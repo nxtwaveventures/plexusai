@@ -6,12 +6,9 @@ const Hero = () => {
     return (
         <section className="section" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
             <div className="bg-grid"></div>
+            <div className="bg-mesh"></div>
 
-            {/* Background glowing orbs */}
-            <div className="glow-orb glow-cyan" style={{ width: '600px', height: '600px', top: '-20%', right: '-10%' }}></div>
-            <div className="glow-orb glow-purple" style={{ width: '800px', height: '800px', bottom: '-30%', left: '-20%' }}></div>
-
-            <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+            <div className="container" style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -37,17 +34,32 @@ const Hero = () => {
                             <Rocket size={20} />
                             Join the Hub
                         </button>
-                        <button className="btn btn-outline" onClick={() => document.getElementById('focus-areas')?.scrollIntoView({ behavior: 'smooth' })}>
+                        <button className="btn btn-outline" style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)' }} onClick={() => document.getElementById('focus-areas')?.scrollIntoView({ behavior: 'smooth' })}>
                             Explore Focus Areas
                         </button>
+                    </div>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
+                    style={{ position: 'relative', perspective: '1000px' }}
+                >
+                    <div className="glass-advanced" style={{ padding: '16px', borderRadius: '32px', transformStyle: 'preserve-3d' }}>
+                        <img
+                            src="/src/assets/hero-bg.png"
+                            alt="Healthcare AI Innovation"
+                            style={{ width: '100%', height: 'auto', borderRadius: '24px', objectFit: 'cover', display: 'block', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+                        />
                     </div>
                 </motion.div>
             </div>
 
             {/* Floating 3D-like elements */}
             <motion.div
-                className="glass-panel animate-float delay-100"
-                style={{ position: 'absolute', right: '10%', top: '25%', padding: '20px', borderRadius: '24px', display: 'flex', alignItems: 'center', gap: '12px', background: '#ffffff' }}
+                className="glass-advanced animate-float delay-100"
+                style={{ position: 'absolute', right: '45%', top: '20%', padding: '20px', display: 'flex', alignItems: 'center', gap: '12px', zIndex: 20 }}
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -62,8 +74,8 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-                className="glass-panel animate-float delay-300"
-                style={{ position: 'absolute', right: '25%', bottom: '20%', padding: '20px', borderRadius: '24px', display: 'flex', alignItems: 'center', gap: '12px', background: '#ffffff' }}
+                className="glass-advanced animate-float delay-300"
+                style={{ position: 'absolute', left: '45%', bottom: '20%', padding: '20px', display: 'flex', alignItems: 'center', gap: '12px', zIndex: 20 }}
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.8 }}

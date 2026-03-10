@@ -67,13 +67,11 @@ const Sandbox = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
                             transition={{ duration: 0.5 }}
-                            className="glass-panel"
+                            className="glass-advanced"
                             style={{
                                 padding: '80px 40px',
                                 textAlign: 'center',
                                 borderRadius: 'var(--border-radius-lg)',
-                                background: 'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.6) 100%)',
-                                border: '1px solid var(--border-glass)'
                             }}
                         >
                             <div className="badge" style={{ marginBottom: '24px' }}>Innovation Summit & Sandbox</div>
@@ -97,15 +95,12 @@ const Sandbox = () => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}
                             transition={{ duration: 0.5, type: 'spring' }}
-                            className="glass-panel"
+                            className="glass-advanced"
                             style={{
                                 padding: '60px',
                                 maxWidth: '700px',
                                 margin: '0 auto',
                                 borderRadius: 'var(--border-radius-lg)',
-                                border: '1px solid var(--border-glass-hover)',
-                                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
-                                background: '#ffffff'
                             }}
                         >
                             {!isSubmitted ? (

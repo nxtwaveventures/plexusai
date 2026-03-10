@@ -65,9 +65,9 @@ const FocusAreas = () => {
                     {pillars.map((pillar) => (
                         <motion.div
                             key={pillar.id}
-                            className="glass-panel"
+                            className="glass-advanced"
                             variants={itemVariants}
-                            style={{ padding: '40px', position: 'relative', overflow: 'hidden', cursor: 'default', background: '#ffffff' }}
+                            style={{ padding: '40px', position: 'relative', overflow: 'hidden', cursor: 'default' }}
                         >
                             <div
                                 style={{
