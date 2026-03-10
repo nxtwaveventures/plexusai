@@ -8,21 +8,21 @@ const pillars = [
         title: 'AI Clinical Workflow',
         desc: 'Deploying intelligence for discharge summaries, OPD notes, and ICU early warning systems.',
         icon: <Stethoscope size={32} color="var(--accent-cyan)" />,
-        glow: 'rgba(0, 240, 255, 0.15)'
+        glow: 'rgba(255, 184, 0, 0.15)'
     },
     {
         id: 2,
         title: 'Digital Health Trials',
         desc: 'Accelerating validation for wearables, AI diagnostics, and remote monitoring therapeutics.',
-        icon: <FileText size={32} color="var(--text-primary)" />,
-        glow: 'rgba(255, 255, 255, 0.1)'
+        icon: <FileText size={32} color="var(--accent-blue)" />,
+        glow: 'rgba(249, 115, 22, 0.15)'
     },
     {
         id: 3,
         title: 'MedFinTech Innovation',
         desc: 'Automating insurance claims, PMJ documentation, and exploring longevity finance.',
         icon: <Landmark size={32} color="var(--accent-purple)" />,
-        glow: 'rgba(112, 0, 255, 0.15)'
+        glow: 'rgba(14, 165, 233, 0.15)'
     }
 ];
 

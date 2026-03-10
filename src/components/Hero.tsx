@@ -47,33 +47,33 @@ const Hero = () => {
             {/* Floating 3D-like elements */}
             <motion.div
                 className="glass-panel animate-float delay-100"
-                style={{ position: 'absolute', right: '10%', top: '25%', padding: '20px', borderRadius: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}
+                style={{ position: 'absolute', right: '10%', top: '25%', padding: '20px', borderRadius: '24px', display: 'flex', alignItems: 'center', gap: '12px', background: '#ffffff' }}
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
             >
-                <div style={{ background: 'rgba(0,240,255,0.2)', padding: '12px', borderRadius: '50%' }}>
+                <div style={{ background: 'rgba(255, 184, 0, 0.1)', padding: '12px', borderRadius: '50%' }}>
                     <Activity color="var(--accent-cyan)" />
                 </div>
                 <div>
                     <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Live Vitals</div>
-                    <div style={{ fontWeight: 600 }}>AI Early Warning</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>AI Early Warning</div>
                 </div>
             </motion.div>
 
             <motion.div
                 className="glass-panel animate-float delay-300"
-                style={{ position: 'absolute', right: '25%', bottom: '20%', padding: '20px', borderRadius: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}
+                style={{ position: 'absolute', right: '25%', bottom: '20%', padding: '20px', borderRadius: '24px', display: 'flex', alignItems: 'center', gap: '12px', background: '#ffffff' }}
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.8 }}
             >
-                <div style={{ background: 'rgba(112,0,255,0.2)', padding: '12px', borderRadius: '50%' }}>
+                <div style={{ background: 'rgba(14, 165, 233, 0.1)', padding: '12px', borderRadius: '50%' }}>
                     <Database color="var(--accent-purple)" />
                 </div>
                 <div>
                     <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Documentation</div>
-                    <div style={{ fontWeight: 600 }}>LLM Summaries</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>LLM Summaries</div>
                 </div>
             </motion.div>
         </section>

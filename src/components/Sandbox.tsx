@@ -72,8 +72,8 @@ const Sandbox = () => {
                                 padding: '80px 40px',
                                 textAlign: 'center',
                                 borderRadius: 'var(--border-radius-lg)',
-                                background: 'linear-gradient(180deg, rgba(15,15,20,0.8) 0%, rgba(5,5,10,0.4) 100%)',
-                                border: '1px solid rgba(0, 245, 184, 0.2)'
+                                background: 'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.6) 100%)',
+                                border: '1px solid var(--border-glass)'
                             }}
                         >
                             <div className="badge" style={{ marginBottom: '24px' }}>Innovation Summit & Sandbox</div>
@@ -151,7 +151,7 @@ const Sandbox = () => {
 
                 <div style={{ marginTop: 'auto', textAlign: 'center', borderTop: '1px solid var(--border-glass)', paddingTop: '40px', color: 'var(--text-secondary)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-                        <div style={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '1.5rem', color: '#fff' }}>
+                        <div style={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '1.5rem', color: 'var(--text-primary)' }}>
                             Plexus AI <span style={{ color: 'var(--accent-cyan)' }}>COE</span>
                         </div>
                         <div style={{ fontSize: '0.875rem' }}>
@@ -167,22 +167,22 @@ const Sandbox = () => {
 const inputStyle = {
     width: '100%',
     padding: '16px 20px',
-    background: 'rgba(0,0,0,0.4)',
-    border: '1px solid var(--border-glass)',
+    background: '#ffffff',
+    border: '1px solid var(--border-glass-hover)',
     borderRadius: '12px',
-    color: '#fff',
+    color: 'var(--text-primary)',
     fontSize: '1rem',
     fontFamily: 'Inter',
     outline: 'none',
-    transition: 'var(--transition-fast)'
+    transition: 'var(--transition-fast)',
+    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
 };
 
-// Add to global CSS later or use pseudo selector trick here
 const styleTag = document.createElement('style');
 styleTag.innerHTML = `
     input:focus, select:focus, textarea:focus {
         border-color: var(--accent-cyan) !important;
-        box-shadow: 0 0 15px rgba(0, 245, 184, 0.1);
+        box-shadow: 0 0 15px rgba(255, 184, 0, 0.1);
     }
 `;
 document.head.appendChild(styleTag);
