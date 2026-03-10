@@ -1,6 +1,7 @@
 
 import { motion } from 'framer-motion';
 import { Rocket, Activity, Database } from 'lucide-react';
+import heroBg from '../assets/hero-bg.png';
 
 const Hero = () => {
     return (
@@ -48,7 +49,7 @@ const Hero = () => {
                 >
                     <div className="glass-advanced" style={{ padding: '16px', borderRadius: '32px', transformStyle: 'preserve-3d' }}>
                         <img
-                            src="/src/assets/hero-bg.png"
+                            src={heroBg}
                             alt="Healthcare AI Innovation"
                             style={{ width: '100%', height: 'auto', borderRadius: '24px', objectFit: 'cover', display: 'block', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
                         />
