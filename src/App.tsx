@@ -1,6 +1,7 @@
 
 import Hero from './components/Hero';
 import FocusAreas from './components/FocusAreas';
+import Programs from './components/Programs';
 import Sandbox from './components/Sandbox';
 import './App.css'; // Emptied Vite styles
 
@@ -27,6 +28,7 @@ function App() {
         </div>
         <div style={{ gap: '32px', fontSize: '0.9rem', fontWeight: 600, display: 'flex' }}>
           <a href="#focus-areas" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Focus Areas</a>
+          <a href="#programs" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Programs</a>
           <a href="#sandbox" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Sandbox</a>
         </div>
         <a href="#sandbox" className="btn btn-primary" style={{ padding: '8px 24px', fontSize: '0.9rem' }}>
@@ -37,6 +39,7 @@ function App() {
       {/* Main Sections */}
       <Hero />
       <FocusAreas />
+      <Programs />
       <Sandbox />
     </div>
   );
