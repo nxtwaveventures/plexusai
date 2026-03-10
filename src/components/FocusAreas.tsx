@@ -3,93 +3,116 @@ import { motion } from 'framer-motion';
 import { Stethoscope, FileText, Landmark } from 'lucide-react';
 
 const pillars = [
-    {
-        id: 1,
-        title: 'AI Clinical Workflow',
-        desc: 'Deploying intelligence for discharge summaries, OPD notes, and ICU early warning systems.',
-        icon: <Stethoscope size={32} color="var(--accent-cyan)" />,
-        glow: 'rgba(255, 184, 0, 0.15)'
-    },
-    {
-        id: 2,
-        title: 'Digital Health Trials',
-        desc: 'Accelerating validation for wearables, AI diagnostics, and remote monitoring therapeutics.',
-        icon: <FileText size={32} color="var(--accent-blue)" />,
-        glow: 'rgba(249, 115, 22, 0.15)'
-    },
-    {
-        id: 3,
-        title: 'MedFinTech Innovation',
-        desc: 'Automating insurance claims, PMJ documentation, and exploring longevity finance.',
-        icon: <Landmark size={32} color="var(--accent-purple)" />,
-        glow: 'rgba(14, 165, 233, 0.15)'
-    }
+  {
+    Icon: Stethoscope,
+    accentColor: 'var(--accent-indigo)',
+    accentBg: 'rgba(99,102,241,0.12)',
+    borderColor: 'rgba(99,102,241,0.3)',
+    tag: 'Clinical Intelligence',
+    title: 'AI Clinical Workflow',
+    desc: 'Deploying intelligence for discharge summaries, OPD documentation, and ICU early warning systems that save lives.',
+  },
+  {
+    Icon: FileText,
+    accentColor: 'var(--accent-gold)',
+    accentBg: 'rgba(245,158,11,0.12)',
+    borderColor: 'rgba(245,158,11,0.3)',
+    tag: 'Research & Trials',
+    title: 'Digital Health Trials',
+    desc: 'Accelerating validation for wearables, AI diagnostics, and remote monitoring therapeutics with real-world evidence.',
+  },
+  {
+    Icon: Landmark,
+    accentColor: 'var(--accent-teal)',
+    accentBg: 'rgba(20,184,166,0.12)',
+    borderColor: 'rgba(20,184,166,0.3)',
+    tag: 'HealthFinTech',
+    title: 'MedFinTech Innovation',
+    desc: 'Automating insurance claims, PMJ documentation, and pioneering longevity finance at the intersection of health and capital.',
+  },
 ];
 
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.2
-        }
-    }
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
-
 const FocusAreas = () => {
-    return (
-        <section className="section" id="focus-areas" style={{ position: 'relative' }}>
-            <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-                    <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '16px' }}>
-                        Core <span className="text-gradient">Focus Areas</span>
-                    </h2>
-                    <p className="text-secondary" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem' }}>
-                        Transforming the intersection of clinical care, validation, and healthcare finance.
-                    </p>
+  return (
+    <section className="section" id="focus-areas" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Background glow */}
+      <div style={{
+        position: 'absolute', bottom: 0, right: '-10%',
+        width: '600px', height: '500px', pointerEvents: 'none',
+        background: 'radial-gradient(ellipse, rgba(245,158,11,0.05) 0%, transparent 70%)',
+      }} />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="section-header">
+          <span className="eyebrow">What We Work On</span>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', marginBottom: '20px' }}>
+            Core{' '}
+            <span className="text-gradient-gold">Focus Areas</span>
+          </h2>
+          <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: 1.7 }}>
+            Transforming the intersection of clinical care, AI validation, and healthcare finance.
+          </p>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '24px',
+        }}>
+          {pillars.map((p, i) => {
+            const { Icon } = p;
+            return (
+              <motion.div
+                key={p.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="card"
+                style={{
+                  padding: '40px',
+                  borderLeft: `3px solid ${p.borderColor}`,
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                {/* Top glow */}
+                <div style={{
+                  position: 'absolute', top: '-40px', right: '-40px',
+                  width: '160px', height: '160px', borderRadius: '50%',
+                  background: p.accentBg, filter: 'blur(40px)',
+                  pointerEvents: 'none',
+                }} />
+
+                {/* Tag */}
+                <div style={{
+                  display: 'inline-block',
+                  fontFamily: 'Outfit', fontWeight: 700, fontSize: '0.72rem',
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
+                  color: p.accentColor, marginBottom: '20px',
+                }}>
+                  {p.tag}
                 </div>
 
-                <motion.div
-                    className="pillars-grid"
-                    style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-100px' }}
-                >
-                    {pillars.map((pillar) => (
-                        <motion.div
-                            key={pillar.id}
-                            className="glass-advanced"
-                            variants={itemVariants}
-                            style={{ padding: '40px', position: 'relative', overflow: 'hidden', cursor: 'default' }}
-                        >
-                            <div
-                                style={{
-                                    position: 'absolute',
-                                    top: '-50px',
-                                    right: '-50px',
-                                    width: '150px',
-                                    height: '150px',
-                                    background: pillar.glow,
-                                    filter: 'blur(50px)',
-                                    borderRadius: '50%'
-                                }}
-                            />
-                            <div style={{ marginBottom: '24px' }}>{pillar.icon}</div>
-                            <h3 style={{ fontSize: '1.5rem', marginBottom: '12px' }}>{pillar.title}</h3>
-                            <p className="text-secondary">{pillar.desc}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
-    );
+                {/* Icon */}
+                <div style={{
+                  background: p.accentBg, borderRadius: '14px',
+                  width: '56px', height: '56px', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '24px',
+                }}>
+                  <Icon size={28} color={p.accentColor} />
+                </div>
+
+                <h3 style={{ fontSize: '1.35rem', marginBottom: '12px', fontWeight: 800 }}>{p.title}</h3>
+                <p className="text-secondary" style={{ lineHeight: 1.75, fontSize: '0.95rem' }}>{p.desc}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default FocusAreas;

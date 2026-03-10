@@ -3,40 +3,64 @@ import Hero from './components/Hero';
 import FocusAreas from './components/FocusAreas';
 import Programs from './components/Programs';
 import Sandbox from './components/Sandbox';
-import './App.css'; // Emptied Vite styles
+import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <div className="app-container">
-      {/* Navigation Layer */}
+    <div style={{ background: 'var(--bg-primary)', minHeight: '100vh' }}>
+      {/* Noise texture overlay */}
+      <div className="noise-overlay" />
+
+      {/* ── Navigation ── */}
       <nav style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
-        padding: '20px 40px',
+        zIndex: 200,
+        padding: '0 40px',
+        height: '72px',
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        zIndex: 100,
-        background: 'rgba(255, 255, 255, 0.8)',
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid var(--border-glass)'
+        justifyContent: 'space-between',
+        transition: 'background 0.3s, border-color 0.3s',
+        background: scrolled ? 'rgba(6, 7, 26, 0.85)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
       }}>
-        <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '1.5rem', color: 'var(--text-primary)', letterSpacing: '1px' }}>
-          PLEXUS<span style={{ color: 'var(--accent-cyan)' }}>AI</span> COE
-        </div>
-        <div style={{ gap: '32px', fontSize: '0.9rem', fontWeight: 600, display: 'flex' }}>
-          <a href="#focus-areas" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Focus Areas</a>
-          <a href="#programs" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Programs</a>
-          <a href="#sandbox" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Sandbox</a>
-        </div>
-        <a href="#sandbox" className="btn btn-primary" style={{ padding: '8px 24px', fontSize: '0.9rem' }}>
-          Join the Hub
+        {/* Logo */}
+        <a href="/" style={{ fontFamily: 'Outfit', fontWeight: 900, fontSize: '1.3rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+          PLEXUS<span style={{ color: 'var(--accent-indigo)' }}>AI</span>
+          <span style={{ marginLeft: '8px', fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', verticalAlign: 'middle' }}>COE</span>
+        </a>
+
+        {/* Links */}
+        <nav className="nav-links" style={{ display: 'flex', gap: '40px', fontSize: '0.875rem', fontWeight: 500 }}>
+          {[['#focus-areas', 'Focus Areas'], ['#programs', 'Programs'], ['#sandbox', 'Apply']].map(([href, label]) => (
+            <a key={href} href={href} style={{ color: 'var(--text-secondary)', transition: 'color 0.2s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
+              {label}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA */}
+        <a href="#sandbox" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.875rem' }}>
+          Apply Now
         </a>
       </nav>
 
-      {/* Main Sections */}
+      {/* ── Sections ── */}
       <Hero />
       <Programs />
       <FocusAreas />
