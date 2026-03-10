@@ -25,12 +25,12 @@ function App() {
         <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '1.5rem', color: 'var(--text-primary)', letterSpacing: '1px' }}>
           PLEXUS<span style={{ color: 'var(--accent-cyan)' }}>AI</span> COE
         </div>
-        <div style={{ gap: '32px', fontSize: '0.9rem', fontWeight: 500, display: 'none' }}>
-          <a href="#focus-areas" className="text-secondary" style={{ transition: 'color 0.2s' }}>Focus Areas</a>
-          <a href="#sandbox" className="text-secondary" style={{ transition: 'color 0.2s' }}>Sandbox</a>
+        <div style={{ gap: '32px', fontSize: '0.9rem', fontWeight: 600, display: 'flex' }}>
+          <a href="#focus-areas" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Focus Areas</a>
+          <a href="#sandbox" className="text-secondary" style={{ transition: 'color 0.2s', textDecoration: 'none' }}>Sandbox</a>
         </div>
         <a href="#sandbox" className="btn btn-primary" style={{ padding: '8px 24px', fontSize: '0.9rem' }}>
-          Join Program
+          Join the Hub
         </a>
       </nav>
 
