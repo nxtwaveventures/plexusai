@@ -3,7 +3,6 @@ import Hero from './components/Hero';
 import FocusAreas from './components/FocusAreas';
 import Programs from './components/Programs';
 import Sandbox from './components/Sandbox';
-import './App.css';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -44,7 +43,7 @@ function App() {
         </a>
 
         {/* Links */}
-        <nav className="nav-links" style={{ display: 'flex', gap: '40px', fontSize: '0.875rem', fontWeight: 500 }}>
+        <div className="nav-links" style={{ display: 'flex', gap: '40px', fontSize: '0.875rem', fontWeight: 500 }}>
           {[['#focus-areas', 'Focus Areas'], ['#programs', 'Programs'], ['#sandbox', 'Apply']].map(([href, label]) => (
             <a key={href} href={href} style={{ color: 'var(--text-secondary)', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
@@ -52,7 +51,7 @@ function App() {
               {label}
             </a>
           ))}
-        </nav>
+        </div>
 
         {/* CTA */}
         <a href="#sandbox" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.875rem' }}>
