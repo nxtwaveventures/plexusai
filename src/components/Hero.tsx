@@ -21,22 +21,22 @@ const Hero = () => {
                     </div>
 
                     <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', lineHeight: 1.1, marginBottom: '24px' }}>
-                        <span style={{ display: 'block' }}>India's First</span>
-                        <span className="text-gradient-accent">Hospital-Embedded</span>
-                        <span style={{ display: 'block' }}>Healthcare AI Hub</span>
+                        <span style={{ display: 'block' }}>Validate Your AI.</span>
+                        <span className="text-gradient-accent">Inside a Real Hospital.</span>
+                        <span style={{ display: 'block' }}>Get Certified. Scale.</span>
                     </h1>
 
                     <p className="text-secondary" style={{ fontSize: '1.25rem', marginBottom: '40px', maxWidth: '600px' }}>
-                        Validating the next generation of clinical AI, digital health trials, and MedFinTech innovation directly inside real hospital workflows.
+                        Plexus AI COE is India's first hospital-embedded AI innovation hub. We give startups, pharma companies, and doctors the clinical access, validation framework, and certification they need to bring AI into healthcare — for real.
                     </p>
 
                     <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                        <button className="btn btn-primary" onClick={() => document.getElementById('sandbox')?.scrollIntoView({ behavior: 'smooth' })}>
+                        <button className="btn btn-primary" onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}>
                             <Rocket size={20} />
-                            Join the Hub
+                            See Programs
                         </button>
-                        <button className="btn btn-outline" style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)' }} onClick={() => document.getElementById('focus-areas')?.scrollIntoView({ behavior: 'smooth' })}>
-                            Explore Focus Areas
+                        <button className="btn btn-outline" style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)' }} onClick={() => document.getElementById('sandbox')?.scrollIntoView({ behavior: 'smooth' })}>
+                            Apply Now
                         </button>
                     </div>
                 </motion.div>

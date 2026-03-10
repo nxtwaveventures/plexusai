@@ -38,8 +38,8 @@ function App() {
 
       {/* Main Sections */}
       <Hero />
-      <FocusAreas />
       <Programs />
+      <FocusAreas />
       <Sandbox />
     </div>
   );
