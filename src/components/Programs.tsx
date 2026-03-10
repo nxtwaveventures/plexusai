@@ -11,7 +11,7 @@ const programs = [
         title: 'MedTech Sandbox',
         subtitle: 'Clinical Validation Program',
         desc: 'Validate your AI product inside a real hospital. Gain clinical testing access, live hospital deployment, and structured doctor feedback.',
-        tags: ['₹50K–1L Application', '₹2–5L/month Access', 'Real Patient Workflows'],
+        tags: ['Application Review', 'Monthly Access', 'Real Patient Workflows'],
     },
     {
         icon: Award,
@@ -20,7 +20,7 @@ const programs = [
         title: 'Plexus AI Certificate',
         subtitle: '⭐ Flagship Product',
         desc: 'The gold standard for clinical AI in India. Investors trust it. Regulators respect it. Hospitals adopt certified products faster.',
-        tags: ['₹15–30L Certification Fee', 'Clinical Study Report', 'Regulatory Support'],
+        tags: ['Clinical Study Report', 'Regulatory Support', 'Validation Certificate'],
         highlight: true,
     },
     {
@@ -30,7 +30,7 @@ const programs = [
         title: 'Sponsored Research',
         subtitle: 'Industry Partnerships',
         desc: 'Pharma and MedTech companies fund hospital-based research studies. ICU AI, remote cardiac monitoring, wearable trials and more.',
-        tags: ['₹50L–3Cr per Study', 'Device & AI Companies', 'Pharma Partners'],
+        tags: ['Device & AI Companies', 'Pharma Partners', 'Hospital-Based Studies'],
     },
     {
         icon: TrendingUp,
@@ -39,7 +39,7 @@ const programs = [
         title: 'AI Accelerator',
         subtitle: 'Equity Model',
         desc: 'Top-performing startups get an accelerated path with equity-based participation. Build a ₹100–500 crore portfolio over 5–7 years.',
-        tags: ['5–7% Equity', '10 Startups / Year', '₹100–500Cr Portfolio'],
+        tags: ['Equity Partnership', 'Cohort-Based', 'Long-Term Value'],
     },
     {
         icon: GraduationCap,
@@ -48,7 +48,7 @@ const programs = [
         title: 'AI for Doctors',
         subtitle: 'Training & Certification',
         desc: 'Upskill clinical teams on AI tools using structured hospital-based programs. Revenue model with 200+ doctors annually.',
-        tags: ['₹50K–1L per Doctor', '200 Doctors / Year', '₹1–2Cr Annual Revenue'],
+        tags: ['Doctor Certification', 'Hospital Programs', 'Clinical AI Training'],
     },
 ];
 
