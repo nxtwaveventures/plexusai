@@ -18,11 +18,11 @@ function App() {
         justifyContent: 'space-between',
         alignItems: 'center',
         zIndex: 100,
-        background: 'rgba(5, 5, 5, 0.4)',
+        background: 'rgba(255, 255, 255, 0.8)',
         backdropFilter: 'blur(10px)',
         borderBottom: '1px solid var(--border-glass)'
       }}>
-        <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '1.5rem', color: '#fff', letterSpacing: '1px' }}>
+        <div style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '1.5rem', color: 'var(--text-primary)', letterSpacing: '1px' }}>
           PLEXUS<span style={{ color: 'var(--accent-cyan)' }}>AI</span> COE
         </div>
         <div style={{ gap: '32px', fontSize: '0.9rem', fontWeight: 500, display: 'none' }}>

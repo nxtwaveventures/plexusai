@@ -103,8 +103,9 @@ const Sandbox = () => {
                                 maxWidth: '700px',
                                 margin: '0 auto',
                                 borderRadius: 'var(--border-radius-lg)',
-                                border: '1px solid var(--accent-purple)',
-                                boxShadow: '0 0 40px rgba(94, 106, 210, 0.2)'
+                                border: '1px solid var(--border-glass-hover)',
+                                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
+                                background: '#ffffff'
                             }}
                         >
                             {!isSubmitted ? (
@@ -141,7 +142,7 @@ const Sandbox = () => {
                                     style={{ textAlign: 'center', padding: '60px 20px' }}
                                 >
                                     <CheckCircle2 size={80} color="var(--accent-cyan)" style={{ margin: '0 auto 24px auto', display: 'block' }} />
-                                    <h3 style={{ fontSize: '2.5rem', marginBottom: '16px', color: 'var(--accent-cyan)' }}>Application Received</h3>
+                                    <h3 style={{ fontSize: '2.5rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Application Received</h3>
                                     <p className="text-secondary" style={{ fontSize: '1.2rem' }}>Our Clinical Validation Committee will review your submission and contact you shortly.</p>
                                 </motion.div>
                             )}

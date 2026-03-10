@@ -67,7 +67,7 @@ const FocusAreas = () => {
                             key={pillar.id}
                             className="glass-panel"
                             variants={itemVariants}
-                            style={{ padding: '40px', position: 'relative', overflow: 'hidden', cursor: 'default' }}
+                            style={{ padding: '40px', position: 'relative', overflow: 'hidden', cursor: 'default', background: '#ffffff' }}
                         >
                             <div
                                 style={{
