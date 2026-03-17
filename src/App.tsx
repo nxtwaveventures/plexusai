@@ -1,7 +1,6 @@
 import Hero from './components/Hero';
 import Features from './components/Features';
 import Gallery from './components/Gallery';
-import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
@@ -14,7 +13,6 @@ function App() {
       <Hero />
       <Features />
       <Gallery />
-      <Pricing />
       <FAQ />
       <Sandbox />
       <Footer />
