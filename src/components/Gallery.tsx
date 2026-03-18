@@ -1,7 +1,4 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-
 import { Brain, Activity, CalendarClock, Pill, Dna, ShieldAlert } from 'lucide-react';
 
 const apps = [
@@ -50,12 +47,9 @@ const apps = [
 ];
 
 const Gallery = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
     <section className="section" style={{ background: 'var(--bg-primary)', overflow: 'hidden' }}>
-      <div className="container" ref={ref}>
+      <div className="container">
         <div className="section-header">
           <span className="eyebrow">Built with PlexusAI</span>
           <h2>Apps validated in <span className="text-gradient">real hospitals</span></h2>
