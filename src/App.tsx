@@ -1,8 +1,6 @@
 import Hero from './components/Hero';
-import Features from './components/Features';
 import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
-import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Sandbox from './components/Sandbox';
 
@@ -11,11 +9,9 @@ function App() {
     <div style={{ background: 'var(--bg-primary)', minHeight: '100vh' }}>
       <Navbar />
       <Hero />
-      <Features />
       <Gallery />
       <FAQ />
       <Sandbox />
-      <Footer />
     </div>
   );
 }

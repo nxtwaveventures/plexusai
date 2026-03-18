@@ -68,13 +68,14 @@ const Features = () => {
                   width: '48px',
                   height: '48px',
                   borderRadius: '12px',
-                  background: 'rgba(99, 102, 241, 0.1)',
+                  background: 'rgba(0, 180, 216, 0.15)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginBottom: '20px',
+                  border: '1px solid rgba(0, 180, 216, 0.2)',
                 }}>
-                  <Icon size={24} color="#a5b4fc" />
+                  <Icon size={24} color="var(--accent-primary)" />
                 </div>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px' }}>
                   {feature.title}

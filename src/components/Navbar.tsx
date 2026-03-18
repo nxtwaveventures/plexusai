@@ -44,17 +44,17 @@ const Navbar = () => {
       left: 0,
       right: 0,
       zIndex: 100,
-      padding: '0 24px',
+      padding: '0 48px',
       height: '64px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      background: 'rgba(5, 5, 7, 0.8)',
-      backdropFilter: 'blur(20px)',
-      borderBottom: '1px solid var(--border-subtle)',
+      background: 'rgba(15, 30, 40, 0.4)',
+      backdropFilter: 'blur(12px)',
+      borderBottom: '1px solid rgba(255,255,255,0.08)',
     }}>
-      <a href="/" style={{ fontFamily: 'Outfit', fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
-        PLEXUS<span style={{ color: '#a5b4fc' }}>AI</span>
+      <a href="/" style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: '1.1rem', letterSpacing: '0.06em', color: '#ffffff', textTransform: 'uppercase' }}>
+        PLEXUS<span style={{ color: 'var(--accent-primary)' }}>AI</span>
       </a>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
@@ -71,9 +71,11 @@ const Navbar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '4px',
-                fontSize: '0.9rem',
-                fontWeight: 500,
-                color: 'var(--text-secondary)',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.8)',
                 transition: 'color 0.2s',
                 cursor: 'pointer',
               }}
@@ -96,11 +98,11 @@ const Navbar = () => {
                     transform: 'translateX(-50%)',
                     marginTop: '12px',
                     minWidth: '240px',
-                    background: 'var(--bg-card)',
-                    border: '1px solid var(--border-subtle)',
+                    background: 'rgba(15, 30, 40, 0.95)',
+                    border: '1px solid rgba(255,255,255,0.12)',
                     borderRadius: 'var(--radius-md)',
                     padding: '8px',
-                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
                   }}
                 >
                   {item.children?.map((child, i) => (
@@ -113,13 +115,13 @@ const Navbar = () => {
                         borderRadius: 'var(--radius-sm)',
                         transition: 'background 0.15s',
                       }}
-                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.05)'}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'}
                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
                     >
-                      <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '2px' }}>
+                      <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', marginBottom: '2px' }}>
                         {child.label}
                       </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>
                         {child.desc}
                       </div>
                     </a>
@@ -131,7 +133,17 @@ const Navbar = () => {
         ))}
       </div>
 
-      <a href="#sandbox" className="btn btn-primary" style={{ padding: '10px 20px', fontSize: '0.875rem' }}>
+      <a href="#sandbox" className="btn" style={{
+        padding: '9px 22px',
+        fontSize: '0.78rem',
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        fontWeight: 700,
+        border: '1px solid rgba(255,255,255,0.9)',
+        color: '#ffffff',
+        background: 'transparent',
+        borderRadius: '0',
+      }}>
         Apply Now
       </a>
     </nav>

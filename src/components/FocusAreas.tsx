@@ -35,19 +35,12 @@ const pillars = [
 const FocusAreas = () => {
   return (
     <section className="section" id="focus-areas" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Background glow */}
-      <div style={{
-        position: 'absolute', bottom: 0, right: '-10%',
-        width: '600px', height: '500px', pointerEvents: 'none',
-        background: 'radial-gradient(ellipse, rgba(245,158,11,0.05) 0%, transparent 70%)',
-      }} />
-
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '20px' }}>
         <div className="section-header">
-          <span className="eyebrow">What We Work On</span>
-          <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', marginBottom: '20px' }}>
+          <span className="eyebrow" style={{ color: 'var(--text-secondary)' }}>What We Work On</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
             Core{' '}
-            <span className="text-gradient-gold">Focus Areas</span>
+            <span style={{ color: 'var(--text-primary)' }}>Focus Areas</span>
           </h2>
           <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: 1.7 }}>
             Transforming the intersection of clinical care, AI validation, and healthcare finance.
@@ -71,23 +64,16 @@ const FocusAreas = () => {
                 className="card"
                 style={{
                   padding: '40px',
-                  borderLeft: `3px solid ${p.borderColor}`,
+                  borderRight: '1px solid var(--border-subtle)',
+                  borderBottom: '1px solid var(--border-subtle)',
                   position: 'relative',
                   overflow: 'hidden',
                 }}
               >
-                {/* Top glow */}
-                <div style={{
-                  position: 'absolute', top: '-40px', right: '-40px',
-                  width: '160px', height: '160px', borderRadius: '50%',
-                  background: p.accentBg, filter: 'blur(40px)',
-                  pointerEvents: 'none',
-                }} />
-
                 {/* Tag */}
                 <div style={{
                   display: 'inline-block',
-                  fontFamily: 'Outfit', fontWeight: 700, fontSize: '0.72rem',
+                  fontFamily: 'Montserrat', fontWeight: 700, fontSize: '0.72rem',
                   letterSpacing: '0.08em', textTransform: 'uppercase',
                   color: p.accentColor, marginBottom: '20px',
                 }}>

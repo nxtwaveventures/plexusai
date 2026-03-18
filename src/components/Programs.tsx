@@ -69,14 +69,7 @@ const Programs = () => {
 
   return (
     <section id="programs" className="section" style={{ background: 'var(--bg-secondary)', position: 'relative' }}>
-      {/* subtle background glow */}
-      <div style={{
-        position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)',
-        width: '800px', height: '400px', pointerEvents: 'none', zIndex: 0,
-        background: 'radial-gradient(ellipse at top, rgba(99,102,241,0.06) 0%, transparent 70%)',
-      }} />
-
-      <div className="container" ref={ref} style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container" ref={ref} style={{ position: 'relative', zIndex: 1, paddingTop: '40px' }}>
         {/* Section header */}
         <motion.div
           className="section-header"
@@ -84,10 +77,10 @@ const Programs = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="eyebrow">Programs Open for Application</span>
-          <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', marginBottom: '20px' }}>
+          <span className="eyebrow" style={{ color: 'var(--text-secondary)' }}>Programs Open for Application</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '20px', letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1 }}>
             What Can You{' '}
-            <span className="text-gradient-indigo">Apply For?</span>
+            <span style={{ color: 'var(--accent-primary)' }}>Apply For?</span>
           </h2>
           <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: 1.7 }}>
             Whether you're a startup seeking clinical proof, a pharma company funding hospital AI research, or a doctor leading digital transformation — there's a program built for you.
@@ -101,30 +94,17 @@ const Programs = () => {
             return (
               <motion.div
                 key={p.num}
+                className="program-row"
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '80px 1fr auto',
-                  gap: '32px',
-                  alignItems: 'center',
-                  padding: '32px 0',
-                  borderBottom: '1px solid var(--border-subtle)',
-                  cursor: 'default',
-                  transition: 'background 0.2s',
-                  borderRadius: '4px',
-                  position: 'relative',
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(99,102,241,0.03)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
               >
                 {/* Number */}
                 <div style={{
-                  fontFamily: 'Outfit', fontWeight: 900, fontSize: '2.5rem',
-                  color: p.highlight ? p.accentColor : 'var(--text-muted)',
+                  fontFamily: 'Montserrat', fontWeight: 900, fontSize: '3rem',
+                  color: p.highlight ? p.accentColor : 'var(--border-medium)',
                   lineHeight: 1,
-                  opacity: p.highlight ? 1 : 0.5,
+                  opacity: 1,
                 }}>
                   {p.num}
                 </div>
@@ -141,14 +121,14 @@ const Programs = () => {
                     <span className={`badge ${p.badgeClass}`} style={{ fontSize: '0.7rem' }}>{p.badge}</span>
                     {p.highlight && (
                       <span style={{
-                        fontFamily: 'Outfit', fontSize: '0.68rem', fontWeight: 800,
-                        color: '#0d0700', background: 'var(--accent-gold)',
-                        padding: '3px 10px', borderRadius: '999px', letterSpacing: '0.05em', textTransform: 'uppercase',
+                        fontFamily: 'Montserrat', fontSize: '0.68rem', fontWeight: 800,
+                        color: '#ffffff', background: 'var(--accent-secondary)',
+                        padding: '3px 10px', borderRadius: '0px', letterSpacing: '0.05em', textTransform: 'uppercase',
                       }}>MOST IMPACTFUL</span>
                     )}
                   </div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>{p.title}</h3>
-                  <p style={{ fontStyle: 'italic', color: p.accentColor, fontSize: '0.9rem', fontFamily: 'Outfit', fontWeight: 600 }}>{p.headline}</p>
+                  <p style={{ fontStyle: 'italic', color: p.accentColor, fontSize: '0.9rem', fontFamily: 'Montserrat', fontWeight: 600 }}>{p.headline}</p>
                   <p className="text-secondary" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '640px' }}>{p.desc}</p>
                 </div>
 

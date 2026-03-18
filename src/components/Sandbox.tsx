@@ -53,13 +53,6 @@ const Sandbox = () => {
       background: 'var(--bg-secondary)',
       borderTop: '1px solid var(--border-subtle)',
     }}>
-      {/* Ambient glows */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-        width: '800px', height: '500px', pointerEvents: 'none',
-        background: 'radial-gradient(ellipse, rgba(99,102,241,0.08) 0%, transparent 65%)',
-      }} />
-
       <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '120px', paddingBottom: '60px' }}>
         <AnimatePresence mode="wait">
           {!isFormOpen ? (
@@ -74,20 +67,36 @@ const Sandbox = () => {
             >
               <span className="badge badge-indigo" style={{ marginBottom: '32px' }}>Innovation Sandbox</span>
 
-              <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', marginBottom: '24px', lineHeight: 1.05 }}>
-                Ready to Validate<br />
-                Your{' '}
-                <span className="text-gradient-gold">MedTech Innovation?</span>
+              <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '24px', lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
+                Become Our Partner
               </h2>
 
               <p className="text-secondary" style={{ fontSize: '1.15rem', maxWidth: '540px', margin: '0 auto 48px auto', lineHeight: 1.75 }}>
-                Join the Plexus AI MedTech Sandbox. Get clinical testing access, real-world hospital deployment, and a place in our Global Partnership Program.
+                Join the Plexus AI MedTech Sandbox.
               </p>
 
               <button
-                className="btn btn-gold"
+                className="btn"
                 onClick={() => setIsFormOpen(true)}
-                style={{ padding: '18px 48px', fontSize: '1.05rem', gap: '10px' }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.1)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.background = 'transparent';
+                }}
+                style={{
+                  padding: '16px 40px',
+                  fontSize: '0.9rem',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  border: '2px solid rgba(255,255,255,0.9)',
+                  color: '#ffffff',
+                  background: 'transparent',
+                  borderRadius: '0',
+                  gap: '12px',
+                  transition: 'background 0.3s',
+                }}
               >
                 Apply Now <ArrowRight size={18} />
               </button>
@@ -115,7 +124,7 @@ const Sandbox = () => {
                         <p className="text-secondary" style={{ fontSize: '0.9rem' }}>Tell us about your innovation</p>
                       </div>
                       <button type="button" onClick={() => setIsFormOpen(false)} style={{
-                        background: 'var(--bg-card-hover)', border: '1px solid var(--border-subtle)',
+                        background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-subtle)',
                         borderRadius: '8px', color: 'var(--text-muted)', cursor: 'pointer',
                         width: '36px', height: '36px', fontSize: '1rem',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -192,7 +201,7 @@ const Sandbox = () => {
                     style={{ textAlign: 'center', padding: '40px 20px' }}
                   >
                     <div style={{ marginBottom: '24px' }}>
-                      <CheckCircle2 size={64} color="var(--accent-indigo)" style={{ margin: '0 auto' }} />
+                      <CheckCircle2 size={64} color="var(--accent-primary)" style={{ margin: '0 auto' }} />
                     </div>
                     <h3 style={{ fontSize: '2rem', marginBottom: '12px' }}>Application Received</h3>
                     <p className="text-secondary" style={{ fontSize: '1rem', lineHeight: 1.75 }}>
@@ -215,8 +224,8 @@ const Sandbox = () => {
           flexWrap: 'wrap',
           gap: '16px',
         }}>
-          <div style={{ fontFamily: 'Outfit', fontWeight: 900, fontSize: '1.2rem', letterSpacing: '-0.02em' }}>
-            PLEXUS<span style={{ color: 'var(--accent-indigo)' }}>AI</span>{' '}
+          <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: '1.2rem', letterSpacing: '-0.02em' }}>
+            PLEXUS<span style={{ color: 'var(--accent-primary)' }}>AI</span>{' '}
             <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>COE</span>
           </div>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>

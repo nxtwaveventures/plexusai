@@ -72,12 +72,13 @@ const FAQ = () => {
                 <span style={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: openIndex === i ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  color: openIndex === i ? 'var(--accent-primary)' : 'var(--text-primary)',
+                  transition: 'color 0.2s',
                 }}>
                   {faq.q}
                 </span>
                 {openIndex === i ? (
-                  <Minus size={20} color="var(--text-muted)" />
+                  <Minus size={20} color="var(--accent-primary)" />
                 ) : (
                   <Plus size={20} color="var(--text-muted)" />
                 )}
