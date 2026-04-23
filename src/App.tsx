@@ -1,0 +1,32 @@
+import CustomCursor from './components/CustomCursor';
+import Hero from './components/Hero';
+import Gallery from './components/Gallery';
+import Features from './components/Features';
+import FocusAreas from './components/FocusAreas';
+import Programs from './components/Programs';
+import Team from './components/Team';
+import Advisors from './components/Advisors';
+import FAQ from './components/FAQ';
+import Navbar from './components/Navbar';
+import Sandbox from './components/Sandbox';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <div style={{ background: 'var(--bg-primary)', minHeight: '100vh' }}>
+      <CustomCursor />
+      <Navbar />
+      <Hero />
+      <Gallery />
+      <Features />
+      <FocusAreas />
+      <Team />
+      <Advisors />
+      <FAQ />
+      <Sandbox />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;

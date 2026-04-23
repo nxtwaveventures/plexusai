@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.aperiambio.com)",
+      "WebFetch(domain:recursion.com)",
+      "WebFetch(domain:www.insitro.com)"
+    ]
+  }
+}
