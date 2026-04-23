@@ -37,7 +37,6 @@ const RevealText = ({ text, delay = 0 }: { text: string; delay?: number }) => (
     {text.split(' ').map((word, i) => (
       <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.28em' }}>
         <motion.span
-          display="inline-block"
           initial={{ y: '105%', opacity: 0 }}
           animate={{ y: '0%', opacity: 1 }}
           transition={{ duration: 0.65, delay: delay + i * 0.1, ease: [0.16, 1, 0.3, 1] }}

@@ -3,7 +3,6 @@ import Hero from './components/Hero';
 import Gallery from './components/Gallery';
 import Features from './components/Features';
 import FocusAreas from './components/FocusAreas';
-import Programs from './components/Programs';
 import Team from './components/Team';
 import Advisors from './components/Advisors';
 import FAQ from './components/FAQ';
