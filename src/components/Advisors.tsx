@@ -63,8 +63,8 @@ const Advisors = () => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-          gap: '24px',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+          gap: '28px',
         }}>
           {advisors.map((advisor, i) => (
             <motion.div
@@ -73,63 +73,52 @@ const Advisors = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.55, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
-              className="card-light"
-              style={{ overflow: 'hidden' }}
+              style={{
+                background: 'var(--bg-white)',
+                border: '1px solid var(--border)',
+                borderRadius: '14px',
+                overflow: 'hidden',
+                transition: 'box-shadow 300ms ease, transform 300ms ease',
+              }}
+              whileHover={{ y: -4, boxShadow: '0 16px 40px rgba(0,0,0,0.1)' }}
             >
-              {/* Photo */}
-              <div style={{
-                width: '100%',
-                padding: '32px 0 24px',
-                background: 'var(--bg-off-white)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+              {/* Photo — 4:5 portrait ratio */}
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '4/5', overflow: 'hidden', background: '#f1f5f9' }}>
                 {advisor.photo ? (
-                  <div style={{
-                    width: '120px',
-                    height: '120px',
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: '3px solid var(--bg-white)',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                    flexShrink: 0,
-                  }}>
-                    <img
-                      src={advisor.photo}
-                      alt={advisor.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
+                  <img
+                    src={advisor.photo}
+                    alt={advisor.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                  />
                 ) : (
                   <div style={{
-                    width: '120px',
-                    height: '120px',
-                    borderRadius: '50%',
-                    background: '#e2e2e2',
-                    border: '3px solid var(--bg-white)',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    width: '100%', height: '100%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: 'linear-gradient(145deg, #f1f5f9, #e2e8f0)',
                   }}>
-                    <span style={{ fontSize: '2rem', color: '#aaa' }}>
+                    <span style={{ fontSize: '3.5rem', fontWeight: 700, color: '#94a3b8' }}>
                       {advisor.name.charAt(0)}
                     </span>
                   </div>
                 )}
-              </div>
-
-              {/* Info */}
-              <div style={{ padding: '20px 24px 24px' }}>
+                {/* Category pill over photo */}
                 <div style={{
-                  fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em',
-                  textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '10px',
+                  position: 'absolute', bottom: '12px', left: '12px',
+                  background: 'rgba(13,148,136,0.92)',
+                  backdropFilter: 'blur(8px)',
+                  color: '#fff',
+                  fontSize: '0.62rem', fontWeight: 700,
+                  letterSpacing: '0.07em', textTransform: 'uppercase',
+                  padding: '4px 10px', borderRadius: '4px',
                 }}>
                   {advisor.category}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-dark)' }}>
+              </div>
+
+              {/* Info */}
+              <div style={{ padding: '20px 20px 22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '5px' }}>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-dark)', lineHeight: 1.3 }}>
                     {advisor.name}
                   </h3>
                   {advisor.linkedin && (
@@ -137,7 +126,7 @@ const Advisors = () => {
                       href={advisor.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: 'var(--text-muted)', transition: 'color 200ms', flexShrink: 0, marginLeft: '8px' }}
+                      style={{ color: 'var(--text-muted)', transition: 'color 200ms', flexShrink: 0, marginLeft: '8px', marginTop: '2px' }}
                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#0a66c2'}
                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)'}
                     >
@@ -145,10 +134,10 @@ const Advisors = () => {
                     </a>
                   )}
                 </div>
-                <div style={{ fontSize: '0.78rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '12px', lineHeight: 1.5 }}>
+                <div style={{ fontSize: '0.76rem', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '10px', lineHeight: 1.5 }}>
                   {advisor.role}
                 </div>
-                <p style={{ fontSize: '0.83rem', color: 'var(--text-body)', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-body)', lineHeight: 1.6 }}>
                   {advisor.bio}
                 </p>
               </div>
