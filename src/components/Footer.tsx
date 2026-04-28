@@ -35,7 +35,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer style={{ background: '#1E0A3C', color: '#ffffff', borderTop: 'none' }}>
+    <footer style={{ background: 'var(--bg-dark)', color: '#ffffff', borderTop: 'none' }}>
       <div className="container" style={{ padding: '72px 32px 40px' }}>
         <div style={{
           display: 'grid',

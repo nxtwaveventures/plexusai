@@ -44,7 +44,7 @@ const Sandbox = () => {
   return (
     <>
       {/* CTA Banner */}
-      <section id="sandbox" className="section" style={{ background: 'linear-gradient(135deg, #1E0A3C 0%, #2D1160 100%)' }}>
+      <section id="sandbox" className="section" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)' }}>
         <div className="container">
           <AnimatePresence mode="wait">
             {!isFormOpen ? (

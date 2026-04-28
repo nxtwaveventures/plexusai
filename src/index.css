@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap');
 
 :root {
   /* Backgrounds */
   --bg-white: #ffffff;
-  --bg-off-white: #f7f7f5;
-  --bg-dark: #1E0A3C;
-  --bg-dark-2: #160730;
+  --bg-off-white: #F8FAFC;
+  --bg-dark: #1E293B;
+  --bg-dark-2: #0F172A;
 
   /* Text */
-  --text-dark: #111111;
-  --text-body: #3d3d3d;
-  --text-muted: #888888;
+  --text-dark: #1E293B;
+  --text-body: #475569;
+  --text-muted: #94A3B8;
 
-  /* Accent (used sparingly — CTAs, links, hover only) */
-  --accent: #7B35D9;
-  --accent-hover: #6325BB;
+  /* Accent — teal brand colour */
+  --accent: #0D9488;
+  --accent-hover: #0B7C72;
 
   /* Borders */
-  --border: #e5e5e5;
+  --border: #E2E8F0;
   --border-dark: rgba(255,255,255,0.1);
 
   /* Spacing scale (8px base) */
@@ -49,7 +49,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg-white);
   color: var(--text-dark);
   line-height: 1.6;
@@ -61,7 +61,7 @@ body {
 a { text-decoration: none; color: inherit; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   line-height: 1.2;
   color: var(--text-dark);
 }
@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: var(--s1);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(232,80,10,0.2);
+  box-shadow: 0 4px 16px rgba(13,148,136,0.25);
 }
 
 .btn-outline {
@@ -208,9 +208,9 @@ hr.divider {
   letter-spacing: 0.04em;
 }
 .badge-accent {
-  background: rgba(232,80,10,0.08);
+  background: rgba(13,148,136,0.08);
   color: var(--accent);
-  border: 1px solid rgba(232,80,10,0.2);
+  border: 1px solid rgba(13,148,136,0.2);
 }
 .badge-dark {
   background: rgba(255,255,255,0.08);
@@ -232,7 +232,7 @@ hr.divider {
 .form-input {
   width: 100%;
   padding: 12px 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
   background: var(--bg-white);
   border: 1px solid var(--border);
@@ -243,7 +243,7 @@ hr.divider {
 }
 .form-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(232,80,10,0.08);
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.1);
 }
 .form-input::placeholder { color: var(--text-muted); }
 
