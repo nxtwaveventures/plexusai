@@ -14,6 +14,18 @@ const team = [
     photo: '/team/founder-1.jpg',
     linkedin: 'https://www.linkedin.com/in/doctoramitraj/',
   },
+  {
+    name: 'Anamika Singh',
+    role: 'Technology Founder Director · Digital Architecture & AI Deployment',
+    bullets: [
+      'Integration of AI solutions with hospital systems — HMS, diagnostics, and clinical workflows.',
+      'Designing data capture systems for real-world evidence (RWE) at scale.',
+      'Supporting scalable platform architecture for multi-centre deployments.',
+      'Ensuring AI systems are not just technically sound, but practical and usable in clinical environments.',
+    ],
+    photo: '/team/anamika.jpg',
+    linkedin: 'https://www.linkedin.com/in/anamika-singh/',
+  },
 ];
 
 const Team = () => {
@@ -23,10 +35,10 @@ const Team = () => {
         <div className="section-header centered">
           <span className="eyebrow">Leadership</span>
           <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '16px' }}>
-            Meet the Founder
+            The Founding Team
           </h2>
           <p style={{ fontSize: '1.05rem', color: 'var(--text-body)', maxWidth: '460px', margin: '0 auto' }}>
-            The vision behind India's first hospital-embedded AI innovation hub.
+            Clinical vision and technology expertise — the two forces building Plexus AI.
           </p>
         </div>
 

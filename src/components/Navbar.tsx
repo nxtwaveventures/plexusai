@@ -9,7 +9,7 @@ const navItems = [
     children: [
       { label: 'Clinical Validation', desc: 'Test AI in real hospital workflows', href: '#programs' },
       { label: 'AI Certification', desc: 'Get clinically certified credentials', href: '#programs' },
-      { label: 'Hospital Research', desc: 'Sponsored clinical studies', href: '#programs' },
+      { label: 'Hospital Research', desc: 'Sponsored clinical studies & RWE', href: '#programs' },
       { label: 'Accelerator', desc: 'Equity-based scaling program', href: '#programs' },
     ],
   },
@@ -17,13 +17,13 @@ const navItems = [
     label: 'Focus Areas',
     href: '#focus-areas',
     children: [
-      { label: 'Diagnostics', desc: 'Medical imaging & detection AI', href: '#focus-areas' },
-      { label: 'Patient Care', desc: 'Monitoring & engagement', href: '#focus-areas' },
-      { label: 'Operations', desc: 'Hospital workflow automation', href: '#focus-areas' },
-      { label: 'Research', desc: 'Clinical trial optimization', href: '#focus-areas' },
+      { label: 'AI Clinical Workflow', desc: 'OPD, ICU & decision support AI', href: '#focus-areas' },
+      { label: 'Digital Health Trials', desc: 'Wearables, diagnostics & monitoring', href: '#focus-areas' },
+      { label: 'Evidence Generation', desc: 'RWE, regulatory & certification', href: '#focus-areas' },
     ],
   },
-  { label: 'Advisors', href: '#advisors' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Team', href: '#team' },
   { label: 'FAQ', href: '#faq' },
 ];
 

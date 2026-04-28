@@ -2,7 +2,6 @@ import { motion, useInView, animate, useScroll, useTransform } from 'framer-moti
 import { useEffect, useRef, useState } from 'react';
 import MagneticButton from './MagneticButton';
 
-/* ── Animated count-up for stats ──────────────────────── */
 const useCountUp = (target: number, duration = 1.4, inView = false) => {
   const [value, setValue] = useState(0);
   useEffect(() => {
@@ -21,7 +20,7 @@ const StatItem = ({ value, suffix, label, inView }: { value: number; suffix: str
   const count = useCountUp(value, 1.2, inView);
   return (
     <div>
-      <div style={{ fontSize: '1.9rem', fontWeight: 700, color: 'var(--text-dark)', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
+      <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-dark)', lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
         {count}{suffix}
       </div>
       <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '6px', fontWeight: 500 }}>
@@ -31,7 +30,6 @@ const StatItem = ({ value, suffix, label, inView }: { value: number; suffix: str
   );
 };
 
-/* ── Word-by-word headline reveal ─────────────────────── */
 const RevealText = ({ text, delay = 0 }: { text: string; delay?: number }) => (
   <span style={{ display: 'inline-block' }}>
     {text.split(' ').map((word, i) => (
@@ -49,53 +47,55 @@ const RevealText = ({ text, delay = 0 }: { text: string; delay?: number }) => (
   </span>
 );
 
-/* ── Animated mesh gradient blobs ─────────────────────── */
 const MeshBackground = () => (
   <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
-    {/* Blob 1 – top right violet */}
     <motion.div
       animate={{ x: [0, 30, -20, 0], y: [0, -40, 20, 0], scale: [1, 1.1, 0.95, 1] }}
       transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
       style={{
         position: 'absolute', top: '-10%', right: '5%',
         width: '520px', height: '520px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(123,53,217,0.09) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(13,148,136,0.07) 0%, transparent 70%)',
         filter: 'blur(40px)',
       }}
     />
-    {/* Blob 2 – bottom left soft magenta */}
     <motion.div
       animate={{ x: [0, -25, 40, 0], y: [0, 30, -30, 0], scale: [1, 0.9, 1.05, 1] }}
       transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
       style={{
         position: 'absolute', bottom: '0%', left: '-5%',
         width: '480px', height: '480px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)',
         filter: 'blur(50px)',
       }}
     />
-    {/* Blob 3 – center faint indigo */}
     <motion.div
       animate={{ scale: [1, 1.15, 0.9, 1], opacity: [0.4, 0.7, 0.4] }}
       transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut', delay: 6 }}
       style={{
         position: 'absolute', top: '30%', left: '40%',
         width: '360px', height: '360px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99,37,187,0.05) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(5,150,105,0.04) 0%, transparent 70%)',
         filter: 'blur(60px)',
       }}
     />
-    {/* Subtle grid pattern */}
     <div style={{
       position: 'absolute', inset: 0,
       backgroundImage: `
-        linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px)
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px)
       `,
       backgroundSize: '48px 48px',
     }} />
   </div>
 );
+
+const steps = [
+  { num: '01', label: 'Onboard', desc: 'Intake, scope & partner alignment' },
+  { num: '02', label: 'Deploy', desc: 'Real OPD / IPD / ICU integration' },
+  { num: '03', label: 'Validate', desc: 'Clinician feedback & RWE capture' },
+  { num: '04', label: 'Certify', desc: 'Regulatory dossier & publication' },
+];
 
 const Hero = () => {
   const statsRef = useRef<HTMLDivElement>(null);
@@ -135,20 +135,22 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               style={{ marginBottom: '28px' }}
             >
-              <span className="badge badge-accent">India's First Hospital-Embedded AI Hub</span>
+              <span className="badge badge-accent">India's First Hospital-Embedded AI CoE</span>
             </motion.div>
 
             <h1 style={{
               fontSize: 'clamp(2.8rem, 5vw, 4.4rem)',
-              fontWeight: 700,
-              lineHeight: 1.1,
+              fontWeight: 800,
+              lineHeight: 1.08,
               letterSpacing: '-0.03em',
               color: 'var(--text-dark)',
               marginBottom: '28px',
             }}>
-              <RevealText text="Validated" delay={0.1} />
+              <RevealText text="Where Clinical" delay={0.1} />
               <br />
-              <RevealText text="Intelligence" delay={0.2} />
+              <span style={{ color: 'var(--accent)' }}>
+                <RevealText text="AI Gets Proven." delay={0.2} />
+              </span>
             </h1>
 
             <motion.p
@@ -158,12 +160,12 @@ const Hero = () => {
               style={{
                 fontSize: '1.1rem',
                 color: 'var(--text-body)',
-                lineHeight: 1.7,
+                lineHeight: 1.75,
                 maxWidth: '420px',
                 marginBottom: '40px',
               }}
             >
-              Improving patient outcomes with hospital-grade AI. Test, validate, and certify your healthcare AI inside real clinical workflows.
+              Test, validate, and certify your healthcare AI inside real hospital workflows — not a lab. Built for clinicians, trusted by regulators.
             </motion.p>
 
             <motion.div
@@ -172,11 +174,10 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.65 }}
               style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}
             >
-              <MagneticButton href="#sandbox" className="btn btn-primary">Apply Now</MagneticButton>
-              <MagneticButton href="#features" className="btn btn-outline">Learn More</MagneticButton>
+              <MagneticButton href="#sandbox" className="btn btn-primary">Apply to the Sandbox</MagneticButton>
+              <MagneticButton href="#how-it-works" className="btn btn-outline">See How It Works</MagneticButton>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
               ref={statsRef}
               initial={{ opacity: 0 }}
@@ -190,81 +191,108 @@ const Hero = () => {
                 borderTop: '1px solid var(--border)',
               }}
             >
-              <StatItem value={3} suffix="+" label="Partner Hospitals" inView={statsInView} />
-              <StatItem value={50} suffix="+" label="AI Startups Validated" inView={statsInView} />
-              <StatItem value={100} suffix="%" label="Clinical-Grade Certified" inView={statsInView} />
+              <StatItem value={5} suffix="+" label="Hospital Partners" inView={statsInView} />
+              <StatItem value={10} suffix="+" label="AI Tools Validated" inView={statsInView} />
+              <StatItem value={3} suffix="+" label="RWE Publications" inView={statsInView} />
             </motion.div>
           </div>
 
-          {/* ── Right panel ── */}
+          {/* ── Right panel: Validation Journey ── */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              background: 'rgba(247,247,245,0.8)',
+              background: 'var(--bg-off-white)',
               border: '1px solid var(--border)',
-              borderRadius: '10px',
-              padding: '40px',
+              borderRadius: '12px',
+              padding: '36px',
               position: 'relative',
               overflow: 'hidden',
-              backdropFilter: 'blur(8px)',
             }}
           >
+            {/* top teal strip */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'var(--accent)' }} />
 
-            <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '20px' }}>
-              Innovation Pillars
+            <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '24px' }}>
+              The Validation Journey
             </div>
 
-            {[
-              { num: '01', label: 'AI Clinical Workflow', desc: 'Discharge summaries, OPD docs, ICU alerts' },
-              { num: '02', label: 'Digital Health Trials', desc: 'Wearables, diagnostics, remote monitoring' },
-              { num: '03', label: 'MedFinTech Innovation', desc: 'Claims automation, longevity finance' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '16px',
-                  padding: '16px 0',
-                  borderBottom: i < 2 ? '1px solid var(--border)' : 'none',
-                }}
-              >
-                <div style={{
-                  width: '32px', height: '32px', borderRadius: '50%',
-                  background: 'var(--bg-white)', border: '1px solid var(--border)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0, fontSize: '0.7rem', fontWeight: 700, color: 'var(--accent)',
-                }}>
-                  {item.num}
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-dark)', marginBottom: '3px' }}>{item.label}</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{item.desc}</div>
-                </div>
-              </motion.div>
-            ))}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {steps.map((step, i) => (
+                <motion.div
+                  key={step.num}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+                  style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}
+                >
+                  {/* Line + dot */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
+                    <div style={{
+                      width: '32px', height: '32px', borderRadius: '50%',
+                      background: i === 0 ? 'var(--accent)' : i < 2 ? 'rgba(13,148,136,0.12)' : 'var(--bg-white)',
+                      border: i < 2 ? '2px solid var(--accent)' : '2px solid var(--border)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: '0.68rem', fontWeight: 800,
+                      color: i === 0 ? '#fff' : i < 2 ? 'var(--accent)' : 'var(--text-muted)',
+                    }}>
+                      {step.num}
+                    </div>
+                    {i < steps.length - 1 && (
+                      <div style={{
+                        width: '2px', height: '28px',
+                        background: i < 1 ? 'var(--accent)' : 'var(--border)',
+                        margin: '4px 0',
+                      }} />
+                    )}
+                  </div>
 
-            <motion.a
-              href="#sandbox"
+                  <div style={{ paddingBottom: i < steps.length - 1 ? '0' : '0', paddingTop: '4px' }}>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 700, color: i < 2 ? 'var(--text-dark)' : 'var(--text-muted)', marginBottom: '2px' }}>
+                      {step.label}
+                    </div>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: i < steps.length - 1 ? '0' : '0' }}>
+                      {step.desc}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Status badge */}
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
+              transition={{ delay: 1.0 }}
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                fontSize: '0.875rem', fontWeight: 600, color: 'var(--accent)',
-                marginTop: '20px', transition: 'gap 200ms ease',
+                marginTop: '28px',
+                paddingTop: '20px',
+                borderTop: '1px solid var(--border)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
               }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.gap = '10px'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.gap = '6px'}
             >
-              Join the Sandbox →
-            </motion.a>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 0 3px rgba(16,185,129,0.2)' }} />
+                <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+                  Accepting partners for Q2 2026
+                </span>
+              </div>
+              <motion.a
+                href="#sandbox"
+                style={{
+                  fontSize: '0.82rem', fontWeight: 700, color: 'var(--accent)',
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                  transition: 'gap 200ms ease',
+                }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.gap = '8px'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.gap = '4px'}
+              >
+                Apply →
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

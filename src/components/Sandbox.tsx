@@ -157,10 +157,10 @@ const Sandbox = () => {
                         onChange={e => setFormData({ ...formData, innovationPillar: e.target.value })}
                         style={{ appearance: 'none', cursor: 'pointer' }}
                       >
-                        <option value="" disabled>Select Innovation Pillar</option>
+                        <option value="" disabled>Select Focus Area</option>
                         <option value="workflow">AI Clinical Workflow</option>
                         <option value="trials">Digital Health Trials</option>
-                        <option value="medfintech">MedFinTech</option>
+                        <option value="rwe">Evidence Generation (RWE)</option>
                       </select>
 
                       <textarea

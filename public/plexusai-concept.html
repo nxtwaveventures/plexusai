@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlexusAI — Concept Brief for Advisors</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple: #7B35D9;
+      --purple-dark: #1E0A3C;
+      --purple-mid: #2D1160;
+      --purple-light: #f3eeff;
+      --gold: #f59e0b;
+      --text: #111111;
+      --muted: #6b7280;
+      --border: #e5e5e5;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #fff;
+      font-size: 10pt;
+      line-height: 1.6;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-mid) 60%, #4c1d95 100%);
+      color: #fff;
+      padding: 72px 64px 60px;
+      min-height: 240px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: avoid;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(123,53,217,0.35);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 40%;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(245,158,11,0.12);
+    }
+    .cover-tag {
+      display: inline-block;
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 22px;
+    }
+    .cover h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 38pt;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      position: relative; z-index: 1;
+    }
+    .cover h1 span { color: var(--gold); }
+    .cover-sub {
+      font-size: 12pt;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      max-width: 520px;
+      position: relative; z-index: 1;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .cover-meta {
+      font-size: 8.5pt;
+      color: rgba(255,255,255,0.45);
+      position: relative; z-index: 1;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LAYOUT ── */
+    .page { padding: 52px 64px; }
+    .page + .page { padding-top: 40px; }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18pt;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--purple-dark);
+      margin-bottom: 6px;
+    }
+    h2 span { color: var(--purple); }
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 6px;
+    }
+    .divider {
+      height: 3px;
+      width: 48px;
+      background: var(--purple);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    p { color: #3d3d3d; margin-bottom: 12px; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: var(--purple-light);
+      border-left: 4px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+      margin: 24px 0;
+      font-size: 10.5pt;
+      font-weight: 500;
+      color: var(--purple-dark);
+      line-height: 1.65;
+    }
+
+    /* ── PROBLEM / OPPORTUNITY ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 24px 0;
+    }
+    .stat-block {
+      background: var(--purple-dark);
+      color: #fff;
+      border-radius: 10px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .stat-block .num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28pt;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-block .label {
+      font-size: 9pt;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.45;
+    }
+
+    /* ── PROGRAMS ── */
+    .program-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 16px;
+      align-items: start;
+      break-inside: avoid;
+    }
+    .program-card.flagship {
+      border-color: var(--purple);
+      background: var(--purple-light);
+    }
+    .prog-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18pt;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+    }
+    .program-card.flagship .prog-num { color: var(--purple); }
+    .prog-badge {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--purple);
+      color: #fff;
+      padding: 2px 9px;
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    .prog-badge.green { background: #059669; }
+    .prog-badge.blue { background: #2563eb; }
+    .prog-badge.indigo { background: #4f46e5; }
+    .prog-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--purple-dark);
+      margin-bottom: 2px;
+    }
+    .prog-headline {
+      font-style: italic;
+      color: var(--purple);
+      font-size: 9pt;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .prog-desc { font-size: 9pt; color: var(--muted); margin: 0; line-height: 1.55; }
+
+    /* ── BUSINESS MODEL ── */
+    .revenue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .rev-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 16px;
+      text-align: center;
+      break-inside: avoid;
+    }
+    .rev-icon {
+      font-size: 20pt;
+      margin-bottom: 8px;
+    }
+    .rev-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: var(--purple-dark);
+      margin-bottom: 4px;
+    }
+    .rev-desc { font-size: 8pt; color: var(--muted); line-height: 1.5; }
+
+    /* ── TRACTION ── */
+    .traction-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .traction-row:last-child { border-bottom: none; }
+    .traction-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+    .traction-text { font-size: 10pt; color: #3d3d3d; }
+    .traction-text strong { color: var(--purple-dark); }
+
+    /* ── TEAM ── */
+    .team-card {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      break-inside: avoid;
+    }
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--purple-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20pt; font-weight: 900;
+      color: var(--purple);
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .team-name { font-size: 11pt; font-weight: 700; color: var(--purple-dark); }
+    .team-role { font-size: 8.5pt; color: var(--purple); font-weight: 600; margin-bottom: 4px; }
+    .team-bio { font-size: 9pt; color: var(--muted); line-height: 1.55; }
+
+    /* ── ASK ── */
+    .ask-box {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-mid));
+      color: #fff;
+      border-radius: 12px;
+      padding: 36px 40px;
+      margin: 24px 0;
+      break-inside: avoid;
+    }
+    .ask-box h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16pt;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .ask-box h3 span { color: var(--gold); }
+    .ask-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+    .ask-tag {
+      background: var(--gold);
+      color: #111;
+      font-size: 7.5pt;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 2px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .ask-text { font-size: 10pt; color: rgba(255,255,255,0.85); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8pt;
+      color: var(--muted);
+    }
+    .doc-footer strong { color: var(--purple); }
+
+    /* ── PRINT ── */
+    @media print {
+      @page { margin: 0; size: A4; }
+      body { font-size: 9.5pt; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .stat-block, .ask-box, .program-card.flagship { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { page-break-before: always; }
+    }
+
+    @media screen {
+      body { max-width: 900px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.12); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ COVER ══════════════════ -->
+<div class="cover">
+  <div class="cover-tag">Concept Brief · Confidential</div>
+  <h1>Plexus<span>AI</span></h1>
+  <p class="cover-sub">India's first hospital-embedded AI innovation and validation hub — where clinical AI goes from idea to trusted deployment.</p>
+  <p class="cover-meta">Prepared for Advisors &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; plexusai.in</p>
+</div>
+
+<!-- ══════════════════ PAGE 1 ══════════════════ -->
+<div class="page">
+
+  <!-- The Problem -->
+  <div class="section-label">The Problem</div>
+  <h2>Healthcare AI is failing at the <span>last mile</span></h2>
+  <div class="divider"></div>
+
+  <p>India generates <strong>1.4 billion patient interactions annually</strong>, yet fewer than 3% of healthcare AI tools deployed in India have undergone any structured clinical validation. The result: tools built in labs that collapse inside real wards.</p>
+
+  <div class="highlight-box">
+    "There is no structured pathway in India for an AI startup to test their product inside a real hospital, gather clinical evidence, and earn the trust of regulators, investors, and clinicians — all at once."
+  </div>
+
+  <p>AI companies spend 2–4 years attempting to access hospitals independently. They face fragmented data, ethical approval bottlenecks, clinician distrust, and regulatory opacity — with no neutral intermediary to bridge the gap.</p>
+
+  <div class="two-col">
+    <div class="stat-block">
+      <div class="num">$45B</div>
+      <div class="label">India healthtech market by 2030 — largely locked behind unvalidated AI</div>
+    </div>
+    <div class="stat-block">
+      <div class="num">&lt;3%</div>
+      <div class="label">of deployed clinical AI tools in India have structured validation evidence</div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="stat-block">
+      <div class="num">2–4 yrs</div>
+      <div class="label">average time AI startups spend attempting independent hospital access</div>
+    </div>
+    <div class="stat-block">
+      <div class="num">500+</div>
+      <div class="label">healthcare AI companies in India with no clear certification pathway</div>
+    </div>
+  </div>
+
+  <!-- The Solution -->
+  <div style="margin-top: 36px;">
+    <div class="section-label">The Solution</div>
+    <h2>A <span>hospital-embedded</span> AI innovation hub</h2>
+    <div class="divider"></div>
+
+    <p>PlexusAI is the neutral infrastructure layer between AI builders and Indian hospitals. We provide structured access to real clinical environments, issue market-trusted validation certificates, and accelerate the highest-potential startups through equity-based co-development.</p>
+
+    <p>Think of us as the <strong>FDA-equivalent confidence layer</strong> — but built for speed, for India, and for the current state of healthcare AI adoption.</p>
+  </div>
+
+</div>
+
+<!-- ══════════════════ PAGE 2 ══════════════════ -->
+<div class="page page-break">
+  <div class="section-label">Programs</div>
+  <h2>Five pathways. One <span>trusted network.</span></h2>
+  <div class="divider"></div>
+
+  <div class="program-card">
+    <div class="prog-num">01</div>
+    <div>
+      <div class="prog-badge">For Startups</div>
+      <div class="prog-title">Clinical Validation Access</div>
+      <div class="prog-headline">Test your AI inside a real hospital — not a lab.</div>
+      <p class="prog-desc">Structured access to live hospital workflows, real clinical data, and direct doctor feedback. Compress years of validation into months. Revenue model: program fee + milestone-based success payments.</p>
+    </div>
+  </div>
+
+  <div class="program-card flagship">
+    <div class="prog-num">02</div>
+    <div>
+      <div class="prog-badge">⭐ Flagship Program</div>
+      <div class="prog-title">Plexus AI Validation Certificate</div>
+      <div class="prog-headline">The credential that unlocks markets for your AI.</div>
+      <p class="prog-desc">India's most trusted clinical AI certificate. Investors fund it faster. Regulators clear it smoother. Hospitals adopt what is certified. Revenue model: certification fee (₹8–25L per tool, tiered by complexity).</p>
+    </div>
+  </div>
+
+  <div class="program-card">
+    <div class="prog-num">03</div>
+    <div>
+      <div class="prog-badge green">For Pharma & MedTech</div>
+      <div class="prog-title">Sponsored Hospital Research</div>
+      <div class="prog-headline">Fund breakthrough studies with real patient impact.</div>
+      <p class="prog-desc">Commission structured AI clinical studies inside partner hospitals — publishable, real-world evidence with full ethical compliance. Revenue model: research sponsorship fees (₹20L–2Cr per study).</p>
+    </div>
+  </div>
+
+  <div class="program-card">
+    <div class="prog-num">04</div>
+    <div>
+      <div class="prog-badge blue">High-Potential Startups</div>
+      <div class="prog-title">AI Accelerator Track</div>
+      <div class="prog-headline">Skip the noise. Scale inside a hospital.</div>
+      <p class="prog-desc">Equity-based acceleration — co-building with clinicians, hospital administrators, and our expert advisory network. Revenue model: equity stake (2–8%) in cohort companies.</p>
+    </div>
+  </div>
+
+  <div class="program-card">
+    <div class="prog-num">05</div>
+    <div>
+      <div class="prog-badge indigo">For Clinicians</div>
+      <div class="prog-title">AI Certification for Doctors</div>
+      <div class="prog-headline">Become the AI-fluent clinician your hospital needs.</div>
+      <p class="prog-desc">Hospital-grounded AI certification designed by clinicians for clinicians. Evaluate and champion AI tools with full confidence. Revenue model: ₹15,000–45,000 per clinician, B2B hospital licensing.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════ PAGE 3 ══════════════════ -->
+<div class="page page-break">
+
+  <!-- Business Model -->
+  <div class="section-label">Business Model</div>
+  <h2>Multiple revenue streams, <span>one moat</span></h2>
+  <div class="divider"></div>
+
+  <div class="revenue-grid">
+    <div class="rev-card">
+      <div class="rev-icon">🏥</div>
+      <div class="rev-title">Validation Fees</div>
+      <div class="rev-desc">Per-tool, per-study program fees from AI startups and pharma companies</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-icon">🏅</div>
+      <div class="rev-title">Certification Revenue</div>
+      <div class="rev-desc">Annual certification fees + renewal licensing for the PlexusAI certificate</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-icon">📈</div>
+      <div class="rev-title">Equity + Upside</div>
+      <div class="rev-desc">2–8% equity in accelerator cohort companies; milestone performance fees</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-icon">🎓</div>
+      <div class="rev-title">Clinician Training</div>
+      <div class="rev-desc">Individual and B2B licensing for the doctor AI certification program</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-icon">🔬</div>
+      <div class="rev-title">Sponsored Research</div>
+      <div class="rev-desc">Pharma and MedTech-funded hospital AI studies with publication rights</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-icon">🤝</div>
+      <div class="rev-title">Hospital Partnerships</div>
+      <div class="rev-desc">Revenue-sharing from hospital technology adoption facilitated through PlexusAI</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>The core moat:</strong> Hospital partnerships. Once a hospital is embedded in the PlexusAI network, every AI tool targeting Indian healthcare must come through us for credible, fast-tracked validation. We become the rails, not the train.
+  </div>
+
+  <!-- Traction -->
+  <div style="margin-top: 32px;">
+    <div class="section-label">Traction & Milestones</div>
+    <h2>Where we are <span>today</span></h2>
+    <div class="divider"></div>
+
+    <div class="traction-row">
+      <div class="traction-dot"></div>
+      <div class="traction-text"><strong>Hospital network being established</strong> — active conversations with 3 partner hospitals in Tier-1 cities for initial validation cohort</div>
+    </div>
+    <div class="traction-row">
+      <div class="traction-dot"></div>
+      <div class="traction-text"><strong>Founder domain expertise</strong> — Dr. Amit Raj is a practicing cardiologist with deep clinical network and firsthand understanding of the validation gap</div>
+    </div>
+    <div class="traction-row">
+      <div class="traction-dot"></div>
+      <div class="traction-text"><strong>Advisory board formation</strong> — onboarding senior advisors from strategy, deep-tech, clinical, and regulatory domains</div>
+    </div>
+    <div class="traction-row">
+      <div class="traction-dot"></div>
+      <div class="traction-text"><strong>Product & brand complete</strong> — full website, application sandbox, and program structure designed and live</div>
+    </div>
+    <div class="traction-row">
+      <div class="traction-dot"></div>
+      <div class="traction-text"><strong>First cohort target: Q3 2026</strong> — 5 AI startups in the Clinical Validation Access program, 1 pharma-sponsored study</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════ PAGE 4 ══════════════════ -->
+<div class="page page-break">
+
+  <!-- Team -->
+  <div class="section-label">Founding Team</div>
+  <h2>Built by those who <span>live in the wards</span></h2>
+  <div class="divider"></div>
+
+  <div class="team-card">
+    <div class="avatar">
+      <img src="/team/founder-1.jpg" alt="Dr. Amit Raj" onerror="this.parentElement.innerHTML='AR'" />
+    </div>
+    <div>
+      <div class="team-name">Dr. Amit Raj</div>
+      <div class="team-role">Founder · Cardiologist & Healthcare Strategist</div>
+      <p class="team-bio">Practicing cardiologist with deep clinical experience and a firsthand view of how AI tools succeed or fail at the bedside. Dr. Raj founded PlexusAI to build the infrastructure he wished existed — structured, fast, and trusted clinical validation for healthcare AI in India.</p>
+    </div>
+  </div>
+
+  <!-- Advisors -->
+  <div style="margin-top: 28px;">
+    <div class="section-label">Advisory Board</div>
+    <h2>Senior advisors across <span>every critical domain</span></h2>
+    <div class="divider"></div>
+
+    <div class="team-card">
+      <div class="avatar">
+        <img src="/advisors/advisor-1.jpg" alt="Sachin Gaur" onerror="this.parentElement.innerHTML='SG'" />
+      </div>
+      <div>
+        <div class="team-name">Sachin Gaur</div>
+        <div class="team-role">Strategy & Innovation Advisory · Serial Entrepreneur · Stanford GSB</div>
+        <p class="team-bio">Global innovation leader with experience in AI, deep-tech ecosystems, and international collaborations. Guides PlexusAI's strategy, partnership architecture, and scaling roadmap across markets.</p>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="avatar">
+        <img src="/advisors/advisor-2.jpg" alt="Advisor" onerror="this.parentElement.innerHTML='?'" />
+      </div>
+      <div>
+        <div class="team-name">Advisor — Profile Pending</div>
+        <div class="team-role">Clinical Advisory</div>
+        <p class="team-bio">Senior clinician advisor — profile to be added.</p>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="avatar">
+        <img src="/advisors/advisor-3.jpg" alt="Advisor" onerror="this.parentElement.innerHTML='?'" />
+      </div>
+      <div>
+        <div class="team-name">Advisor — Profile Pending</div>
+        <div class="team-role">Medical & Regulatory Advisory</div>
+        <p class="team-bio">Senior medical advisor — profile to be added.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Ask -->
+  <div style="margin-top: 32px;">
+    <div class="section-label">Advisory Ask</div>
+    <h2>How you can <span>help us win</span></h2>
+    <div class="divider"></div>
+
+    <div class="ask-box">
+      <h3>We're asking advisors for <span>three things</span></h3>
+
+      <div class="ask-row">
+        <div class="ask-tag">Doors</div>
+        <div class="ask-text">Introductions to hospital leadership, medical directors, and health system administrators who can become our next partner institutions</div>
+      </div>
+      <div class="ask-row">
+        <div class="ask-tag">Signal</div>
+        <div class="ask-text">Guidance on pricing, program structure, and regulatory positioning so we build the right credential from day one</div>
+      </div>
+      <div class="ask-row">
+        <div class="ask-tag">Network</div>
+        <div class="ask-text">Warm introductions to AI startups seeking clinical validation, and to pharma/MedTech companies looking to sponsor hospital research</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div><strong>PlexusAI</strong> · India's Hospital-Embedded AI Innovation Hub</div>
+    <div>Confidential — For Advisor Use Only · April 2026</div>
+    <div>Contact: <strong>plexusai.in@gmail.com</strong></div>
+  </div>
+
+</div>
+
+</body>
+</html>

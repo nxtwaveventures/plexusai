@@ -106,7 +106,7 @@ const Programs = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '10px' }}>
                     <div style={{
                       width: '32px', height: '32px', borderRadius: '8px',
-                      background: `${p.accent === 'var(--accent)' ? 'rgba(232,80,10' : p.accent === '#059669' ? 'rgba(5,150,105' : 'rgba(37,99,235'},0.08)`,
+                      background: `${p.accent === 'var(--accent)' ? 'rgba(13,148,136' : p.accent === '#059669' ? 'rgba(5,150,105' : 'rgba(37,99,235'},0.08)`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                       <Icon size={17} color={p.accent} />

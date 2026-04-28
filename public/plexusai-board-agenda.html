@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plexus AI — Board of Advisors Agenda</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink:       #1E293B;
+      --purple:    #0D9488;
+      --purple-lt: #F0FDFA;
+      --blue-lt:   #EFF6FF;
+      --gold:      #3B82F6;
+      --green:     #059669;
+      --muted:     #64748B;
+      --border:    #E2E8F0;
+      --bg:        #F8FAFC;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: #fff;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      width: 210mm;
+    }
+
+    /* ━━ COVER ━━ */
+    .cover {
+      display: grid;
+      grid-template-columns: 44% 56%;
+      min-height: 297mm;
+      break-after: page;
+    }
+    .cover-left {
+      background: var(--ink);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-left::after {
+      content: '';
+      position: absolute; bottom: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(13,148,136,0.12);
+    }
+    .cover-right {
+      background: var(--blue-lt);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cv-mark { width: 28px; height: 2px; background: var(--purple); border-radius: 1px; margin-bottom: 14px; }
+    .cv-tag { font-size: 6.5pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); }
+    .cv-brand { font-size: 10pt; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; margin-top: 3px; }
+    .cv-spacer { flex: 1; }
+    .cv-title { font-size: 22pt; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; }
+    .cv-title em { color: var(--purple); font-style: normal; }
+    .cv-subtitle { font-size: 9pt; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .cv-footer { margin-top: auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 1; }
+    .cv-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    .cv-meta-label { font-size: 6.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1px; }
+    .cv-meta-value { font-size: 9pt; font-weight: 600; color: rgba(255,255,255,0.8); }
+
+    /* agenda schedule on cover right */
+    .cv-agenda-label { font-size: 6.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+    .cv-agenda-total { font-size: 8.5pt; color: var(--muted); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .cv-agenda-total strong { color: var(--ink); }
+    .agenda-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border); }
+    .agenda-item:last-child { border-bottom: none; }
+    .agenda-num { font-size: 7pt; font-weight: 800; color: var(--purple); width: 18px; flex-shrink: 0; margin-top: 2px; }
+    .agenda-content { flex: 1; }
+    .agenda-name { font-size: 9.5pt; font-weight: 700; color: var(--ink); line-height: 1.3; }
+    .agenda-sub { font-size: 7.5pt; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .agenda-badge { font-size: 6.5pt; font-weight: 700; background: var(--purple); color: #fff; padding: 3px 8px; border-radius: 10px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; }
+
+    /* ━━ CONTENT PAGES ━━ */
+    .page { padding: 36px 52px 30px; break-before: page; background: #fff; }
+
+    .sec-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--purple);
+    }
+    .sec-num {
+      font-size: 7pt; font-weight: 800; letter-spacing: 0.1em;
+      background: var(--purple-lt); color: var(--purple);
+      padding: 3px 9px; border-radius: 3px; flex-shrink: 0;
+    }
+    .sec-title { font-size: 12pt; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; flex: 1; }
+    .sec-time {
+      font-size: 6.5pt; font-weight: 700; color: var(--muted);
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 3px 9px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+    }
+
+    .page-divider { border: none; border-top: 2px solid var(--border); margin: 20px 0; }
+
+    .label { font-size: 7pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple); margin-bottom: 4px; }
+
+    h3 { font-size: 9.5pt; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    p { color: var(--muted); font-size: 9pt; margin-bottom: 6px; line-height: 1.7; }
+    p:last-child { margin-bottom: 0; }
+
+    ul.clean { list-style: none; padding: 0; margin: 6px 0; }
+    ul.clean li {
+      display: flex; gap: 9px; align-items: flex-start;
+      padding: 5px 0; border-bottom: 1px solid var(--border);
+      font-size: 9pt; color: #374151; line-height: 1.55;
+    }
+    ul.clean li:last-child { border-bottom: none; }
+    ul.clean li::before { content: '→'; color: var(--purple); font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+
+    .callout {
+      border-left: 2px solid var(--purple); padding: 9px 13px;
+      margin: 10px 0; background: var(--purple-lt);
+      border-radius: 0 4px 4px 0; font-size: 9pt;
+      color: #0F4C45; line-height: 1.65;
+    }
+
+    .discussion {
+      background: var(--purple-lt); border: 1px solid rgba(13,148,136,0.2);
+      border-left: 3px solid var(--purple); border-radius: 0 5px 5px 0;
+      padding: 10px 14px; margin-top: 10px;
+    }
+    .discussion-title { font-size: 6.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--purple); margin-bottom: 7px; }
+    .discussion-q { font-size: 8.5pt; color: var(--ink); padding: 3px 0; display: flex; gap: 8px; line-height: 1.5; }
+    .discussion-q::before { content: '?'; color: var(--purple); font-weight: 800; flex-shrink: 0; }
+
+    .phases { display: flex; flex-direction: column; gap: 5px; margin: 6px 0; }
+    .phase {
+      display: grid; grid-template-columns: 82px 1fr; gap: 10px;
+      align-items: start; padding: 8px 11px;
+      background: var(--bg); border-radius: 5px; border: 1px solid var(--border);
+    }
+    .phase-tag { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--purple); }
+    .phase-range { font-size: 8pt; font-weight: 700; color: var(--ink); margin-top: 1px; }
+    .phase-items { font-size: 8.5pt; color: var(--muted); line-height: 1.5; }
+
+    .fw-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin: 7px 0; }
+    .fw-step { background: var(--bg); border-radius: 5px; padding: 10px 11px; border: 1px solid var(--border); text-align: center; }
+    .fw-step-n { font-size: 14pt; font-weight: 800; color: var(--border); line-height: 1; margin-bottom: 4px; }
+    .fw-step h3 { font-size: 8.5pt; font-weight: 700; color: var(--purple); margin-bottom: 3px; }
+    .fw-step p { font-size: 7.5pt; color: var(--muted); margin: 0; line-height: 1.45; }
+
+    .cols { display: grid; gap: 20px; }
+    .cols-2 { grid-template-columns: 1fr 1fr; }
+
+    /* Decision cards */
+    .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+    .decision-card {
+      background: var(--bg); border-radius: 5px;
+      padding: 11px 13px; border: 1px solid var(--border);
+    }
+    .decision-card.wide { grid-column: 1 / -1; }
+    .decision-tag { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+    .decision-card h3 { font-size: 9pt; color: var(--ink); margin-bottom: 3px; }
+    .decision-card p { font-size: 8.5pt; margin: 0; }
+
+    /* Action table */
+    .action-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 8.5pt; }
+    .action-table th {
+      background: var(--blue-lt); padding: 6px 10px; text-align: left;
+      font-size: 6.5pt; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .action-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--ink); vertical-align: top; }
+    .action-table tr:last-child td { border-bottom: none; }
+    .action-table tr:nth-child(even) td { background: var(--bg); }
+
+    .next-box {
+      background: var(--ink); color: #fff; border-radius: 8px;
+      padding: 20px 24px; margin-top: 14px;
+      position: relative; overflow: hidden;
+    }
+    .next-box::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 130px; height: 130px; border-radius: 50%;
+      background: rgba(13,148,136,0.18);
+    }
+    .next-box h3 { font-size: 10pt; font-weight: 800; color: #fff; margin-bottom: 8px; position: relative; z-index: 1; }
+    .next-box p { color: rgba(255,255,255,0.65); font-size: 8.5pt; line-height: 1.65; margin-bottom: 4px; position: relative; z-index: 1; }
+    .next-box strong { color: var(--purple); }
+
+    /* Tier grid for partners */
+    .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 7px 0; }
+    .tier-card { border-radius: 5px; padding: 9px 11px; border: 1px solid var(--border); }
+    .tier-tag { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+    .tier-card h3 { font-size: 8.5pt; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+    .tier-card p { font-size: 7.5pt; margin: 0; line-height: 1.45; }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      .cover-left, .discussion, .next-box, .phase, .fw-step,
+      .decision-card, .tier-card, .callout {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+    @media screen {
+      body { max-width: 860px; margin: 0 auto; box-shadow: 0 2px 40px rgba(0,0,0,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━ COVER ━━ -->
+<div class="cover">
+  <div class="cover-left">
+    <div>
+      <div class="cv-mark"></div>
+      <div class="cv-tag">Board of Advisors · Inaugural Meeting</div>
+      <div class="cv-brand">Plexus AI</div>
+    </div>
+    <div class="cv-spacer"></div>
+    <div>
+      <h1 class="cv-title">Advisory<br>Board<br><em>Agenda</em></h1>
+      <p class="cv-subtitle">A structured discussion guide for the inaugural advisory session — covering governance, clinical strategy, validation frameworks, business model, and the decisions required for execution.</p>
+    </div>
+    <div class="cv-footer">
+      <div class="cv-meta">
+        <div>
+          <div class="cv-meta-label">Session Type</div>
+          <div class="cv-meta-value">Full Board · In Person</div>
+        </div>
+        <div>
+          <div class="cv-meta-label">Date</div>
+          <div class="cv-meta-value">April 2026</div>
+        </div>
+        <div>
+          <div class="cv-meta-label">Total Duration</div>
+          <div class="cv-meta-value">~110 Minutes</div>
+        </div>
+        <div>
+          <div class="cv-meta-label">Classification</div>
+          <div class="cv-meta-value">Confidential</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-right">
+    <div class="cv-agenda-label">Session Agenda</div>
+    <div class="cv-agenda-total">7 agenda items · <strong>~110 minutes total</strong></div>
+
+    <div class="agenda-item">
+      <div class="agenda-num">01</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Executive Overview & Mission Clarity</div>
+        <div class="agenda-sub">Problem, positioning, and Plexus AI's unique role</div>
+      </div>
+      <div class="agenda-badge">15 min</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-num">02</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Model Design & Governance Deep Dive</div>
+        <div class="agenda-sub">Operating model, governance structure, board oversight</div>
+      </div>
+      <div class="agenda-badge">20 min</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-num">03</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Clinical Integration & Adoption</div>
+        <div class="agenda-sub">Doctor buy-in, rollout strategy, specialty prioritisation</div>
+      </div>
+      <div class="agenda-badge">15 min</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-num">04</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Validation Framework & Evidence Generation</div>
+        <div class="agenda-sub">RWE criteria, methodology, publication strategy</div>
+      </div>
+      <div class="agenda-badge">15 min</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-num">05</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Business Model & Partnerships</div>
+        <div class="agenda-sub">Revenue streams, partner prioritisation, market strategy</div>
+      </div>
+      <div class="agenda-badge">20 min</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-num">06</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Scalability & Multi-Centre Strategy</div>
+        <div class="agenda-sub">Expansion phases, replicability challenges, funding for growth</div>
+      </div>
+      <div class="agenda-badge">15 min</div>
+    </div>
+    <div class="agenda-item">
+      <div class="agenda-num">07</div>
+      <div class="agenda-content">
+        <div class="agenda-name">Key Decisions & Next Steps</div>
+        <div class="agenda-sub">Critical path decisions, action items, next board meeting</div>
+      </div>
+      <div class="agenda-badge">10 min</div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ PAGE 1: SECTIONS 1 + 2 ━━ -->
+<div class="page">
+
+  <div class="sec-header">
+    <div class="sec-num">01</div>
+    <div class="sec-title">Executive Overview & Mission Clarity</div>
+    <div class="sec-time">⏱ 15 minutes</div>
+  </div>
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">Problem Statement</div>
+      <h3>Why Plexus AI exists</h3>
+      <ul class="clean">
+        <li>Healthcare AI achieves impressive lab results — real-world clinical translation rate remains <strong>&lt;10%</strong></li>
+        <li>Core bottleneck: gap between innovation and structured clinical validation</li>
+        <li>Root causes: absence of clinician involvement, poor workflow integration, lack of structured RWE</li>
+      </ul>
+    </div>
+    <div>
+      <div class="label">Unique Positioning</div>
+      <h3>What makes Plexus AI different</h3>
+      <ul class="clean">
+        <li>Hospital-embedded CoE — not a consulting firm, not pure tech, not a hospital innovation cell</li>
+        <li>Active clinician-led validation using real patient data</li>
+        <li>Structured pathway: Pilot → Validation → Scale</li>
+        <li>Real-World Evidence (RWE) as the primary, monetisable deliverable</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="discussion" style="margin-top:12px;">
+    <div class="discussion-title">Board Discussion</div>
+    <div class="discussion-q">What is our primary success metric at 12 months — and does the board agree on the definition?</div>
+    <div class="discussion-q">How do we define "validation" in a way that satisfies regulators, clinicians, and investors simultaneously?</div>
+    <div class="discussion-q">What is the minimum viable proof point to attract our first paying partner?</div>
+  </div>
+
+  <hr class="page-divider" />
+
+  <div class="sec-header">
+    <div class="sec-num">02</div>
+    <div class="sec-title">Model Design & Governance Deep Dive</div>
+    <div class="sec-time">⏱ 20 minutes</div>
+  </div>
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">Core Operating Model</div>
+      <h3>Five activities that drive the CoE</h3>
+      <ul class="clean">
+        <li><strong>Partner Onboarding:</strong> Structured intake, scope definition, and expectations alignment</li>
+        <li><strong>Clinical Deployment:</strong> Integration with OPD, IPD, ICU, and diagnostic workflows</li>
+        <li><strong>Doctor Engagement:</strong> Structured feedback loops, usability testing, clinician training</li>
+        <li><strong>Data Capture:</strong> Real-time usage, clinical outcomes, and efficiency metrics</li>
+        <li><strong>Validation & Reporting:</strong> RWE generation, case studies, and publishable results</li>
+      </ul>
+    </div>
+    <div>
+      <div class="discussion" style="margin-top:0;">
+        <div class="discussion-title">Board Discussion</div>
+        <div class="discussion-q">Should Plexus AI establish a formal steering committee from day one? Who should sit on it?</div>
+        <div class="discussion-q">How do we balance clinical independence with partner commercial interests?</div>
+        <div class="discussion-q">What regulatory or ethical certifications should Plexus AI pursue early?</div>
+      </div>
+      <div class="callout" style="margin-top:10px;">
+        <strong>Key tension:</strong> Maintaining scientific independence while generating revenue from the partners whose tools are being validated. A clear governance charter is critical from day one.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ━━ PAGE 2: SECTIONS 3 + 4 ━━ -->
+<div class="page">
+
+  <div class="sec-header">
+    <div class="sec-num">03</div>
+    <div class="sec-title">Clinical Integration & Doctor Adoption</div>
+    <div class="sec-time">⏱ 15 minutes</div>
+  </div>
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">The Real Challenge</div>
+      <h3>Doctor buy-in</h3>
+      <ul class="clean">
+        <li>Doctors don't adopt tools that add friction — success means <strong>reduced workload + visible benefit</strong></li>
+        <li>Integration into existing workflows (EHR, diagnostics, ward rounds) is non-negotiable</li>
+        <li><strong>Pilot bias:</strong> Early adopters are not representative of broader clinical adoption potential</li>
+      </ul>
+      <div class="label" style="margin-top:12px;">Phased Clinical Rollout</div>
+      <div class="phases">
+        <div class="phase">
+          <div><div class="phase-tag">Pre-pilot</div><div class="phase-range">Weeks 1–4</div></div>
+          <div class="phase-items">Workflow mapping · clinician onboarding · baseline data collection</div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-tag">Pilot</div><div class="phase-range">Weeks 5–12</div></div>
+          <div class="phase-items">30-day limited deployment · structured feedback · interim analysis</div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-tag">Full Deploy</div><div class="phase-range">Month 4+</div></div>
+          <div class="phase-items">Expanded access · continuous RWE capture · workflow optimisation</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="discussion">
+        <div class="discussion-title">Board Discussion</div>
+        <div class="discussion-q">Which clinical specialties should be priority #1? (Oncology? Emergency? ICU? Diagnostics?)</div>
+        <div class="discussion-q">Should Plexus AI hire dedicated clinical coordinators or rely on hospital staff?</div>
+        <div class="discussion-q">What incentive structures will sustain doctor engagement beyond initial pilots?</div>
+      </div>
+      <div class="callout" style="margin-top:12px;">
+        Clinician adoption rate is the single most powerful validation signal. A tool used by 80% of doctors in a pilot is worth more commercially than perfect outcomes in 20% of cases. Adoption rate should be a headline KPI.
+      </div>
+    </div>
+  </div>
+
+  <hr class="page-divider" />
+
+  <div class="sec-header">
+    <div class="sec-num">04</div>
+    <div class="sec-title">Validation Framework & Real-World Evidence</div>
+    <div class="sec-time">⏱ 15 minutes</div>
+  </div>
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">What Makes RWE Credible</div>
+      <ul class="clean">
+        <li><strong>Clinical rigour:</strong> Defined outcomes, control or comparison groups where possible</li>
+        <li><strong>Transparent reporting:</strong> Methodology, limitations, and conflicts of interest declared</li>
+        <li><strong>Generalisability:</strong> Data representative of real populations, not just pilot cohorts</li>
+        <li><strong>Independent validation:</strong> Third-party review or peer-reviewed publication</li>
+      </ul>
+      <div class="label" style="margin-top:12px;">Validation Timeline</div>
+      <div class="phases">
+        <div class="phase">
+          <div><div class="phase-tag">Months 1–3</div></div>
+          <div class="phase-items">Baseline data collection · outcome metric definition · initial feedback loops</div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-tag">Months 4–6</div></div>
+          <div class="phase-items">Interim analysis · statistical review · publication preparation</div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-tag">Months 9–12</div></div>
+          <div class="phase-items">Final RWE report · case study published · regulatory dossier compiled</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="label">Proposed RWE Framework</div>
+      <div class="fw-steps">
+        <div class="fw-step"><div class="fw-step-n">01</div><h3>Define</h3><p>Outcome metrics, population, comparison group</p></div>
+        <div class="fw-step"><div class="fw-step-n">02</div><h3>Deploy</h3><p>Clinical integration, data capture infrastructure</p></div>
+        <div class="fw-step"><div class="fw-step-n">03</div><h3>Analyse</h3><p>Interim and final statistical analysis</p></div>
+        <div class="fw-step"><div class="fw-step-n">04</div><h3>Report</h3><p>Case study, publication, regulatory dossier</p></div>
+      </div>
+      <div class="discussion" style="margin-top:10px;">
+        <div class="discussion-title">Board Discussion</div>
+        <div class="discussion-q">Should RWE be Plexus AI's primary revenue driver or a partnership enabler?</div>
+        <div class="discussion-q">Who owns publications? What journal impact threshold is required?</div>
+        <div class="discussion-q">Should validation be third-party audited? What certification model?</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ━━ PAGE 3: SECTIONS 5 + 6 ━━ -->
+<div class="page">
+
+  <div class="sec-header">
+    <div class="sec-num">05</div>
+    <div class="sec-title">Business Model & Partnerships</div>
+    <div class="sec-time">⏱ 20 minutes</div>
+  </div>
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">Revenue Streams</div>
+      <ul class="clean">
+        <li><strong>Validation Programs:</strong> Structured per-engagement fee from AI and MedTech startups for end-to-end clinical validation</li>
+        <li><strong>Sponsored Research:</strong> Pharma and MedTech companies commission independent RWE studies through the embedded network</li>
+        <li><strong>Grants & Partnerships:</strong> DST, BIRAC, and ICMR funding for nationally-aligned innovation programs</li>
+      </ul>
+      <div class="label" style="margin-top:12px;">Partner Prioritisation</div>
+      <div class="tier-grid">
+        <div class="tier-card" style="background:var(--purple-lt); border-color:rgba(13,148,136,0.2);">
+          <div class="tier-tag" style="color:var(--purple);">Tier 1 · Priority</div>
+          <h3>Diagnostic AI</h3>
+          <p>High impact · fast validation cycle · proven clinical demand</p>
+        </div>
+        <div class="tier-card" style="background:var(--blue-lt);">
+          <div class="tier-tag" style="color:var(--gold);">Tier 2 · Near-term</div>
+          <h3>Clinical Workflow AI</h3>
+          <p>EHR, notes, triage — high clinician touchpoint frequency</p>
+        </div>
+        <div class="tier-card" style="background:var(--bg);">
+          <div class="tier-tag" style="color:var(--muted);">Tier 3 · Pipeline</div>
+          <h3>MedTech Devices</h3>
+          <p>Longer cycles, higher revenue per engagement</p>
+        </div>
+        <div class="tier-card" style="background:var(--bg);">
+          <div class="tier-tag" style="color:var(--muted);">Tier 4 · Strategic</div>
+          <h3>Pharma / RWE</h3>
+          <p>High-value, relationship-driven, longer sales cycle</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="discussion">
+        <div class="discussion-title">Board Discussion</div>
+        <div class="discussion-q">Which revenue model is most sustainable — upfront fees, outcomes-based, or hybrid?</div>
+        <div class="discussion-q">What is the realistic total addressable market in India and globally?</div>
+        <div class="discussion-q">Should Plexus AI actively sell or build for inbound demand first?</div>
+        <div class="discussion-q">How do we prevent conflicts of interest when validating competing products?</div>
+      </div>
+      <div class="callout" style="margin-top:12px;">
+        <strong>Key tension:</strong> More rigorous validation = longer engagement = higher cost per partner. The board needs to define the commercial vs. scientific threshold — and who sets it for each engagement.
+      </div>
+    </div>
+  </div>
+
+  <hr class="page-divider" />
+
+  <div class="sec-header">
+    <div class="sec-num">06</div>
+    <div class="sec-title">Scalability & Multi-Centre Strategy</div>
+    <div class="sec-time">⏱ 15 minutes</div>
+  </div>
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">Expansion Phases</div>
+      <div class="phases">
+        <div class="phase">
+          <div><div class="phase-tag">Phase 1</div><div class="phase-range">0–12 Mo</div></div>
+          <div class="phase-items">Validate model in one hospital · build replicable playbook · document all processes</div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-tag">Phase 2</div><div class="phase-range">12–24 Mo</div></div>
+          <div class="phase-items">Replicate to 2–3 additional centres (same geography) · test playbook at scale</div>
+        </div>
+        <div class="phase">
+          <div><div class="phase-tag">Phase 3</div><div class="phase-range">24–36 Mo</div></div>
+          <div class="phase-items">Expand to 5–10 centres across geographies · begin international MedTech collaborations</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="label">Replicability Challenges</div>
+      <ul class="clean">
+        <li>Hospital buy-in varies significantly by institution culture and leadership</li>
+        <li>Data standards are non-uniform across Indian hospital systems</li>
+        <li>Clinical workflow cultures differ — one playbook may not fit all contexts</li>
+        <li>Regulatory and ethical requirements may vary by state and institution type</li>
+      </ul>
+      <div class="discussion" style="margin-top:10px;">
+        <div class="discussion-title">Board Discussion</div>
+        <div class="discussion-q">Should the second centre be the same hospital system or a completely different one?</div>
+        <div class="discussion-q">Should partner hospitals become equity stakeholders in a network model?</div>
+        <div class="discussion-q">What is the funding model for multi-centre expansion?</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ━━ PAGE 4: SECTION 7 ━━ -->
+<div class="page">
+
+  <div class="sec-header">
+    <div class="sec-num">07</div>
+    <div class="sec-title">Key Decisions & Next Steps</div>
+    <div class="sec-time">⏱ 10 minutes</div>
+  </div>
+
+  <p style="margin-bottom:10px;">The following decisions are required before execution begins. Each needs a clear answer from this session.</p>
+
+  <div class="decision-grid">
+    <div class="decision-card" style="border-left:3px solid var(--purple);">
+      <div class="decision-tag" style="color:var(--purple);">Decision 01</div>
+      <h3>Founding Hospital Partner</h3>
+      <p>Which hospital or health system will be the anchor? Is an MOU secured or pending?</p>
+    </div>
+    <div class="decision-card" style="border-left:3px solid var(--gold);">
+      <div class="decision-tag" style="color:var(--gold);">Decision 02</div>
+      <h3>Revenue Model</h3>
+      <p>Upfront fees, outcomes-based, or hybrid? What is the pricing for a validation engagement?</p>
+    </div>
+    <div class="decision-card" style="border-left:3px solid var(--green);">
+      <div class="decision-tag" style="color:var(--green);">Decision 03</div>
+      <h3>Governance Structure</h3>
+      <p>Founder-led initially or establish a formal steering committee from day one?</p>
+    </div>
+    <div class="decision-card" style="border-left:3px solid var(--purple);">
+      <div class="decision-tag" style="color:var(--purple);">Decision 04</div>
+      <h3>Initial Partner Category</h3>
+      <p>Focus on AI startups, MedTech, or enterprise first? Diagnostic AI as the beachhead?</p>
+    </div>
+    <div class="decision-card wide" style="border-left:3px solid var(--gold);">
+      <div class="decision-tag" style="color:var(--gold);">Decision 05</div>
+      <h3>First AI Solution to Deploy</h3>
+      <p>What clinical problem area — diagnostics, clinical workflow, or administrative AI? What is the selection criteria and who decides?</p>
+    </div>
+  </div>
+
+  <hr style="margin:16px 0; border:none; border-top:1px solid var(--border);" />
+
+  <div class="label">Post-Board Action Items</div>
+  <table class="action-table">
+    <thead>
+      <tr>
+        <th style="width:38%;">Action</th>
+        <th style="width:18%;">Owner</th>
+        <th style="width:16%;">Deadline</th>
+        <th style="width:28%;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Finalise hospital partnership MOU</td>
+        <td>Dr. Amit Raj</td>
+        <td>2 weeks</td>
+        <td style="color:var(--gold); font-weight:600;">In Progress</td>
+      </tr>
+      <tr>
+        <td>Define and agree RWE validation framework</td>
+        <td>Anamika Singh</td>
+        <td>3 weeks</td>
+        <td style="color:var(--muted);">Pending Board Input</td>
+      </tr>
+      <tr>
+        <td>Identify first 3 AI solution candidates for pilot</td>
+        <td>Founding Team</td>
+        <td>3 weeks</td>
+        <td style="color:var(--muted);">Pending</td>
+      </tr>
+      <tr>
+        <td>Draft governance charter and steering committee structure</td>
+        <td>Dr. Amit Raj</td>
+        <td>4 weeks</td>
+        <td style="color:var(--muted);">Pending Board Input</td>
+      </tr>
+      <tr>
+        <td>Prepare technology infrastructure roadmap</td>
+        <td>Anamika Singh</td>
+        <td>4 weeks</td>
+        <td style="color:var(--green); font-weight:600;">Underway</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="next-box">
+    <h3>Next Board Meeting</h3>
+    <p><strong>Timeline:</strong> 6–8 weeks from this session</p>
+    <p><strong>Expected updates:</strong> Hospital partnership finalised · first pilot AI solutions identified · RWE framework approved · technology roadmap presented to board</p>
+    <p style="margin-top:10px; color:rgba(255,255,255,0.35); font-size:7.5pt;">Document prepared for Plexus AI Board of Advisors · April 2026 · Confidential</p>
+  </div>
+
+</div>
+
+</body>
+</html>

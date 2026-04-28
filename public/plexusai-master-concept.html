@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plexus AI — Master Concept Note</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink:        #1E293B;
+      --purple:     #0D9488;
+      --purple-lt:  #F0FDFA;
+      --blue-lt:    #EFF6FF;
+      --gold:       #3B82F6;
+      --green:      #059669;
+      --muted:      #64748B;
+      --border:     #E2E8F0;
+      --bg:         #F8FAFC;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: #fff;
+      font-size: 10pt;
+      line-height: 1.75;
+      width: 210mm;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━
+       COVER — split layout
+    ━━━━━━━━━━━━━━━━━━━━━━ */
+    .cover {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 297mm;
+      break-after: page;
+    }
+
+    /* LEFT — text anchored to doctor's eyeline */
+    .cover-left {
+      background: var(--blue-lt);
+      padding: 40px 44px 40px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-left::after {
+      content: '';
+      position: absolute; bottom: -50px; left: -50px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(123,53,217,0.06);
+    }
+
+    /* top strip: brand + eyebrow — compact, anchors the top */
+    .cover-header {
+      margin-bottom: 0;
+    }
+    .cover-top-mark {
+      width: 28px; height: 2px;
+      background: var(--purple); border-radius: 1px;
+      margin-bottom: 14px;
+    }
+    .cover-tag {
+      font-size: 6.5pt; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--purple);
+    }
+    .cover-brand-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10pt; font-weight: 800; color: var(--ink);
+      letter-spacing: 0.04em; margin-top: 3px;
+      opacity: 0.5;
+    }
+
+    /* spacer pushes headline to ~32% down — aligns with doctor's spectacles */
+    .cover-spacer { flex: 0 0 14%; }
+
+    /* main content — sits at the visual reading line */
+    .cover-main { }
+    .cover h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22pt; font-weight: 800; line-height: 1.18;
+      color: var(--ink); margin-bottom: 14px; letter-spacing: -0.02em;
+    }
+    .cover h1 em { font-style: normal; color: var(--purple); }
+    /* subtle horizontal reading line — extends toward the photo */
+    .cover-reading-line {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .cover-reading-line::before {
+      content: '';
+      display: block; width: 24px; height: 1px;
+      background: var(--purple); flex-shrink: 0;
+    }
+    .cover-reading-line span {
+      font-size: 7pt; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--purple);
+    }
+    .cover-desc {
+      font-size: 9.5pt; color: var(--muted); line-height: 1.75;
+    }
+
+    /* flexible gap between content and footer */
+    .cover-gap { flex: 1; }
+
+    /* footer: divider + meta */
+    .cover-footer {
+      padding-top: 18px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    .cover-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .cover-meta-label {
+      font-size: 6.5pt; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 1px;
+    }
+    .cover-meta-value { font-size: 9pt; font-weight: 600; color: var(--ink); }
+    .cover-email { font-size: 8pt; color: var(--muted); }
+    .cover-email a { color: var(--purple); font-weight: 600; text-decoration: none; }
+
+    /* RIGHT — photo, cropped to show face/upper body */
+    .cover-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: 40% 8%;
+      display: block;
+    }
+    .cover-right::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(220,232,248,0.25) 0%, transparent 30%),
+                  linear-gradient(to bottom, transparent 70%, rgba(30,10,60,0.2) 100%);
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━
+       CONTENT PAGES
+    ━━━━━━━━━━━━━━━━━━━━ */
+    .page {
+      padding: 40px 56px 36px;
+      break-before: page;
+      background: #fff;
+    }
+
+    /* thin purple top strip */
+    .page-strip {
+      height: 3px;
+      background: var(--purple);
+      width: 40px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    /* section label */
+    .label {
+      font-size: 7pt; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--purple); margin-bottom: 4px;
+    }
+
+    /* headings */
+    h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15pt; font-weight: 800; color: var(--ink);
+      line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.02em;
+    }
+    h2 em { font-style: normal; color: var(--purple); }
+
+    h3 {
+      font-size: 9.5pt; font-weight: 700; color: var(--ink); margin-bottom: 3px;
+    }
+
+    p { color: var(--muted); font-size: 9pt; margin-bottom: 7px; line-height: 1.7; }
+    p:last-child { margin-bottom: 0; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-left: 2px solid var(--purple);
+      padding: 10px 14px;
+      margin: 14px 0;
+      background: var(--purple-lt);
+      border-radius: 0 4px 4px 0;
+      font-size: 9pt; font-style: italic;
+      color: #0F4C45; line-height: 1.65;
+    }
+
+    /* ── BULLET LIST ── */
+    ul.clean { list-style: none; padding: 0; margin: 8px 0; }
+    ul.clean li {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 5px 0; border-bottom: 1px solid var(--border);
+      font-size: 10pt; color: #1f2937;
+    }
+    ul.clean li:last-child { border-bottom: none; }
+    ul.clean li::before {
+      content: '→'; color: var(--purple); font-weight: 600;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px; margin: 12px 0; }
+    .stat {
+      background: var(--blue-lt); border-radius: 6px;
+      padding: 13px 12px; text-align: center;
+    }
+    .stat-n {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18pt; font-weight: 800; color: var(--ink); line-height: 1;
+    }
+    .stat-n em { font-style: normal; color: var(--purple); }
+    .stat-d { font-size: 7.5pt; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+    /* ── STEPS ── */
+    .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 10px 0; }
+    .step {
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 12px 13px; break-inside: avoid;
+    }
+    .step-n {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14pt; font-weight: 800; color: var(--border);
+      line-height: 1; margin-bottom: 5px;
+    }
+    .step h3 { font-size: 9.5pt; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .step p { font-size: 9pt; color: var(--muted); margin: 0; line-height: 1.6; }
+    .step.accent { background: var(--purple-lt); border-color: rgba(123,53,217,0.25); grid-column: 1/-1; display: flex; gap: 14px; align-items: flex-start; }
+    .step.accent .step-n { color: var(--purple); font-size: 18pt; flex-shrink: 0; margin: 0; }
+
+    /* ── FOCUS GRID ── */
+    .focus { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 10px 0; }
+    .focus-card { background: var(--bg); border-radius: 6px; padding: 13px 14px; break-inside: avoid; }
+    .focus-card h3 { font-size: 9.5pt; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .focus-card p { font-size: 9pt; color: var(--muted); margin: 0; line-height: 1.6; }
+
+    /* ── TIMELINE ── */
+    .tl { margin: 10px 0; }
+    .tl-row { display: grid; grid-template-columns: 100px 1fr; break-inside: avoid; }
+    .tl-left { padding: 9px 14px 9px 0; border-right: 2px solid var(--border); position: relative; }
+    .tl-left::after {
+      content: ''; position: absolute; right: -6px; top: 13px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--purple); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--purple);
+    }
+    .tl-tag { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--purple); margin-bottom: 1px; }
+    .tl-range { font-family: 'DM Sans', sans-serif; font-size: 9.5pt; font-weight: 700; color: var(--ink); }
+    .tl-right { padding: 9px 0 9px 14px; }
+    .tl-right ul { list-style: none; }
+    .tl-right ul li { font-size: 9pt; color: #1f2937; padding: 2px 0; display: flex; gap: 7px; line-height: 1.55; }
+    .tl-right ul li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+    /* ── PERSON CARDS ── */
+    .team { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+    .person { border: 1px solid var(--border); border-radius: 8px; padding: 14px; break-inside: avoid; }
+    .person.lead { border-color: var(--purple); background: var(--purple-lt); }
+    .person-head { display: flex; gap: 11px; align-items: center; margin-bottom: 10px; }
+    .ava {
+      width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+      background: #e5d9f8;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Sans', sans-serif; font-size: 11pt; font-weight: 800; color: var(--purple);
+    }
+    .ava img { width: 100%; height: 100%; object-fit: cover; }
+    .ptag {
+      font-size: 6.5pt; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--purple); color: #fff; padding: 2px 7px; border-radius: 2px;
+      display: inline-block; margin-bottom: 2px;
+    }
+    .pname { font-size: 9.5pt; font-weight: 700; color: var(--ink); }
+    .prole { font-size: 7.5pt; color: var(--purple); font-weight: 500; }
+    .person p { font-size: 9pt; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
+    .pbullets { list-style: none; padding: 0; }
+    .pbullets li { font-size: 7.5pt; color: #374151; padding: 2px 0; display: flex; gap: 6px; line-height: 1.4; }
+    .pbullets li::before { content: '→'; color: var(--purple); font-weight: 700; flex-shrink: 0; }
+
+    /* ── QA ── */
+    .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 10px 0; }
+    .qa {
+      border: 1px solid var(--border); border-radius: 6px; overflow: hidden; break-inside: avoid;
+    }
+    .qa-h {
+      background: var(--bg); padding: 7px 12px;
+      display: flex; align-items: center; gap: 9px;
+      border-bottom: 1px solid var(--border);
+    }
+    .qa-n { font-family: 'DM Sans', sans-serif; font-size: 10pt; font-weight: 800; color: var(--purple); min-width: 16px; }
+    .qa-t { font-size: 9.5pt; font-weight: 700; color: var(--ink); }
+    .qa-b { padding: 8px 12px 10px; }
+    .qa-q { font-size: 9pt; color: var(--muted); padding: 2px 0; display: flex; gap: 7px; line-height: 1.55; }
+    .qa-q::before { content: '–'; color: #d1d5db; flex-shrink: 0; }
+
+    /* ── CONCLUSION ── */
+    .conclusion {
+      background: var(--purple-lt); color: var(--ink);
+      border: 1px solid rgba(123,53,217,0.2);
+      border-radius: 8px; padding: 22px 26px; margin-top: 12px;
+      break-inside: avoid; position: relative; overflow: hidden;
+    }
+    .conclusion::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(123,53,217,0.08);
+    }
+    .conclusion h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12pt; font-weight: 800; color: var(--ink); margin-bottom: 8px;
+      position: relative; z-index: 1;
+    }
+    .conclusion h2 em { font-style: normal; color: var(--gold); }
+    .conclusion p {
+      color: var(--muted); font-size: 9.5pt; line-height: 1.65;
+      margin-bottom: 5px; position: relative; z-index: 1;
+    }
+    .conclusion .sign {
+      margin-top: 10px; font-weight: 600; font-size: 9.5pt;
+      color: var(--ink); position: relative; z-index: 1;
+    }
+
+    /* ── TWO COL HELPER ── */
+    .cols { display: grid; gap: 24px; }
+    .cols-2 { grid-template-columns: 1fr 1fr; }
+    .cols-wide { grid-template-columns: 1.1fr 0.9fr; }
+
+    /* ━━━━━━ PRINT ━━━━━━ */
+    @media print {
+      @page { size: A4; margin: 0; }
+      .cover, .cover-left, .cover-right, .cover-right img,
+      .conclusion, .stat, .step.accent, .focus-card,
+      .person.lead, .qa-h, .page-strip {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+    @media screen {
+      body { max-width: 860px; margin: 0 auto; box-shadow: 0 2px 40px rgba(0,0,0,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━ COVER ━━ -->
+<div class="cover">
+  <div class="cover-left">
+
+    <!-- Top: brand anchors the page -->
+    <div class="cover-header">
+      <div class="cover-top-mark"></div>
+      <div class="cover-tag">Master Concept Note · Board of Advisors</div>
+      <div class="cover-brand-name">Plexus AI</div>
+    </div>
+
+    <!-- Spacer: pushes headline to doctor's eyeline (~32% down) -->
+    <div class="cover-spacer"></div>
+
+    <!-- Main: headline sits at the visual reading line -->
+    <div class="cover-main">
+      <div class="cover-reading-line">
+        <span>Hospital-Embedded CoE</span>
+      </div>
+      <h1>Where Clinical AI<br>Gets <em>Tested, Trusted,</em><br>and Deployed.</h1>
+      <p class="cover-desc">A structured ecosystem where healthcare AI is not only developed — but meaningfully validated inside real hospital workflows.</p>
+      <p class="cover-desc">Built to earn the trust of clinicians, regulators, and investors simultaneously.</p>
+    </div>
+
+    <!-- Flexible gap -->
+    <div class="cover-gap"></div>
+
+    <!-- Footer: document meta -->
+    <div class="cover-footer">
+      <div class="cover-meta">
+        <div>
+          <div class="cover-meta-label">Prepared by</div>
+          <div class="cover-meta-value">Dr. Amit Raj, Founder</div>
+        </div>
+        <div>
+          <div class="cover-meta-label">Date</div>
+          <div class="cover-meta-value">April 2026</div>
+        </div>
+        <div>
+          <div class="cover-meta-label">Classification</div>
+          <div class="cover-meta-value">Confidential</div>
+        </div>
+        <div>
+          <div class="cover-meta-label">Contact</div>
+          <div class="cover-meta-value">plexusai.in@gmail.com</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="cover-right">
+    <img src="/cover-doctor.jpg" alt="Doctor with tablet" />
+  </div>
+</div>
+
+<!-- ━━ PAGE 1: INTRO + PROBLEM + APPROACH ━━ -->
+<div class="page">
+  <div class="page-strip"></div>
+
+  <div class="cols cols-wide">
+    <div>
+      <div class="label">Introduction</div>
+      <h2>What is <em>Plexus AI?</em></h2>
+      <p>Plexus AI is a hospital-embedded Centre of Excellence (CoE) focused on the real-world validation and deployment of healthcare AI and MedTech solutions.</p>
+      <p>The objective is to create a structured ecosystem where innovation is not only developed, but meaningfully tested, validated, and integrated into live clinical workflows.</p>
+
+      <hr />
+
+      <div class="label">The Problem</div>
+      <h2>Why AI fails at <em>the last mile</em></h2>
+      <p>Despite rapid advancements, adoption of healthcare AI in real clinical practice remains severely limited. Promising technologies fail to translate into patient care.</p>
+
+      <ul class="clean">
+        <li>Lack of real-world clinical validation</li>
+        <li>Limited doctor involvement in development</li>
+        <li>Poor integration into hospital workflows</li>
+        <li>Absence of structured real-world evidence (RWE)</li>
+      </ul>
+
+      <div class="callout">
+        The gap is not in innovation — it's in translation. No structured pathway exists in India for an AI tool to be tested in a real hospital, earn clinical evidence, and gain the trust of regulators, clinicians, and investors — simultaneously.
+      </div>
+
+      <hr />
+
+      <div class="label">Our Approach</div>
+      <h2>From lab to <em>live wards</em></h2>
+      <p>Plexus AI bridges this gap by operating directly within a functioning hospital ecosystem.</p>
+      <ul class="clean">
+        <li>Deployment of AI tools in real clinical environments</li>
+        <li>Active clinician participation in evaluation and feedback</li>
+        <li>Continuous data capture on usage, outcomes, efficiency</li>
+        <li>Structured validation and reporting for scale-up</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="label">Market Context</div>
+      <h2>The <em>opportunity</em></h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n">$<em>45</em>B</div>
+          <div class="stat-d">India healthtech market by 2030</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">&lt;<em>3</em>%</div>
+          <div class="stat-d">of deployed AI tools have structured validation</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><em>500</em>+</div>
+          <div class="stat-d">healthcare AI companies with no clear pathway</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><em>2–4</em></div>
+          <div class="stat-d">years lost seeking independent hospital access</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="label">Operational Model</div>
+      <h2>Five activities that <em>drive validation</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">01</div>
+          <h3>Onboarding AI & MedTech</h3>
+          <p>Bringing high-potential solutions into the ecosystem for structured evaluation.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">02</div>
+          <h3>Clinical Deployment</h3>
+          <p>Integration into OPD, IPD, ICU, and diagnostic workflows in partner hospitals.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">03</div>
+          <h3>Doctor Feedback</h3>
+          <p>Structured clinician usage and feedback ensuring the physician voice shapes the tools.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">04</div>
+          <h3>Data Capture & Analysis</h3>
+          <p>Monitoring clinical usage, outcomes, and operational impact.</p>
+        </div>
+        <div class="step accent">
+          <div class="step-n">05</div>
+          <div>
+            <h3>Validation & Reporting</h3>
+            <p>Generating real-world evidence to support regulatory submission, investor confidence, and hospital adoption at scale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ PAGE 2: TEAM + FOCUS + TIMELINE ━━ -->
+<div class="page">
+  <div class="page-strip"></div>
+
+  <div class="label">Leadership & Execution</div>
+  <h2>The team <em>building this</em></h2>
+
+  <div class="team">
+    <div class="person lead">
+      <div class="person-head">
+        <div class="ava"><img src="/team/founder-1.jpg" alt="Dr. Amit Raj" onerror="this.parentElement.innerHTML='AR'" /></div>
+        <div>
+          <div class="ptag">Founder</div>
+          <div class="pname">Dr. Amit Raj</div>
+          <div class="prole">Physician & Healthcare Entrepreneur</div>
+        </div>
+      </div>
+      <p>Dr. Amit Raj leads Plexus AI with hands-on clinical practice and hospital operational experience. His core belief: healthcare AI must be validated in real patient environments to be truly impactful.</p>
+    </div>
+    <div class="person">
+      <div class="person-head">
+        <div class="ava"><img src="/team/anamika.jpg" alt="Anamika Singh" onerror="this.parentElement.innerHTML='AS'" /></div>
+        <div>
+          <div class="ptag">Technology Director</div>
+          <div class="pname">Anamika Singh</div>
+          <div class="prole">Digital Architecture & AI Deployment</div>
+        </div>
+      </div>
+      <p>Building the digital infrastructure for clinical AI deployment — ensuring systems are practical, scalable, and usable within clinical environments.</p>
+      <ul class="pbullets">
+        <li>HMS, diagnostics & workflow integration</li>
+        <li>Real-world evidence (RWE) data systems</li>
+        <li>Multi-centre platform architecture</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="cols cols-2">
+    <div>
+      <div class="label">Strategic Focus Areas</div>
+      <h2>Four pillars of <em>the CoE</em></h2>
+      <div class="focus">
+        <div class="focus-card">
+          <h3>Clinical AI Deployment</h3>
+          <p>Embedding AI into OPD, IPD, ICU, and diagnostic workflows where value is generated.</p>
+        </div>
+        <div class="focus-card">
+          <h3>Real-World Validation</h3>
+          <p>Structured methodologies producing credible, publishable real-world evidence.</p>
+        </div>
+        <div class="focus-card">
+          <h3>Doctor Adoption Framework</h3>
+          <p>Clinician usability and trust — adoption by doctors is the true measure of success.</p>
+        </div>
+        <div class="focus-card">
+          <h3>Evidence Generation (RWE)</h3>
+          <p>Real-world data assets for partnerships, regulatory pathways, and scale decisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="label">Roadmap</div>
+      <h2>Phased outcomes <em>over 36 months</em></h2>
+      <div class="tl">
+        <div class="tl-row">
+          <div class="tl-left">
+            <div class="tl-tag">Short</div>
+            <div class="tl-range">0–6 Mo</div>
+          </div>
+          <div class="tl-right"><ul>
+            <li>Operational framework established</li>
+            <li>Initial AI / MedTech partners onboarded</li>
+            <li>Pilot projects deployed in clinical settings</li>
+            <li>Early validation insights generated</li>
+          </ul></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-left">
+            <div class="tl-tag">Mid</div>
+            <div class="tl-range">6–18 Mo</div>
+          </div>
+          <div class="tl-right"><ul>
+            <li>Structured validation model developed</li>
+            <li>Partner ecosystem strengthened</li>
+            <li>Measurable workflow improvements</li>
+            <li>Initial revenue generation</li>
+          </ul></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-left">
+            <div class="tl-tag">Long</div>
+            <div class="tl-range">18–36 Mo</div>
+          </div>
+          <div class="tl-right"><ul>
+            <li>India's reference model for clinical AI validation</li>
+            <li>Multi-centre deployment ecosystem</li>
+            <li>Standardised validation framework & certification</li>
+            <li>Global MedTech collaborations</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ PAGE 3: THE MODEL ━━ -->
+<div class="page">
+  <div class="page-strip"></div>
+
+  <div class="label">Business Model</div>
+  <h2>How Plexus AI <em>sustains and scales</em></h2>
+
+  <!-- Revenue Streams — compact 3-col -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin:10px 0;">
+    <div style="background:var(--bg); border-radius:6px; padding:11px 13px; border:1px solid var(--border); border-top:2px solid var(--purple);">
+      <div style="font-size:6.5pt; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--purple); margin-bottom:4px;">Primary</div>
+      <h3 style="font-size:9.5pt; color:var(--ink); margin-bottom:3px;">Validation Programs</h3>
+      <p style="font-size:8.5pt; color:var(--muted); line-height:1.5; margin:0;">Startups pay a structured fee for end-to-end clinical validation, data capture, and RWE reporting.</p>
+    </div>
+    <div style="background:var(--bg); border-radius:6px; padding:11px 13px; border:1px solid var(--border); border-top:2px solid var(--gold);">
+      <div style="font-size:6.5pt; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:4px;">Secondary</div>
+      <h3 style="font-size:9.5pt; color:var(--ink); margin-bottom:3px;">Sponsored Research</h3>
+      <p style="font-size:8.5pt; color:var(--muted); line-height:1.5; margin:0;">Pharma and MedTech companies commission independent real-world evidence studies through the clinical network.</p>
+    </div>
+    <div style="background:var(--bg); border-radius:6px; padding:11px 13px; border:1px solid var(--border); border-top:2px solid var(--green);">
+      <div style="font-size:6.5pt; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); margin-bottom:4px;">Pipeline</div>
+      <h3 style="font-size:9.5pt; color:var(--ink); margin-bottom:3px;">Grants & Partnerships</h3>
+      <p style="font-size:8.5pt; color:var(--muted); line-height:1.5; margin:0;">DST, BIRAC, and ICMR fund targeted programs aligned to national health priorities and digital health missions.</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Value Exchange + Competitive: equal columns -->
+  <div class="cols cols-2" style="gap:20px;">
+
+    <div>
+      <div class="label">Value Exchange</div>
+      <h2>What each party <em>gives and gets</em></h2>
+      <div style="margin:8px 0; border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+        <div style="display:grid; grid-template-columns:95px 1fr 1fr; padding:6px 12px; background:var(--blue-lt);">
+          <div style="font-size:6.5pt; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">Party</div>
+          <div style="font-size:6.5pt; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">Gives</div>
+          <div style="font-size:6.5pt; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.1em;">Gets</div>
+        </div>
+        <div style="display:grid; grid-template-columns:95px 1fr 1fr; padding:8px 12px; border-top:1px solid var(--border);">
+          <div style="font-size:8.5pt; font-weight:700; color:var(--ink);">AI Startup</div>
+          <div style="font-size:8.5pt; color:var(--muted);">Fee · data access</div>
+          <div style="font-size:8.5pt; color:var(--ink);">RWE · validation report · regulatory dossier</div>
+        </div>
+        <div style="display:grid; grid-template-columns:95px 1fr 1fr; padding:8px 12px; border-top:1px solid var(--border); background:var(--bg);">
+          <div style="font-size:8.5pt; font-weight:700; color:var(--ink);">Hospital</div>
+          <div style="font-size:8.5pt; color:var(--muted);">Infrastructure · access</div>
+          <div style="font-size:8.5pt; color:var(--ink);">Revenue share · research output</div>
+        </div>
+        <div style="display:grid; grid-template-columns:95px 1fr 1fr; padding:8px 12px; border-top:1px solid var(--border);">
+          <div style="font-size:8.5pt; font-weight:700; color:var(--ink);">Clinician</div>
+          <div style="font-size:8.5pt; color:var(--muted);">Feedback · time</div>
+          <div style="font-size:8.5pt; color:var(--ink);">Authorship · CME · better tools</div>
+        </div>
+        <div style="display:grid; grid-template-columns:95px 1fr 1fr; padding:8px 12px; border-top:1px solid var(--border); background:var(--bg);">
+          <div style="font-size:8.5pt; font-weight:700; color:var(--ink);">Pharma</div>
+          <div style="font-size:8.5pt; color:var(--muted);">Study fees</div>
+          <div style="font-size:8.5pt; color:var(--ink);">Independent RWE · market access evidence</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="label">Competitive Position</div>
+      <h2>Why <em>Plexus AI</em>, not alternatives</h2>
+      <ul class="clean" style="margin-top:8px;">
+        <li><strong>vs AMTZ:</strong> Hardware focus — no clinical AI validation or RWE methodology</li>
+        <li><strong>vs NASSCOM CoEs:</strong> Software incubation — no hospital embedding or deployment track</li>
+        <li><strong>vs Innovation Cells:</strong> Internal only — no structured multi-stakeholder model</li>
+        <li style="background:var(--purple-lt); border-radius:4px; padding:6px 8px; border-bottom:none;"><strong>Plexus AI:</strong> Only model combining hospital embedding + structured RWE + CDSCO-aligned validation</li>
+      </ul>
+      <div class="callout" style="margin-top:10px; font-size:8.5pt;">
+        <strong>Regulatory unlock:</strong> CDSCO's SaMD guidelines require real-world clinical evidence for AI device approval. Plexus AI outputs are structured to directly feed regulatory dossiers — a pathway no other CoE provides.
+      </div>
+    </div>
+
+  </div>
+
+  <hr />
+
+  <!-- KPIs -->
+  <div class="label">Target Metrics · Year 1</div>
+  <div class="stats" style="grid-template-columns:repeat(4,1fr); margin-top:8px;">
+    <div class="stat">
+      <div class="stat-n"><em>10</em>+</div>
+      <div class="stat-d">tools in active validation by Month 12</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n"><em>3</em>+</div>
+      <div class="stat-d">peer-reviewed publications in Year 1</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n"><em>2</em></div>
+      <div class="stat-d">CDSCO-aligned regulatory dossiers filed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">₹<em>1</em>Cr</div>
+      <div class="stat-d">target revenue by end of Year 1</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ━━ PAGE 4: ADVISOR QUESTIONS + CONCLUSION ━━ -->
+<div class="page">
+  <div class="page-strip"></div>
+
+  <div class="label">Key Strategic Questions</div>
+  <h2>Where we seek <em>your guidance</em></h2>
+  <p>As Plexus AI evolves, advisory input will be critical across five domains:</p>
+
+  <div class="qa-grid">
+    <div class="qa">
+      <div class="qa-h"><div class="qa-n">01</div><div class="qa-t">Model Design & Governance</div></div>
+      <div class="qa-b">
+        <div class="qa-q">Is the CoE structure appropriate for scale and impact?</div>
+        <div class="qa-q">What governance mechanisms should be built in early?</div>
+      </div>
+    </div>
+    <div class="qa">
+      <div class="qa-h"><div class="qa-n">02</div><div class="qa-t">Clinical Integration</div></div>
+      <div class="qa-b">
+        <div class="qa-q">How do we ensure sustained doctor adoption beyond pilots?</div>
+        <div class="qa-q">Which specialties should be prioritised initially?</div>
+      </div>
+    </div>
+    <div class="qa">
+      <div class="qa-h"><div class="qa-n">03</div><div class="qa-t">Validation Framework</div></div>
+      <div class="qa-b">
+        <div class="qa-q">What parameters define robust clinical validation?</div>
+        <div class="qa-q">How do we ensure credibility at national and global levels?</div>
+      </div>
+    </div>
+    <div class="qa">
+      <div class="qa-h"><div class="qa-n">04</div><div class="qa-t">Partnership Strategy</div></div>
+      <div class="qa-b">
+        <div class="qa-q">Which categories of startups should be prioritised?</div>
+        <div class="qa-q">How should Plexus AI be positioned for top collaborations?</div>
+      </div>
+    </div>
+    <div class="qa">
+      <div class="qa-h"><div class="qa-n">05</div><div class="qa-t">Scalability</div></div>
+      <div class="qa-b">
+        <div class="qa-q">What is the optimal path beyond a single centre?</div>
+        <div class="qa-q">How do we balance depth of validation with scale?</div>
+      </div>
+    </div>
+    <div class="qa" style="border-color:var(--purple);">
+      <div class="qa-h" style="background:var(--purple-lt); border-color:rgba(13,148,136,0.2);">
+        <div class="qa-n" style="font-size:11pt;">✉</div>
+        <div class="qa-t" style="color:var(--purple);">Get in Touch</div>
+      </div>
+      <div class="qa-b">
+        <div class="qa-q" style="color:var(--ink); font-weight:600; font-size:9.5pt;">plexusai.in@gmail.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclusion">
+    <h2>A <em>foundational layer</em> for healthcare innovation</h2>
+    <p>Plexus AI is an effort to build the infrastructure that India's healthcare AI ecosystem has been missing — where AI is not only created, but tested, trusted, and adopted in real clinical environments.</p>
+    <p>This initiative is in its formative phase, and the role of the advisory board will be instrumental in shaping its direction, structure, and long-term impact.</p>
+    <p class="sign">We look forward to your guidance in strengthening and scaling this model.</p>
+  </div>
+</div>
+
+</body>
+</html>

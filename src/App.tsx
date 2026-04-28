@@ -1,6 +1,7 @@
 import CustomCursor from './components/CustomCursor';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
+import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
 import FocusAreas from './components/FocusAreas';
 import Team from './components/Team';
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Hero />
       <Gallery />
+      <HowItWorks />
       <Features />
       <FocusAreas />
       <Team />
