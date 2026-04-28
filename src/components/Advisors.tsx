@@ -15,6 +15,7 @@ const advisors: {
     role: 'Chairman of Cardiology · Max Super Speciality Hospital, New Delhi',
     bio: 'Senior interventional cardiologist with expertise in complex cardiac care, guiding real-world clinical validation and integration.',
     photo: '/advisors/advisor-viveka.jpg',
+    linkedin: 'https://in.linkedin.com/in/drvivekakumar',
   },
   {
     name: 'Dr. Kris Vijay',
@@ -22,6 +23,7 @@ const advisors: {
     role: 'President, Innovative Cardiometabolic Center, USA · Clinical Professor, University of Arizona',
     bio: 'Globally recognized cardiometabolic expert with 40+ years of experience in clinical practice, research, and healthcare innovation.',
     photo: '/advisors/advisor-kris.png',
+    linkedin: 'https://www.linkedin.com/in/kris-vijay-1373078',
   },
   {
     name: 'Dr. Ravi Gaur',
@@ -29,6 +31,7 @@ const advisors: {
     role: 'Chair, Medical Advisory Committee, Oncquest Laboratories · Founder, DRG Path Labs',
     bio: 'Healthcare leader with 30+ years of experience in pathology and diagnostics, specializing in scalable healthcare systems.',
     photo: '/advisors/advisor-ravi.webp',
+    linkedin: 'https://in.linkedin.com/in/dr-ravi-gaur-7788321b',
   },
   {
     name: 'Dr. Venkat Saddikuti',
@@ -36,6 +39,7 @@ const advisors: {
     role: 'Professor, Operations & Supply Chain Management · IIM Lucknow · Fulbright Scholar',
     bio: 'Academic leader in healthcare systems and operations, enabling research-driven scalability and innovation.',
     photo: '/advisors/advisor-venkat.png',
+    linkedin: 'https://in.linkedin.com/in/venkat-saddikuti-a450aa65',
   },
   {
     name: 'Sachin Gaur',
