@@ -42,7 +42,7 @@ const advisors: {
     category: 'Strategy & Innovation Advisory',
     role: 'Serial Entrepreneur · Stanford GSB · AI & Deep-Tech Innovator',
     bio: 'Global innovation leader with experience in AI, deep-tech ecosystems, and international collaborations, guiding strategy and scaling.',
-    photo: '/advisors/advisor-1.jpg',
+    photo: '/advisors/advisor-sachin.webp',
     linkedin: 'https://no.linkedin.com/in/sachgaur',
   },
 ];
