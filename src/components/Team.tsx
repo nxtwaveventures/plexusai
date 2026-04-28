@@ -16,7 +16,7 @@ const team = [
   },
   {
     name: 'Anamika Singh',
-    role: 'Technology Founder Director · Digital Architecture & AI Deployment',
+    role: 'Director – AI & MedTech',
     bullets: [
       'Integration of AI solutions with hospital systems — HMS, diagnostics, and clinical workflows.',
       'Designing data capture systems for real-world evidence (RWE) at scale.',

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Linkedin } from 'lucide-react';
 
-// Replace these with real advisor data when photos/profiles are ready
 const advisors: {
   name: string;
   category: string;
@@ -11,44 +10,40 @@ const advisors: {
   linkedin?: string;
 }[] = [
   {
+    name: 'Dr. Viveka Kumar',
+    category: 'Clinical Advisory Board',
+    role: 'Chairman of Cardiology · Max Super Speciality Hospital, New Delhi',
+    bio: 'Senior interventional cardiologist with expertise in complex cardiac care, guiding real-world clinical validation and integration.',
+    photo: '/advisors/advisor-viveka.jpg',
+  },
+  {
+    name: 'Dr. Kris Vijay',
+    category: 'Clinical Advisory Board',
+    role: 'President, Innovative Cardiometabolic Center, USA · Clinical Professor, University of Arizona',
+    bio: 'Globally recognized cardiometabolic expert with 40+ years of experience in clinical practice, research, and healthcare innovation.',
+    photo: '/advisors/advisor-kris.png',
+  },
+  {
+    name: 'Dr. Ravi Gaur',
+    category: 'Clinical Advisory Board',
+    role: 'Chair, Medical Advisory Committee, Oncquest Laboratories · Founder, DRG Path Labs',
+    bio: 'Healthcare leader with 30+ years of experience in pathology and diagnostics, specializing in scalable healthcare systems.',
+    photo: '/advisors/advisor-ravi.png',
+  },
+  {
+    name: 'Dr. Venkat Saddikuti',
+    category: 'Academic & Research Advisory',
+    role: 'Professor, Operations & Supply Chain Management · IIM Lucknow · Fulbright Scholar',
+    bio: 'Academic leader in healthcare systems and operations, enabling research-driven scalability and innovation.',
+    photo: '/advisors/advisor-venkat.png',
+  },
+  {
     name: 'Sachin Gaur',
     category: 'Strategy & Innovation Advisory',
     role: 'Serial Entrepreneur · Stanford GSB · AI & Deep-Tech Innovator',
     bio: 'Global innovation leader with experience in AI, deep-tech ecosystems, and international collaborations, guiding strategy and scaling.',
     photo: '/advisors/advisor-1.jpg',
     linkedin: 'https://no.linkedin.com/in/sachgaur',
-  },
-  {
-    name: 'Dr. [Name]',
-    category: '[Advisory Category]',
-    role: '[Role · Institution]',
-    bio: 'Bio coming soon.',
-    photo: '/advisors/advisor-2.jpg',
-    linkedin: '#',
-  },
-  {
-    name: 'Dr. [Name]',
-    category: '[Advisory Category]',
-    role: '[Role · Institution]',
-    bio: 'Bio coming soon.',
-    photo: '/advisors/advisor-3.jpg',
-    linkedin: '#',
-  },
-  {
-    name: 'Dr. [Name]',
-    category: '[Advisory Category]',
-    role: '[Role · Institution]',
-    bio: 'Bio coming soon.',
-    photo: '/advisors/advisor-4.jpg',
-    linkedin: '#',
-  },
-  {
-    name: '[Name]',
-    category: '[Advisory Category]',
-    role: '[Role · Institution]',
-    bio: 'Bio coming soon.',
-    photo: '/advisors/advisor-5.jpg',
-    linkedin: '#',
   },
 ];
 

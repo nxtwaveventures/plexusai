@@ -49,7 +49,7 @@ const Footer = () => {
               Plexus<span style={{ color: 'var(--accent)' }}>AI</span>
             </a>
             <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65, maxWidth: '200px', marginBottom: '24px' }}>
-              India's first hospital-embedded AI innovation hub.
+              Bridging clinical excellence with real-world AI validation.
             </p>
             <div style={{ display: 'flex', gap: '14px' }}>
               {socialLinks.map(({ Icon, href, label }) => (

@@ -165,7 +165,7 @@ const Hero = () => {
                 marginBottom: '40px',
               }}
             >
-              Test, validate, and certify your healthcare AI inside real hospital workflows — not a lab. Built for clinicians, trusted by regulators.
+              Bridging clinical excellence with real-world AI validation. Test, validate, and certify your healthcare AI inside real hospital workflows — not a lab.
             </motion.p>
 
             <motion.div
