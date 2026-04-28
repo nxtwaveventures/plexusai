@@ -24,7 +24,7 @@ const team = [
       'Ensuring AI systems are not just technically sound, but practical and usable in clinical environments.',
     ],
     photo: '/team/anamika.jpg',
-    linkedin: 'https://www.linkedin.com/in/anamika-singh/',
+    linkedin: 'https://www.linkedin.com/in/anamika-singh77',
   },
 ];
 
