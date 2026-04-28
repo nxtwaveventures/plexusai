@@ -28,7 +28,7 @@ const advisors: {
     category: 'Clinical Advisory Board',
     role: 'Chair, Medical Advisory Committee, Oncquest Laboratories · Founder, DRG Path Labs',
     bio: 'Healthcare leader with 30+ years of experience in pathology and diagnostics, specializing in scalable healthcare systems.',
-    photo: '/advisors/advisor-ravi.png',
+    photo: null,
   },
   {
     name: 'Dr. Venkat Saddikuti',
