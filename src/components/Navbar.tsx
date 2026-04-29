@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import Logo from './Logo';
 
 const navItems = [
   {
@@ -68,14 +69,8 @@ const Navbar = () => {
       />
 
       {/* Logo */}
-        <a href="/" style={{
-          fontFamily: 'Inter',
-          fontWeight: 700,
-          fontSize: '1.05rem',
-          letterSpacing: '-0.01em',
-          color: 'var(--text-dark)',
-        }}>
-          Plexus<span style={{ color: 'var(--accent)' }}>AI</span>
+        <a href="/" style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <Logo size={30} />
         </a>
 
         {/* Desktop nav */}

@@ -1,4 +1,5 @@
-import { Twitter, Linkedin, Github, MessageCircle } from 'lucide-react';
+import { Twitter, Linkedin, Github, MessageCircle, Mail } from 'lucide-react';
+import Logo from './Logo';
 
 const footerLinks = {
   Product: [
@@ -11,7 +12,7 @@ const footerLinks = {
     { label: 'Documentation', href: '#faq' },
     { label: 'Blog', href: '#faq' },
     { label: 'Community', href: '#faq' },
-    { label: 'Contact', href: '#sandbox' },
+    { label: 'Contact', href: 'mailto:support@plexusai.in' },
   ],
   Company: [
     { label: 'About', href: '#' },
@@ -45,12 +46,25 @@ const Footer = () => {
         }}>
           {/* Brand column */}
           <div>
-            <a href="/" style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '-0.01em', color: '#ffffff', display: 'block', marginBottom: '14px' }}>
-              Plexus<span style={{ color: 'var(--accent)' }}>AI</span>
+            <a href="/" style={{ display: 'inline-block', marginBottom: '14px' }}>
+              <Logo size={26} theme="light" />
             </a>
-            <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65, maxWidth: '200px', marginBottom: '24px' }}>
+            <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65, maxWidth: '200px', marginBottom: '16px' }}>
               Bridging clinical excellence with real-world AI validation.
             </p>
+            <a
+              href="mailto:support@plexusai.in"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '7px',
+                fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)',
+                marginBottom: '20px', transition: 'color 200ms',
+              }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#fff'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'}
+            >
+              <Mail size={13} />
+              support@plexusai.in
+            </a>
             <div style={{ display: 'flex', gap: '14px' }}>
               {socialLinks.map(({ Icon, href, label }) => (
                 <a

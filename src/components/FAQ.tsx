@@ -51,7 +51,7 @@ const FAQ = () => {
               Can't find what you're looking for? Reach out to us directly.
             </p>
             <a
-              href="#sandbox"
+              href="mailto:support@plexusai.in"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '5px',
                 fontSize: '0.875rem', fontWeight: 600, color: 'var(--accent)',
@@ -60,7 +60,7 @@ const FAQ = () => {
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.gap = '9px'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.gap = '5px'}
             >
-              Contact us →
+              support@plexusai.in →
             </a>
           </div>
 
