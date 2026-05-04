@@ -146,11 +146,7 @@ const Hero = () => {
               color: 'var(--text-dark)',
               marginBottom: '28px',
             }}>
-              <RevealText text="Where Clinical" delay={0.1} />
-              <br />
-              <span style={{ color: 'var(--accent)' }}>
-                <RevealText text="AI Gets Proven." delay={0.2} />
-              </span>
+              <RevealText text="We Test and Validate AI in Hospitals." delay={0.1} />
             </h1>
 
             <motion.p
