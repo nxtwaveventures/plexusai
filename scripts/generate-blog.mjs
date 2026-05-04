@@ -1,28 +1,33 @@
 /**
- * PlexusAI Blog Agent Pipeline
+ * PlexusAI Blog Agent Pipeline — powered by Groq (free) + Tavily search (free)
  *
  * 4 agents in sequence:
- *  1. Researcher  — searches the web for latest healthcare AI news
- *  2. Writer      — turns research into a captivating 2-min article
- *  3. Scorer      — scores clarity, relevance, engagement, accuracy
- *  4. Ethics      — checks responsible AI, flags issues
+ *  1. Researcher  — searches the web for latest healthcare AI news (Tavily)
+ *  2. Writer      — turns research into a captivating 2-min article (Groq)
+ *  3. Scorer      — scores clarity, relevance, engagement, accuracy (Groq)
+ *  4. Ethics      — checks responsible AI, flags issues (Groq)
+ *
+ * Free accounts needed:
+ *  - Groq:   console.groq.com  → GROQ_API_KEY
+ *  - Tavily: app.tavily.com    → TAVILY_API_KEY  (1000 free searches/month)
  *
  * Run manually:  node scripts/generate-blog.mjs
- * Run via cron:  set ANTHROPIC_API_KEY + SUPABASE_URL + SUPABASE_SERVICE_KEY
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import Groq from 'groq-sdk';
 import { createClient } from '@supabase/supabase-js';
 import 'dotenv/config';
 
 // ── Clients ──────────────────────────────────────────────────────────────────
 
-const ai = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL   || process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY || process.env.VITE_SUPABASE_ANON_KEY
 );
+
+const MODEL = 'llama-3.3-70b-versatile'; // free on Groq, excellent quality
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -32,63 +37,93 @@ function extractJSON(text) {
   try { return JSON.parse(match[0]); } catch { return null; }
 }
 
-function textFrom(response) {
-  return response.content.find(b => b.type === 'text')?.text ?? '';
+async function callAgent({ name, system, userMessage, maxTokens = 2048 }) {
+  process.stdout.write(`  [${name}] thinking…`);
+  const res = await groq.chat.completions.create({
+    model: MODEL,
+    max_tokens: maxTokens,
+    messages: [
+      { role: 'system', content: system },
+      { role: 'user', content: userMessage },
+    ],
+  });
+  process.stdout.write(' done\n');
+  return res.choices[0].message.content ?? '';
 }
 
-async function callAgent({ name, system, userMessage, tools = [], maxTokens = 2048 }) {
-  process.stdout.write(`  [${name}] thinking…`);
-  const params = {
-    model: 'claude-opus-4-7',
-    max_tokens: maxTokens,
-    thinking: { type: 'adaptive' },
-    system,
-    messages: [{ role: 'user', content: userMessage }],
-  };
-  if (tools.length) params.tools = tools;
+// ── Web search via Tavily (free tier) ─────────────────────────────────────────
 
-  const res = await ai.messages.create(params);
-  process.stdout.write(' done\n');
-  return res;
+async function tavilySearch(query) {
+  const res = await fetch('https://api.tavily.com/search', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      api_key: process.env.TAVILY_API_KEY,
+      query,
+      search_depth: 'advanced',
+      max_results: 8,
+      include_answer: true,
+      include_raw_content: false,
+    }),
+  });
+  if (!res.ok) throw new Error(`Tavily error: ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
+function formatSearchResults(data) {
+  const lines = [];
+  if (data.answer) lines.push(`SUMMARY: ${data.answer}\n`);
+  for (const r of (data.results ?? [])) {
+    lines.push(`SOURCE: ${r.source || r.url}`);
+    lines.push(`TITLE: ${r.title}`);
+    lines.push(`SNIPPET: ${r.content}\n`);
+  }
+  return lines.join('\n');
 }
 
 // ── Agent 1: Researcher ───────────────────────────────────────────────────────
 
 async function researchAgent() {
-  const res = await callAgent({
+  process.stdout.write('  [Researcher] searching web…');
+  const data = await tavilySearch(
+    'healthcare AI news India hospital clinical validation last 24 hours 2025'
+  );
+  process.stdout.write(' done\n');
+
+  const searchText = formatSearchResults(data);
+
+  const brief = await callAgent({
     name: 'Researcher',
-    maxTokens: 4096,
-    tools: [{ type: 'web_search_20260209', name: 'web_search' }],
+    maxTokens: 1024,
     system: `You are a healthcare AI research specialist.
-Find the most important healthcare AI news from the last 24-48 hours.
-Focus on: clinical AI validation, hospital AI adoption, AI diagnostics,
-regulatory approvals (especially India/CDSCO), real-world evidence, and AI ethics in healthcare.
-Return a structured brief:
+Read these web search results and produce a structured research brief:
 - TOP STORY: one headline + 2-sentence summary
 - KEY FACTS: 3 bullet points with source names
 - IMPLICATION: why this matters for hospital AI adoption
-- QUOTE (if found): one direct quote from a clinician or regulator`,
-    userMessage: 'Find the most important healthcare AI news from the last 24-48 hours. Include India-specific developments where available.',
+- QUOTE (if found): one direct quote from a clinician or regulator
+Focus on: clinical AI validation, hospital AI adoption, diagnostics, India/CDSCO news, real-world evidence, AI ethics in healthcare.`,
+    userMessage: `Here are today's search results:\n\n${searchText}`,
   });
-  return textFrom(res);
+
+  return brief;
 }
 
 // ── Agent 2: Writer ───────────────────────────────────────────────────────────
 
 async function writerAgent(research) {
-  const res = await callAgent({
+  const text = await callAgent({
     name: 'Writer',
     maxTokens: 2048,
     system: `You are a captivating healthcare AI journalist writing for clinicians, hospital leaders, and AI startups.
 Write a 2-minute read (250-320 words). Rules:
-- Active voice only ("Doctors now use…", "Hospitals are adopting…", "We tested…")
+- Active voice only ("Doctors now use…", "Hospitals are adopting…")
 - First sentence must hook the reader — make them want to keep reading
 - Structure: Hook → What happened → Why it matters for hospitals → What comes next
 - No jargon: not "paradigm shift", "synergy", "leverage", "utilize"
 - Be honest about limitations and uncertainty
 - End with one concrete implication for healthcare AI adoption
 
-Return ONLY a JSON object in this exact shape:
+Return ONLY a JSON object in this exact shape (no extra text, no markdown):
 {
   "title": "headline under 12 words",
   "summary": "one sentence that captures the story",
@@ -99,7 +134,6 @@ Return ONLY a JSON object in this exact shape:
     userMessage: `Write a 2-minute healthcare AI news article based on this research:\n\n${research}`,
   });
 
-  const text = textFrom(res);
   const article = extractJSON(text);
   if (!article) throw new Error(`Writer returned unparseable output:\n${text.slice(0, 300)}`);
   return article;
@@ -108,7 +142,7 @@ Return ONLY a JSON object in this exact shape:
 // ── Agent 3: Scorer ───────────────────────────────────────────────────────────
 
 async function scorerAgent(article) {
-  const res = await callAgent({
+  const text = await callAgent({
     name: 'Scorer',
     maxTokens: 512,
     system: `You are an editorial quality scorer. Score on 4 dimensions (1-10):
@@ -117,11 +151,11 @@ async function scorerAgent(article) {
 - engagement: would a busy clinician read to the end?
 - accuracy: are the claims factually grounded?
 
-Return ONLY JSON: { "clarity": N, "relevance": N, "engagement": N, "accuracy": N, "average": N, "notes": "one line" }`,
+Return ONLY JSON (no extra text): { "clarity": N, "relevance": N, "engagement": N, "accuracy": N, "average": N, "notes": "one line" }`,
     userMessage: `Score this article:\n\nTitle: ${article.title}\n\n${article.body}`,
   });
 
-  const score = extractJSON(textFrom(res)) ?? { clarity: 5, relevance: 5, engagement: 5, accuracy: 5, average: 5 };
+  const score = extractJSON(text) ?? { clarity: 5, relevance: 5, engagement: 5, accuracy: 5, average: 5 };
   score.average = +(((score.clarity + score.relevance + score.engagement + score.accuracy) / 4).toFixed(1));
   return score;
 }
@@ -129,7 +163,7 @@ Return ONLY JSON: { "clarity": N, "relevance": N, "engagement": N, "accuracy": N
 // ── Agent 4: Ethics Reviewer ──────────────────────────────────────────────────
 
 async function ethicsAgent(article) {
-  const res = await callAgent({
+  const text = await callAgent({
     name: 'Ethics',
     maxTokens: 512,
     system: `You are an AI ethics and responsible content reviewer for healthcare journalism.
@@ -140,20 +174,20 @@ Check for:
 - Transparency: clear about what is validated vs. speculative
 - Responsible AI: acknowledges limitations
 
-Return ONLY JSON:
-{ "approved": true/false, "flags": ["flag1"], "suggestions": ["fix1"], "note": "one-line summary" }
+Return ONLY JSON (no extra text):
+{ "approved": true, "flags": [], "suggestions": [], "note": "one-line summary" }
 
 Approve if there are no serious issues. Minor suggestions are fine.`,
     userMessage: `Review this healthcare AI article:\n\nTitle: ${article.title}\n\n${article.body}`,
   });
 
-  return extractJSON(textFrom(res)) ?? { approved: false, flags: ['parse error'], suggestions: [], note: '' };
+  return extractJSON(text) ?? { approved: false, flags: ['parse error'], suggestions: [], note: '' };
 }
 
 // ── Pipeline ──────────────────────────────────────────────────────────────────
 
 async function run() {
-  console.log('\n🏥 PlexusAI Blog Agent Pipeline\n');
+  console.log('\n🏥 PlexusAI Blog Agent Pipeline (Groq + Tavily — free)\n');
 
   console.log('① Researcher — searching healthcare AI news…');
   const research = await researchAgent();
