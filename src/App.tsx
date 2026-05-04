@@ -6,6 +6,7 @@ import Features from './components/Features';
 import FocusAreas from './components/FocusAreas';
 import Team from './components/Team';
 import Advisors from './components/Advisors';
+import Blog from './components/Blog';
 import FAQ from './components/FAQ';
 import Navbar from './components/Navbar';
 import Sandbox from './components/Sandbox';
@@ -23,6 +24,7 @@ function App() {
       <FocusAreas />
       <Team />
       <Advisors />
+      <Blog />
       <FAQ />
       <Sandbox />
       <Footer />
