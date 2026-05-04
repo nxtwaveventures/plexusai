@@ -135,7 +135,7 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               style={{ marginBottom: '28px' }}
             >
-              <span className="badge badge-accent">India's First Hospital-Embedded AI CoE</span>
+              <span className="badge badge-accent">India's First Hospital-Embedded AI Validation Hub</span>
             </motion.div>
 
             <h1 style={{
@@ -161,7 +161,7 @@ const Hero = () => {
                 marginBottom: '40px',
               }}
             >
-              Bridging clinical excellence with real-world AI validation. Test, validate, and certify your healthcare AI inside real hospital workflows — not a lab.
+              Bring your AI. We run it inside real hospital workflows, collect the evidence, and certify it.
             </motion.p>
 
             <motion.div

@@ -66,7 +66,7 @@ const Sandbox = () => {
                   color: '#ffffff',
                   marginBottom: '20px',
                 }}>
-                  Become Our Partner
+                  Apply to the Sandbox
                 </h2>
 
                 <p style={{
@@ -76,7 +76,7 @@ const Sandbox = () => {
                   maxWidth: '480px',
                   margin: '0 auto 40px',
                 }}>
-                  Join the Plexus AI MedTech Sandbox and validate your healthcare AI inside real hospitals.
+                  Test and validate your AI inside real hospitals. We handle the rest.
                 </p>
 
                 <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>

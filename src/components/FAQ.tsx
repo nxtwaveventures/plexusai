@@ -5,27 +5,27 @@ import { Plus, Minus } from 'lucide-react';
 const faqs = [
   {
     q: 'What is PlexusAI?',
-    a: "PlexusAI is India's first hospital-embedded AI innovation hub. We provide startups, pharma companies, and clinicians with clinical access, validation frameworks, and certification to bring AI into healthcare — for real.",
+    a: "PlexusAI is India's first hospital-embedded AI validation hub. We give startups and pharma companies real hospital access to test, validate, and certify their AI.",
   },
   {
     q: 'Do I need healthcare experience?',
-    a: 'No prior healthcare experience is required. We provide the clinical expertise, hospital access, and validation framework. You bring the AI technology — we help you validate it in real clinical settings.',
+    a: 'No. You bring the AI. We provide clinical expertise, hospital access, and the validation framework.',
   },
   {
     q: 'What types of AI can be validated?',
-    a: 'We support a wide range of healthcare AI applications including diagnostic imaging, patient monitoring, clinical decision support, hospital operations, drug interaction checking, and clinical trial matching.',
+    a: 'Diagnostic imaging, patient monitoring, clinical decisions, hospital operations, drug checks, and trial matching. If it is healthcare AI, we can validate it.',
   },
   {
     q: 'How does the clinical validation process work?',
-    a: "After acceptance, you'll get access to our partner hospital workflows where you can test your AI with real (de-identified) clinical data. Our clinical team will guide you through the validation framework and provide feedback.",
+    a: 'After acceptance, we place your AI in a partner hospital. You test it with real, de-identified data. Our clinical team guides you at every step.',
   },
   {
     q: 'What is the PlexusAI Certification?',
-    a: "The PlexusAI Validation Certificate is India's most trusted clinical AI credential. It demonstrates that your AI has been validated inside real hospital workflows and meets clinical standards. This credential helps investors, regulators, and hospitals trust your technology.",
+    a: "It is proof your AI works in a real hospital. Investors, regulators, and hospitals recognize it. It is the fastest path to adoption in India.",
   },
   {
     q: 'Is my data secure?',
-    a: 'Yes, we take data security very seriously. All clinical data is de-identified and handled according to healthcare data protection standards. We comply with all relevant healthcare regulations and use industry-standard encryption.',
+    a: 'Yes. All clinical data is de-identified and encrypted. We follow healthcare data protection standards.',
   },
 ];
 

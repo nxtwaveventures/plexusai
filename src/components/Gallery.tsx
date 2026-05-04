@@ -26,7 +26,7 @@ const Gallery = () => {
             Apps validated in real hospitals
           </h2>
           <p style={{ fontSize: '1.05rem', color: 'var(--text-body)', maxWidth: '520px', margin: '0 auto' }}>
-            See what startups have built and validated inside our partner hospital network.
+            Real AI tools, tested and validated in our partner hospitals.
           </p>
         </motion.div>
       </div>

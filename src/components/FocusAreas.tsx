@@ -6,7 +6,7 @@ const pillars = [
     Icon: Stethoscope,
     tag: 'Clinical Intelligence',
     title: 'AI Clinical Workflow',
-    desc: 'Deploying AI intelligence for discharge summaries, OPD documentation, ICU early-warning systems, and clinical decision support — tools that reduce clinician burden and improve patient outcomes.',
+    desc: 'We deploy AI for discharge summaries, OPD notes, ICU alerts, and clinical decisions. Less burden on doctors. Better outcomes for patients.',
     accent: 'var(--accent)',
     accentBg: 'rgba(13,148,136,0.07)',
     accentBorder: 'rgba(13,148,136,0.15)',
@@ -15,7 +15,7 @@ const pillars = [
     Icon: FileText,
     tag: 'Research & Trials',
     title: 'Digital Health Trials',
-    desc: 'Accelerating real-world validation for wearables, AI diagnostics, and remote monitoring therapeutics. Structured trial design with publishable evidence and full ethical compliance.',
+    desc: 'We run structured trials for wearables, AI diagnostics, and remote monitoring. You get publishable evidence and full ethical compliance.',
     accent: '#2563eb',
     accentBg: 'rgba(37,99,235,0.07)',
     accentBorder: 'rgba(37,99,235,0.15)',
@@ -24,7 +24,7 @@ const pillars = [
     Icon: BarChart3,
     tag: 'Regulatory Validation',
     title: 'Evidence Generation (RWE)',
-    desc: 'Generating credible, publishable real-world evidence that supports CDSCO regulatory approval, investor confidence, and multi-centre hospital adoption — the structured pathway from pilot to scale.',
+    desc: 'We generate publishable real-world evidence for CDSCO approval, investors, and hospital adoption across multiple centres.',
     accent: '#059669',
     accentBg: 'rgba(5,150,105,0.07)',
     accentBorder: 'rgba(5,150,105,0.15)',
@@ -48,7 +48,7 @@ const FocusAreas = () => {
               Core Focus Areas
             </h2>
             <p style={{ fontSize: '1rem', color: 'var(--text-body)', lineHeight: 1.75, marginBottom: '32px' }}>
-              Three domains where Plexus AI drives meaningful clinical AI adoption — from workflow automation to regulatory-grade evidence.
+              We work in three areas of hospital AI — from daily clinical workflows to regulatory approval.
             </p>
             <a href="#programs" style={{
               display: 'inline-flex',

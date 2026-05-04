@@ -8,7 +8,7 @@ const steps = [
     num: '01',
     Icon: UserCheck,
     title: 'Partner Onboarding',
-    desc: 'Structured intake, scope definition, and expectations alignment with your clinical team.',
+    desc: 'We agree on scope and align with your clinical team.',
     color: '#0D9488',
     bg: 'rgba(13,148,136,0.08)',
     border: 'rgba(13,148,136,0.15)',
@@ -17,7 +17,7 @@ const steps = [
     num: '02',
     Icon: Stethoscope,
     title: 'Clinical Deployment',
-    desc: 'Integration into live OPD, IPD, ICU, and diagnostic workflows inside partner hospitals.',
+    desc: 'We integrate your AI into live OPD, ICU, and diagnostic workflows inside partner hospitals.',
     color: '#3B82F6',
     bg: 'rgba(59,130,246,0.08)',
     border: 'rgba(59,130,246,0.15)',
@@ -26,7 +26,7 @@ const steps = [
     num: '03',
     Icon: BarChart3,
     title: 'Evidence Capture',
-    desc: 'Real-time data collection on clinical usage, outcomes, and efficiency. Structured clinician feedback loops.',
+    desc: 'We track usage, outcomes, and efficiency in real time. Clinicians give direct feedback.',
     color: '#8B5CF6',
     bg: 'rgba(139,92,246,0.08)',
     border: 'rgba(139,92,246,0.15)',
@@ -35,7 +35,7 @@ const steps = [
     num: '04',
     Icon: Award,
     title: 'Validation & Certification',
-    desc: 'Publishable RWE reports, CDSCO-aligned regulatory dossiers, and the Plexus AI Validation Certificate.',
+    desc: 'You get a published RWE report, a regulatory dossier, and the PlexusAI Validation Certificate.',
     color: '#059669',
     bg: 'rgba(5,150,105,0.08)',
     border: 'rgba(5,150,105,0.15)',
@@ -44,7 +44,7 @@ const steps = [
     num: '05',
     Icon: Rocket,
     title: 'Scale & Expand',
-    desc: 'Multi-centre deployment, investor-ready evidence, and access to our partner hospital network.',
+    desc: 'We help you scale across hospitals with investor-ready evidence and our full partner network.',
     color: '#0D9488',
     bg: 'rgba(13,148,136,0.08)',
     border: 'rgba(13,148,136,0.15)',
@@ -64,7 +64,7 @@ const HowItWorks = () => {
             From idea to clinical proof — in months, not years
           </h2>
           <p style={{ fontSize: '1.05rem', color: 'var(--text-body)', maxWidth: '520px', margin: '0 auto' }}>
-            A structured five-step pathway that takes your healthcare AI from concept to certified, evidence-backed deployment.
+            Five steps. We take your AI from submission to certified and deployed.
           </p>
         </div>
 
@@ -159,10 +159,10 @@ const HowItWorks = () => {
         >
           <div>
             <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-dark)', marginBottom: '4px' }}>
-              Ready to begin your validation journey?
+              Ready to validate your AI?
             </div>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-body)' }}>
-              We're accepting applications from AI startups, MedTech companies, and pharma partners for Q2 2026.
+              Now accepting AI startups, MedTech companies, and pharma partners for Q2 2026.
             </div>
           </div>
           <a href="#sandbox" className="btn btn-primary" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>

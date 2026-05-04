@@ -7,26 +7,26 @@ const features = [
   {
     num: '01',
     Icon: FlaskConical,
-    title: 'Clinical Validation Access',
-    desc: 'Test your AI inside real hospital workflows with live clinical data. Compress years of validation into months.',
+    title: 'Validate in Real Hospitals',
+    desc: 'We run your AI in live hospital workflows with real clinical data. Months, not years.',
   },
   {
     num: '02',
     Icon: Shield,
     title: 'Clinical Certification',
-    desc: 'Get the credential that unlocks markets. Investors fund faster. Regulators clear smoother. Hospitals adopt what is certified.',
+    desc: 'Get the credential that opens doors. Investors fund faster. Regulators move quicker. Hospitals adopt certified AI.',
   },
   {
     num: '03',
     Icon: Database,
     title: 'Real-World Data',
-    desc: 'Access de-identified patient data, clinical workflows, and hospital systems to train and validate your AI.',
+    desc: 'We give you de-identified patient data and live hospital workflows to train and validate your AI.',
   },
   {
     num: '04',
     Icon: Zap,
     title: 'Fast-Track to Market',
-    desc: 'Skip the noise. Scale inside a hospital with direct access to clinicians, administrators, and our expert network.',
+    desc: 'Skip the queue. Scale inside a hospital with direct access to clinicians, administrators, and our advisor network.',
   },
 ];
 
@@ -40,10 +40,10 @@ const Features = () => {
         <div className="section-header centered">
           <span className="eyebrow">Why PlexusAI</span>
           <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '16px' }}>
-            Everything you need to build trusted healthcare AI
+            What you get with PlexusAI
           </h2>
           <p style={{ fontSize: '1.05rem', color: 'var(--text-body)', maxWidth: '500px', margin: '0 auto' }}>
-            From validation to certification — get your AI into real clinical settings faster.
+            We take your AI from pilot to certified — inside real hospitals.
           </p>
         </div>
 
