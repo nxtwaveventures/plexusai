@@ -1,15 +1,14 @@
 /**
- * PlexusAI Blog Agent Pipeline — powered by Groq (free) + Tavily search (free)
+ * PlexusAI Blog Agent Pipeline — powered by Groq (free) + Google News RSS (free)
  *
  * 4 agents in sequence:
- *  1. Researcher  — searches the web for latest healthcare AI news (Tavily)
+ *  1. Researcher  — fetches today's healthcare AI headlines via Google News RSS
  *  2. Writer      — turns research into a captivating 2-min article (Groq)
  *  3. Scorer      — scores clarity, relevance, engagement, accuracy (Groq)
  *  4. Ethics      — checks responsible AI, flags issues (Groq)
  *
- * Free accounts needed:
- *  - Groq:   console.groq.com  → GROQ_API_KEY
- *  - Tavily: app.tavily.com    → TAVILY_API_KEY  (1000 free searches/month)
+ * Only one key needed:
+ *  - Groq: console.groq.com → GROQ_API_KEY
  *
  * Run manually:  node scripts/generate-blog.mjs
  */
@@ -51,46 +50,40 @@ async function callAgent({ name, system, userMessage, maxTokens = 2048 }) {
   return res.choices[0].message.content ?? '';
 }
 
-// ── Web search via Tavily (free tier) ─────────────────────────────────────────
+// ── Google News RSS (free, no API key) ───────────────────────────────────────
 
-async function tavilySearch(query) {
-  const res = await fetch('https://api.tavily.com/search', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      api_key: process.env.TAVILY_API_KEY,
-      query,
-      search_depth: 'advanced',
-      max_results: 8,
-      include_answer: true,
-      include_raw_content: false,
-    }),
-  });
-  if (!res.ok) throw new Error(`Tavily error: ${res.status} ${await res.text()}`);
-  return res.json();
-}
+async function fetchGoogleNews(query) {
+  const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-IN&gl=IN&ceid=IN:en`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`News RSS error: ${res.status}`);
+  const xml = await res.text();
 
-function formatSearchResults(data) {
-  const lines = [];
-  if (data.answer) lines.push(`SUMMARY: ${data.answer}\n`);
-  for (const r of (data.results ?? [])) {
-    lines.push(`SOURCE: ${r.source || r.url}`);
-    lines.push(`TITLE: ${r.title}`);
-    lines.push(`SNIPPET: ${r.content}\n`);
+  const items = [];
+  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+  let match;
+  while ((match = itemRegex.exec(xml)) !== null && items.length < 10) {
+    const block = match[1];
+    const title   = (block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)   || block.match(/<title>(.*?)<\/title>/))?.[1]   ?? '';
+    const source  = (block.match(/<source[^>]*>(.*?)<\/source>/))?.[1] ?? '';
+    const pubDate = (block.match(/<pubDate>(.*?)<\/pubDate>/))?.[1] ?? '';
+    const desc    = (block.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/) || block.match(/<description>(.*?)<\/description>/))?.[1] ?? '';
+    const clean   = desc.replace(/<[^>]+>/g, '').slice(0, 300);
+    items.push(`TITLE: ${title}\nSOURCE: ${source} | ${pubDate}\nSNIPPET: ${clean}\n`);
   }
-  return lines.join('\n');
+  return items.join('\n');
 }
 
 // ── Agent 1: Researcher ───────────────────────────────────────────────────────
 
 async function researchAgent() {
-  process.stdout.write('  [Researcher] searching web…');
-  const data = await tavilySearch(
-    'healthcare AI news India hospital clinical validation last 24 hours 2025'
-  );
+  process.stdout.write('  [Researcher] fetching news…');
+  const [general, india] = await Promise.all([
+    fetchGoogleNews('healthcare AI clinical validation hospital 2025'),
+    fetchGoogleNews('healthcare AI India CDSCO hospital 2025'),
+  ]);
   process.stdout.write(' done\n');
 
-  const searchText = formatSearchResults(data);
+  const searchText = `=== Global Healthcare AI News ===\n${general}\n=== India Healthcare AI News ===\n${india}`;
 
   const brief = await callAgent({
     name: 'Researcher',
