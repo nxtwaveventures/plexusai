@@ -9,9 +9,9 @@ const footerLinks = {
     { label: 'Accelerator', href: '#programs' },
   ],
   Resources: [
-    { label: 'Documentation', href: '#faq' },
-    { label: 'Blog', href: '#faq' },
-    { label: 'Community', href: '#faq' },
+    { label: 'Blog', href: '#blog' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Community', href: '#' },
     { label: 'Contact', href: 'mailto:support@plexusai.in' },
   ],
   Company: [

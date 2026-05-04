@@ -116,9 +116,15 @@ Write a 2-minute read (250-320 words). Rules:
 - Be honest about limitations and uncertainty
 - End with one concrete implication for healthcare AI adoption
 
+Title rules (CRITICAL):
+- Must be specific, not generic — name the technology, country, disease, or hospital
+- Good: "AIIMS Delhi Cuts Radiology Wait Time by 40% Using AI" or "CDSCO Clears First AI Diagnostic Tool for Rural Clinics"
+- Bad: "AI in Healthcare", "India Regulates AI", "Healthcare AI Faces Challenges"
+- Never write a title that could apply to any article — make it THIS story only
+
 Return ONLY a JSON object in this exact shape (no extra text, no markdown):
 {
-  "title": "headline under 12 words",
+  "title": "specific headline under 12 words",
   "summary": "one sentence that captures the story",
   "body": "full article text (250-320 words)",
   "tags": ["tag1", "tag2", "tag3"],
