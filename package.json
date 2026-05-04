@@ -12,6 +12,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",
     "@supabase/supabase-js": "^2.99.0",
+    "dotenv": "^17.4.2",
     "framer-motion": "^12.35.2",
     "groq-sdk": "^1.1.2",
     "lucide-react": "^0.577.0",
