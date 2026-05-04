@@ -18,6 +18,12 @@ jobs:
 
       - run: npm ci
 
+      - name: Check secrets are set
+        run: |
+          echo "GROQ_API_KEY set: ${{ secrets.GROQ_API_KEY != '' }}"
+          echo "VITE_SUPABASE_URL set: ${{ secrets.VITE_SUPABASE_URL != '' }}"
+          echo "SUPABASE_SERVICE_KEY set: ${{ secrets.SUPABASE_SERVICE_KEY != '' }}"
+
       - name: Generate and publish blog post
         run: node scripts/generate-blog.mjs
         env:
