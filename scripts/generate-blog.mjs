@@ -76,7 +76,7 @@ async function fetchGoogleNews(query) {
 // ── Step 1: Guard — skip if already published today ───────────────────────────
 
 async function alreadyPublishedToday() {
-  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const today = new Date().toISOString().slice(0, 10);
   const { data } = await supabase
     .from('blog_posts')
     .select('id')
@@ -84,6 +84,15 @@ async function alreadyPublishedToday() {
     .gte('created_at', `${today}T00:00:00Z`)
     .limit(1);
   return (data?.length ?? 0) > 0;
+}
+
+async function getRecentTitles() {
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const { data } = await supabase
+    .from('blog_posts')
+    .select('title')
+    .gte('created_at', sevenDaysAgo);
+  return (data ?? []).map(p => p.title.toLowerCase());
 }
 
 // ── Step 2: Researcher ────────────────────────────────────────────────────────
@@ -129,7 +138,7 @@ Be specific. Never say "AI is transforming healthcare" — say exactly what happ
 
 // ── Step 3: Writer ─────────────────────────────────────────────────────────────
 
-async function writerAgent(research) {
+async function writerAgent(research, recentTitles = []) {
   const text = await callAgent({
     name: 'Writer',
     maxTokens: 2048,
@@ -159,7 +168,7 @@ Return ONLY valid JSON, no markdown:
   "imagePrompt": "a vivid, specific visual description for this story (e.g. 'Indian radiologist reviewing AI-highlighted chest X-ray scans on dual monitors in a busy Mumbai hospital')",
   "readMinutes": 2
 }`,
-    userMessage: `Write a 2-minute healthcare AI article based on:\n\n${research}`,
+    userMessage: `Write a 2-minute healthcare AI article based on:\n\n${research}${recentTitles.length ? `\n\nDO NOT cover these topics already published this week:\n${recentTitles.map(t => `- ${t}`).join('\n')}` : ''}`,
   });
 
   const article = extractJSON(text);
@@ -249,11 +258,14 @@ async function run() {
   }
   console.log('   → No post yet today. Proceeding.\n');
 
+  const recentTitles = await getRecentTitles();
+  console.log(`   → ${recentTitles.length} articles published in last 7 days\n`);
+
   console.log('① Researcher — scanning 4 news sources…');
   const research = await researchAgent();
 
   console.log('② Writer — drafting article…');
-  const article = await writerAgent(research);
+  const article = await writerAgent(research, recentTitles);
   console.log(`   → "${article.title}"`);
 
   console.log('③ Scorer — evaluating quality…');
