@@ -12,6 +12,7 @@ interface Post {
   summary: string;
   tags: string[];
   read_minutes: number;
+  image_url?: string;
 }
 
 const TAG_COLORS: Record<string, string> = {
@@ -35,10 +36,14 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-function imageUrl(title: string, id: string) {
+function fallbackImage(title: string, id: string) {
   const seed = id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 9999;
-  const prompt = encodeURIComponent(`${title}, healthcare technology, India, cinematic, editorial photography, teal blue`);
-  return `https://image.pollinations.ai/prompt/${prompt}?width=800&height=420&nologo=true&seed=${seed}`;
+  const prompt = encodeURIComponent(`${title}, healthcare technology India, photorealistic, cinematic, professional`);
+  return `https://image.pollinations.ai/prompt/${prompt}?model=flux&width=800&height=420&nologo=true&seed=${seed}&enhance=true`;
+}
+
+function getImage(post: Post) {
+  return post.image_url || fallbackImage(post.title, post.id);
 }
 
 export default function BlogIndex() {
@@ -48,7 +53,7 @@ export default function BlogIndex() {
   useEffect(() => {
     supabase
       .from('blog_posts')
-      .select('id, created_at, title, summary, tags, read_minutes')
+      .select('id, created_at, title, summary, tags, read_minutes, image_url')
       .eq('published', true)
       .order('created_at', { ascending: false })
       .limit(30)
@@ -106,7 +111,7 @@ export default function BlogIndex() {
                   {/* AI generated image */}
                   <div style={{ position: 'relative', width: '100%', height: '200px', overflow: 'hidden', background: '#f0faf9' }}>
                     <img
-                      src={imageUrl(post.title, post.id)}
+                      src={getImage(post)}
                       alt={post.title}
                       loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 400ms ease', display: 'block' }}

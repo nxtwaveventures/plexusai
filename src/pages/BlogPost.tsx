@@ -12,6 +12,7 @@ interface Post {
   body: string;
   tags: string[];
   read_minutes: number;
+  image_url?: string;
 }
 
 const TAG_COLORS: Record<string, string> = {
@@ -35,10 +36,11 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-function imageUrl(title: string, id: string) {
-  const seed = id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 9999;
-  const prompt = encodeURIComponent(`${title}, healthcare technology, India, cinematic, editorial photography, teal blue`);
-  return `https://image.pollinations.ai/prompt/${prompt}?width=1200&height=520&nologo=true&seed=${seed}`;
+function getImage(post: Post) {
+  if (post.image_url) return post.image_url;
+  const seed = post.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 9999;
+  const prompt = encodeURIComponent(`${post.title}, healthcare technology India, photorealistic, cinematic, professional`);
+  return `https://image.pollinations.ai/prompt/${prompt}?model=flux&width=1280&height=520&nologo=true&seed=${seed}&enhance=true`;
 }
 
 export default function BlogPost() {
@@ -50,7 +52,7 @@ export default function BlogPost() {
     if (!id) return;
     supabase
       .from('blog_posts')
-      .select('id, created_at, title, summary, body, tags, read_minutes')
+      .select('id, created_at, title, summary, body, tags, read_minutes, image_url')
       .eq('id', id)
       .eq('published', true)
       .single()
@@ -94,7 +96,7 @@ export default function BlogPost() {
         {/* Hero image */}
         <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '36px', height: '340px' }}>
           <img
-            src={imageUrl(post.title, post.id)}
+            src={getImage(post)}
             alt={post.title}
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />

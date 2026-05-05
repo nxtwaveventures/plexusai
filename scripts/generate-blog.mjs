@@ -1,23 +1,23 @@
 /**
- * PlexusAI Blog Agent Pipeline — powered by Groq (free) + Google News RSS (free)
+ * PlexusAI Blog Agent Pipeline — Groq + Google News RSS (fully free)
  *
- * 4 agents in sequence:
- *  1. Researcher  — fetches today's healthcare AI headlines via Google News RSS
- *  2. Writer      — turns research into a captivating 2-min article (Groq)
- *  3. Scorer      — scores clarity, relevance, engagement, accuracy (Groq)
- *  4. Ethics      — checks responsible AI, flags issues (Groq)
+ * Runs once per day at 8 AM IST via GitHub Actions.
+ * Skips if an article was already published today.
  *
- * Only one key needed:
- *  - Groq: console.groq.com → GROQ_API_KEY
- *
- * Run manually:  node scripts/generate-blog.mjs
+ * 5 steps:
+ *  1. Guard     — skip if already published today
+ *  2. Researcher — fetches from 4 news queries, synthesises the best story
+ *  3. Writer    — writes a captivating 2-min article
+ *  4. Scorer    — scores clarity, relevance, engagement, accuracy
+ *  5. Ethics    — checks responsible AI, GDPR, patient safety
+ *  + Image      — generates a FLUX image via Pollinations, stored in DB
  */
 
 import Groq from 'groq-sdk';
 import { createClient } from '@supabase/supabase-js';
 import 'dotenv/config';
 
-// ── Clients ──────────────────────────────────────────────────────────────────
+// ── Clients ───────────────────────────────────────────────────────────────────
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
@@ -26,7 +26,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY || process.env.VITE_SUPABASE_ANON_KEY
 );
 
-const MODEL = 'llama-3.3-70b-versatile'; // free on Groq, excellent quality
+const MODEL = 'llama-3.3-70b-versatile';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -50,87 +50,116 @@ async function callAgent({ name, system, userMessage, maxTokens = 2048 }) {
   return res.choices[0].message.content ?? '';
 }
 
-// ── Google News RSS (free, no API key) ───────────────────────────────────────
+// ── Google News RSS (free, no API key) ────────────────────────────────────────
 
 async function fetchGoogleNews(query) {
   const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-IN&gl=IN&ceid=IN:en`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`News RSS error: ${res.status}`);
+  if (!res.ok) return '';
   const xml = await res.text();
 
   const items = [];
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
   let match;
-  while ((match = itemRegex.exec(xml)) !== null && items.length < 10) {
+  while ((match = itemRegex.exec(xml)) !== null && items.length < 8) {
     const block = match[1];
     const title   = (block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)   || block.match(/<title>(.*?)<\/title>/))?.[1]   ?? '';
     const source  = (block.match(/<source[^>]*>(.*?)<\/source>/))?.[1] ?? '';
     const pubDate = (block.match(/<pubDate>(.*?)<\/pubDate>/))?.[1] ?? '';
     const desc    = (block.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/) || block.match(/<description>(.*?)<\/description>/))?.[1] ?? '';
-    const clean   = desc.replace(/<[^>]+>/g, '').slice(0, 300);
-    items.push(`TITLE: ${title}\nSOURCE: ${source} | ${pubDate}\nSNIPPET: ${clean}\n`);
+    const clean   = desc.replace(/<[^>]+>/g, '').slice(0, 250);
+    items.push(`• ${title} [${source}, ${pubDate}]\n  ${clean}`);
   }
-  return items.join('\n');
+  return items.join('\n\n');
 }
 
-// ── Agent 1: Researcher ───────────────────────────────────────────────────────
+// ── Step 1: Guard — skip if already published today ───────────────────────────
+
+async function alreadyPublishedToday() {
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const { data } = await supabase
+    .from('blog_posts')
+    .select('id')
+    .eq('published', true)
+    .gte('created_at', `${today}T00:00:00Z`)
+    .limit(1);
+  return (data?.length ?? 0) > 0;
+}
+
+// ── Step 2: Researcher ────────────────────────────────────────────────────────
 
 async function researchAgent() {
-  process.stdout.write('  [Researcher] fetching news…');
-  const [general, india] = await Promise.all([
-    fetchGoogleNews('healthcare AI clinical validation hospital 2025'),
+  process.stdout.write('  [Researcher] fetching news from 4 sources…');
+
+  const [global, india, clinical, regulatory] = await Promise.all([
+    fetchGoogleNews('healthcare AI hospital clinical validation 2025'),
     fetchGoogleNews('healthcare AI India CDSCO hospital 2025'),
+    fetchGoogleNews('clinical AI diagnostics radiology pathology 2025'),
+    fetchGoogleNews('AI medical device regulation FDA CDSCO approval 2025'),
   ]);
+
   process.stdout.write(' done\n');
 
-  const searchText = `=== Global Healthcare AI News ===\n${general}\n=== India Healthcare AI News ===\n${india}`;
+  const allNews = [
+    `=== Global Healthcare AI ===\n${global}`,
+    `=== India Healthcare AI ===\n${india}`,
+    `=== Clinical AI & Diagnostics ===\n${clinical}`,
+    `=== Regulatory Approvals ===\n${regulatory}`,
+  ].join('\n\n');
 
   const brief = await callAgent({
     name: 'Researcher',
-    maxTokens: 1024,
-    system: `You are a healthcare AI research specialist.
-Read these web search results and produce a structured research brief:
-- TOP STORY: one headline + 2-sentence summary
-- KEY FACTS: 3 bullet points with source names
-- IMPLICATION: why this matters for hospital AI adoption
-- QUOTE (if found): one direct quote from a clinician or regulator
-Focus on: clinical AI validation, hospital AI adoption, diagnostics, India/CDSCO news, real-world evidence, AI ethics in healthcare.`,
-    userMessage: `Here are today's search results:\n\n${searchText}`,
+    maxTokens: 1200,
+    system: `You are a senior healthcare AI research analyst with 15 years of experience.
+Read today's news carefully and identify THE single most important story — the one with the biggest real-world impact on patients, hospitals, or the healthcare AI industry.
+
+Return a structured brief:
+- TOP STORY: specific headline + 3-sentence summary with concrete numbers/facts
+- WHY IT MATTERS: one specific implication for hospital AI adoption in India
+- KEY FACTS: 3 bullet points with source names and dates
+- COUNTER-POINT: one limitation or concern to acknowledge
+- GDPR/ETHICS NOTE: any data privacy or patient safety angle
+
+Be specific. Never say "AI is transforming healthcare" — say exactly what happened, where, and by how much.`,
+    userMessage: `Today's healthcare AI news:\n\n${allNews}`,
   });
 
   return brief;
 }
 
-// ── Agent 2: Writer ───────────────────────────────────────────────────────────
+// ── Step 3: Writer ─────────────────────────────────────────────────────────────
 
 async function writerAgent(research) {
   const text = await callAgent({
     name: 'Writer',
     maxTokens: 2048,
-    system: `You are a captivating healthcare AI journalist writing for clinicians, hospital leaders, and AI startups.
-Write a 2-minute read (250-320 words). Rules:
-- Active voice only ("Doctors now use…", "Hospitals are adopting…")
-- First sentence must hook the reader — make them want to keep reading
-- Structure: Hook → What happened → Why it matters for hospitals → What comes next
-- No jargon: not "paradigm shift", "synergy", "leverage", "utilize"
-- Be honest about limitations and uncertainty
-- End with one concrete implication for healthcare AI adoption
+    system: `You are an award-winning healthcare AI journalist. Your articles are read by CMOs, hospital CIOs, and AI startup founders.
 
-Title rules (CRITICAL):
-- Must be specific, not generic — name the technology, country, disease, or hospital
-- Good: "AIIMS Delhi Cuts Radiology Wait Time by 40% Using AI" or "CDSCO Clears First AI Diagnostic Tool for Rural Clinics"
-- Bad: "AI in Healthcare", "India Regulates AI", "Healthcare AI Faces Challenges"
-- Never write a title that could apply to any article — make it THIS story only
+Write a 2-minute read (280-320 words). Rules:
+- Active voice: "Doctors now use…", "Apollo deployed…", "AIIMS found…"
+- First sentence: drop the reader into a specific moment or fact — no scene-setting
+- Structure: Hook (1 sentence) → What happened (2-3 sentences) → Why hospitals should care (2 sentences) → What's next (1-2 sentences) → One concrete takeaway
+- Be specific: name hospitals, cities, percentages, patient numbers where available
+- Acknowledge limitations: what's not yet proven, what could go wrong
+- No jargon: no "paradigm shift", "synergy", "leverage", "utilize", "transformative"
+- GDPR/data privacy: if patient data is involved, note how it's handled
 
-Return ONLY a JSON object in this exact shape (no extra text, no markdown):
+Title rules — be specific, name the tech/hospital/country:
+✓ "AIIMS Delhi Cuts Radiology Wait Time 40% with AI Triage"
+✓ "CDSCO Clears First AI Diagnostic Tool for Tier-2 Indian Hospitals"
+✗ "AI is Changing Healthcare" (too generic)
+✗ "India Regulates AI" (too vague)
+
+Return ONLY valid JSON, no markdown:
 {
-  "title": "specific headline under 12 words",
-  "summary": "one sentence that captures the story",
-  "body": "full article text (250-320 words)",
+  "title": "specific headline, max 12 words",
+  "summary": "one sentence capturing the story with one key fact",
+  "body": "full article (280-320 words)",
   "tags": ["tag1", "tag2", "tag3"],
+  "imagePrompt": "a vivid, specific visual description for this story (e.g. 'Indian radiologist reviewing AI-highlighted chest X-ray scans on dual monitors in a busy Mumbai hospital')",
   "readMinutes": 2
 }`,
-    userMessage: `Write a 2-minute healthcare AI news article based on this research:\n\n${research}`,
+    userMessage: `Write a 2-minute healthcare AI article based on:\n\n${research}`,
   });
 
   const article = extractJSON(text);
@@ -138,19 +167,20 @@ Return ONLY a JSON object in this exact shape (no extra text, no markdown):
   return article;
 }
 
-// ── Agent 3: Scorer ───────────────────────────────────────────────────────────
+// ── Step 4: Scorer ─────────────────────────────────────────────────────────────
 
 async function scorerAgent(article) {
   const text = await callAgent({
     name: 'Scorer',
     maxTokens: 512,
-    system: `You are an editorial quality scorer. Score on 4 dimensions (1-10):
-- clarity: easy to understand for a non-expert?
-- relevance: important to hospital AI decision-makers?
-- engagement: would a busy clinician read to the end?
-- accuracy: are the claims factually grounded?
+    system: `You are a ruthless editorial quality scorer. Be honest — most articles score 6-8, not 9-10.
+Score on 4 dimensions (1-10):
+- clarity: can a non-expert read this without confusion?
+- relevance: does this matter to hospital AI decision-makers RIGHT NOW?
+- engagement: would a CMO read past the first paragraph?
+- accuracy: are claims specific, grounded, and appropriately hedged?
 
-Return ONLY JSON (no extra text): { "clarity": N, "relevance": N, "engagement": N, "accuracy": N, "average": N, "notes": "one line" }`,
+Return ONLY JSON: { "clarity": N, "relevance": N, "engagement": N, "accuracy": N, "average": N, "notes": "one specific critique" }`,
     userMessage: `Score this article:\n\nTitle: ${article.title}\n\n${article.body}`,
   });
 
@@ -159,36 +189,67 @@ Return ONLY JSON (no extra text): { "clarity": N, "relevance": N, "engagement": 
   return score;
 }
 
-// ── Agent 4: Ethics Reviewer ──────────────────────────────────────────────────
+// ── Step 5: Ethics Reviewer ────────────────────────────────────────────────────
 
 async function ethicsAgent(article) {
   const text = await callAgent({
     name: 'Ethics',
     maxTokens: 512,
-    system: `You are an AI ethics and responsible content reviewer for healthcare journalism.
-Check for:
-- Overclaiming: does it exaggerate what AI can do?
-- Patient safety: no advice that could harm patients
-- Bias: fair representation of communities and institutions
-- Transparency: clear about what is validated vs. speculative
-- Responsible AI: acknowledges limitations
+    system: `You are a responsible AI and healthcare ethics reviewer. Check for:
+- Overclaiming: does it exaggerate AI capabilities or outcomes?
+- Patient safety: could any statement lead to unsafe clinical decisions?
+- Data privacy: is patient data handling described appropriately (GDPR/DPDP compliant)?
+- Bias: fair representation of communities, not just elite urban hospitals?
+- Transparency: clear about what is validated vs. speculative?
+- Misinformation risk: could this be misread to harm patients or delay care?
 
-Return ONLY JSON (no extra text):
-{ "approved": true, "flags": [], "suggestions": [], "note": "one-line summary" }
+Return ONLY JSON:
+{ "approved": true/false, "flags": ["issue1"], "suggestions": ["fix1"], "note": "one-line verdict" }
 
-Approve if there are no serious issues. Minor suggestions are fine.`,
-    userMessage: `Review this healthcare AI article:\n\nTitle: ${article.title}\n\n${article.body}`,
+Approve if no serious issues. Flag anything a patient advocate would object to.`,
+    userMessage: `Review for responsible AI and GDPR compliance:\n\nTitle: ${article.title}\n\n${article.body}`,
   });
 
   return extractJSON(text) ?? { approved: false, flags: ['parse error'], suggestions: [], note: '' };
 }
 
-// ── Pipeline ──────────────────────────────────────────────────────────────────
+// ── Image generation via Pollinations FLUX ─────────────────────────────────────
+
+async function generateImage(article) {
+  const prompt = article.imagePrompt
+    || `${article.title}, healthcare technology, India, professional editorial photography`;
+  const seed = Math.floor(Math.random() * 99999);
+  const encoded = encodeURIComponent(
+    `${prompt}, photorealistic, cinematic lighting, 8k, professional`
+  );
+  const url = `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=1280&height=680&nologo=true&seed=${seed}&enhance=true`;
+
+  process.stdout.write('  [Image] generating with FLUX…');
+  try {
+    // Ping to trigger generation and cache
+    const res = await fetch(url, { signal: AbortSignal.timeout(30000) });
+    if (res.ok) {
+      process.stdout.write(' done\n');
+      return url;
+    }
+  } catch { /* timeout ok — URL still works later */ }
+  process.stdout.write(' queued\n');
+  return url;
+}
+
+// ── Pipeline ───────────────────────────────────────────────────────────────────
 
 async function run() {
-  console.log('\n🏥 PlexusAI Blog Agent Pipeline (Groq + Tavily — free)\n');
+  console.log('\n🏥 PlexusAI Blog Pipeline\n');
 
-  console.log('① Researcher — searching healthcare AI news…');
+  console.log('⓪ Checking if already published today…');
+  if (await alreadyPublishedToday()) {
+    console.log('   → Already published today. Skipping.\n');
+    process.exit(0);
+  }
+  console.log('   → No post yet today. Proceeding.\n');
+
+  console.log('① Researcher — scanning 4 news sources…');
   const research = await researchAgent();
 
   console.log('② Writer — drafting article…');
@@ -197,14 +258,18 @@ async function run() {
 
   console.log('③ Scorer — evaluating quality…');
   const score = await scorerAgent(article);
-  console.log(`   → Score: ${score.average}/10 (clarity ${score.clarity} | relevance ${score.relevance} | engagement ${score.engagement} | accuracy ${score.accuracy})`);
+  console.log(`   → ${score.average}/10 (clarity ${score.clarity} | relevance ${score.relevance} | engagement ${score.engagement} | accuracy ${score.accuracy})`);
+  console.log(`   → ${score.notes}`);
 
-  console.log('④ Ethics Reviewer — checking responsible AI…');
+  console.log('④ Ethics — checking responsible AI & GDPR…');
   const ethics = await ethicsAgent(article);
   console.log(`   → ${ethics.approved ? '✅ Approved' : '⚠️  Flagged'}: ${ethics.note}`);
   if (ethics.flags?.length) console.log(`   Flags: ${ethics.flags.join(', ')}`);
 
-  const publish = ethics.approved && score.average >= 6.0;
+  console.log('⑤ Image — generating FLUX cover…');
+  const imageUrl = await generateImage(article);
+
+  const publish = ethics.approved && score.average >= 6.5;
 
   const row = {
     title:              article.title,
@@ -212,6 +277,7 @@ async function run() {
     body:               article.body,
     tags:               article.tags ?? [],
     read_minutes:       article.readMinutes ?? 2,
+    image_url:          imageUrl,
     score_clarity:      score.clarity,
     score_relevance:    score.relevance,
     score_engagement:   score.engagement,
