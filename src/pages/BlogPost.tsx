@@ -35,6 +35,12 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+function imageUrl(title: string, id: string) {
+  const seed = id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 9999;
+  const prompt = encodeURIComponent(`${title}, healthcare technology, India, cinematic, editorial photography, teal blue`);
+  return `https://image.pollinations.ai/prompt/${prompt}?width=1200&height=520&nologo=true&seed=${seed}`;
+}
+
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const [post, setPost] = useState<Post | null>(null);
@@ -85,6 +91,15 @@ export default function BlogPost() {
 
       {/* Article */}
       <main style={{ maxWidth: '720px', margin: '0 auto', padding: '64px 32px 96px' }}>
+        {/* Hero image */}
+        <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '36px', height: '340px' }}>
+          <img
+            src={imageUrl(post.title, post.id)}
+            alt={post.title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '24px' }}>
           {post.tags.map(tag => (
             <span key={tag} style={{
