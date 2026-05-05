@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import CustomCursor from './components/CustomCursor';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
@@ -11,8 +12,9 @@ import FAQ from './components/FAQ';
 import Navbar from './components/Navbar';
 import Sandbox from './components/Sandbox';
 import Footer from './components/Footer';
+import BlogPost from './pages/BlogPost';
 
-function App() {
+function Home() {
   return (
     <div style={{ background: 'var(--bg-primary)', minHeight: '100vh' }}>
       <CustomCursor />
@@ -29,6 +31,15 @@ function App() {
       <Sandbox />
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/blog/:id" element={<BlogPost />} />
+    </Routes>
   );
 }
 
