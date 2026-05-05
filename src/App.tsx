@@ -13,6 +13,7 @@ import Navbar from './components/Navbar';
 import Sandbox from './components/Sandbox';
 import Footer from './components/Footer';
 import BlogPost from './pages/BlogPost';
+import BlogIndex from './pages/BlogIndex';
 
 function Home() {
   return (
@@ -38,6 +39,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/blog" element={<BlogIndex />} />
       <Route path="/blog/:id" element={<BlogPost />} />
     </Routes>
   );

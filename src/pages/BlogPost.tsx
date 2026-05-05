@@ -48,7 +48,8 @@ export default function BlogPost() {
       .eq('id', id)
       .eq('published', true)
       .single()
-      .then(({ data }) => {
+      .then(({ data, error }) => {
+        if (error) console.error('Supabase error:', error);
         setPost(data ?? null);
         setLoading(false);
       });

@@ -26,6 +26,7 @@ const navItems = [
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Team', href: '#team' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'AI Pulse', href: '/blog', external: true },
 ];
 
 const Navbar = () => {
@@ -84,17 +85,19 @@ const Navbar = () => {
             >
               <a
                 href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '3px',
                   fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: 'var(--text-body)',
+                  fontWeight: item.external ? 600 : 500,
+                  color: item.external ? 'var(--accent)' : 'var(--text-body)',
                   transition: 'color 200ms',
                 }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-dark)'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-body)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = item.external ? 'var(--accent)' : 'var(--text-body)'}
               >
                 {item.label}
                 {item.children && <ChevronDown size={13} style={{ marginTop: '1px' }} />}
