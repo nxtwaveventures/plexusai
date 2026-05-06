@@ -69,7 +69,7 @@ const HowItWorks = () => {
         </div>
 
         {/* Steps */}
-        <div style={{
+        <div className="hiw-steps" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
           gap: '0',
@@ -77,7 +77,7 @@ const HowItWorks = () => {
           marginTop: '16px',
         }}>
           {/* Connecting line */}
-          <div style={{
+          <div className="hiw-connector" style={{
             position: 'absolute',
             top: '40px',
             left: 'calc(10% + 20px)',
@@ -145,6 +145,7 @@ const HowItWorks = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.7 }}
+          className="hiw-cta"
           style={{
             marginTop: '56px',
             padding: '32px 40px',

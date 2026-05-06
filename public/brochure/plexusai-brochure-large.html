@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlexusAI — Company Brochure (Large Print)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent:       #0D9488;
+      --accent-hover: #0B7C72;
+      --accent-lt:    #F0FDFA;
+      --bg-white:     #ffffff;
+      --bg-off-white: #F8FAFC;
+      --bg-dark:      #1E293B;
+      --bg-dark-2:    #0F172A;
+      --text-dark:    #1E293B;
+      --text-body:    #475569;
+      --text-muted:   #94A3B8;
+      --border:       #E2E8F0;
+      --green:        #059669;
+      --blue:         #2563EB;
+    }
+
+    /* ── LARGE: 13pt base ── */
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-size: 13pt;
+      line-height: 1.75;
+      color: var(--text-dark);
+      background: #fff;
+      width: 210mm;
+      margin: 0 auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ━━ PAGE 1 — COVER ━━ */
+    .cover {
+      min-height: 297mm;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background: linear-gradient(145deg, #F0FDFA 0%, #F8FAFC 55%, #EFF6FF 100%);
+      break-after: page;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(13,148,136,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13,148,136,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+    .cover::after {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 440px; height: 440px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(13,148,136,0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cover-nav {
+      padding: 40px 56px 0;
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 40px; height: 40px; background: var(--accent);
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    }
+    .brand-name { font-size: 16pt; font-weight: 800; letter-spacing: -0.02em; color: var(--text-dark); }
+    .cover-badge {
+      font-size: 8pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      background: rgba(13,148,136,0.1); color: var(--accent-hover);
+      border: 1px solid rgba(13,148,136,0.25); padding: 5px 14px; border-radius: 2px;
+    }
+
+    .cover-body {
+      padding: 0 56px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .cover-eyebrow {
+      font-size: 9pt; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cover-eyebrow::before {
+      content: ''; display: inline-block; width: 24px; height: 2px;
+      background: var(--accent); border-radius: 1px; flex-shrink: 0;
+    }
+    .cover h1 {
+      font-size: 42pt; font-weight: 800; line-height: 1.07;
+      letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 28px;
+    }
+    .cover h1 em { font-style: normal; color: var(--accent); }
+    .cover-tagline {
+      font-size: 14pt; color: var(--text-body);
+      line-height: 1.8; max-width: 400px; margin-bottom: 44px;
+    }
+
+    .cover-trust {
+      display: flex; gap: 0;
+      border: 1px solid rgba(13,148,136,0.2);
+      border-radius: 8px; overflow: hidden;
+      max-width: 480px; background: rgba(255,255,255,0.7);
+    }
+    .cover-trust-item {
+      flex: 1; padding: 16px 18px;
+      border-right: 1px solid rgba(13,148,136,0.15);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cover-trust-item:last-child { border-right: none; }
+    .cover-trust-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .cover-trust-txt { font-size: 10pt; font-weight: 600; color: var(--text-body); line-height: 1.3; }
+
+    .cover-footer {
+      padding: 26px 56px;
+      border-top: 1px solid rgba(13,148,136,0.15);
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.55);
+    }
+    .cover-footer-left { font-size: 10pt; color: var(--text-muted); }
+    .cover-footer-left strong { color: var(--text-body); font-weight: 600; }
+    .cover-url { font-size: 10pt; font-weight: 700; color: var(--accent); }
+
+    /* ━━ CONTENT PAGES ━━ */
+    .page {
+      min-height: 297mm;
+      padding: 36px 56px 28px;
+      break-before: page;
+      background: #fff;
+      display: flex; flex-direction: column;
+    }
+
+    .page-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-brand { display: flex; align-items: center; gap: 9px; }
+    .page-brand-mark {
+      width: 26px; height: 26px; background: var(--accent);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    }
+    .page-brand-name { font-size: 11pt; font-weight: 800; letter-spacing: -0.01em; color: var(--text-dark); }
+    .page-section-label { font-size: 8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+
+    .page-footer {
+      margin-top: auto; padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .page-footer-txt { font-size: 9pt; color: var(--text-muted); }
+
+    /* ── Typography — LARGE ── */
+    .section-lbl {
+      font-size: 8pt; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 9px;
+    }
+    h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 24pt; font-weight: 800; color: var(--text-dark);
+      line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 16px;
+    }
+    h2 em { font-style: normal; color: var(--accent); }
+    h3 { font-size: 13pt; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    p  { font-size: 11.5pt; color: var(--text-body); line-height: 1.75; margin-bottom: 10px; }
+    p:last-child { margin-bottom: 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 30px 0; }
+
+    /* ── Callout ── */
+    .callout {
+      border-left: 4px solid var(--accent);
+      padding: 20px 24px; background: var(--accent-lt);
+      border-radius: 0 8px 8px 0; margin: 26px 0;
+      font-size: 13pt; font-style: italic;
+      color: #0a3d38; line-height: 1.7;
+    }
+
+    /* ── Pipeline ── */
+    .pipeline {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; margin: 22px 0;
+    }
+    .pipe-step { padding: 24px 18px; border-right: 1px solid var(--border); background: var(--bg-white); }
+    .pipe-step:last-child { border-right: none; }
+    .pipe-step.active { background: var(--accent); }
+    .pipe-n { font-size: 22pt; font-weight: 800; color: var(--border); line-height: 1; margin-bottom: 10px; }
+    .pipe-step.active .pipe-n { color: rgba(255,255,255,0.3); }
+    .pipe-label { font-size: 12pt; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
+    .pipe-step.active .pipe-label { color: #fff; }
+    .pipe-desc { font-size: 10pt; color: var(--text-muted); line-height: 1.55; }
+    .pipe-step.active .pipe-desc { color: rgba(255,255,255,0.72); }
+
+    /* ── Focus rows ── */
+    .focus-grid { display: flex; flex-direction: column; gap: 16px; margin: 22px 0; }
+    .focus-card {
+      display: grid; grid-template-columns: 190px 1fr;
+      border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; break-inside: avoid;
+    }
+    .focus-card-left {
+      padding: 30px 24px;
+      display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    }
+    .focus-card-left.teal  { background: rgba(13,148,136,0.07); border-right: 1px solid rgba(13,148,136,0.15); }
+    .focus-card-left.blue  { background: rgba(37,99,235,0.07);  border-right: 1px solid rgba(37,99,235,0.15); }
+    .focus-card-left.green { background: rgba(5,150,105,0.07);  border-right: 1px solid rgba(5,150,105,0.15); }
+    .focus-dec { font-size: 34pt; font-weight: 800; line-height: 1; }
+    .focus-dec.teal  { color: rgba(13,148,136,0.18); }
+    .focus-dec.blue  { color: rgba(37,99,235,0.18); }
+    .focus-dec.green { color: rgba(5,150,105,0.18); }
+    .focus-tag { font-size: 8pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.4; }
+    .focus-tag.teal  { color: var(--accent); }
+    .focus-tag.blue  { color: var(--blue); }
+    .focus-tag.green { color: var(--green); }
+    .focus-card-right {
+      padding: 30px 30px;
+      background: var(--bg-off-white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .focus-card h3 { font-size: 13pt; margin-bottom: 9px; }
+    .focus-card p  { font-size: 11pt; line-height: 1.7; margin: 0; }
+
+    /* ── Programs ── */
+    .prog-list { display: flex; flex-direction: column; }
+    .prog-row {
+      display: grid; grid-template-columns: 40px 1fr auto;
+      gap: 16px; align-items: start;
+      padding: 9px 0; border-bottom: 1px solid var(--border);
+    }
+    .prog-row:first-child { border-top: 1px solid var(--border); }
+    .prog-num { font-size: 16pt; font-weight: 800; color: #dde1e7; line-height: 1.1; padding-top: 3px; }
+    .prog-num.highlight { color: var(--accent); }
+    .prog-badge {
+      font-size: 7.5pt; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 2px;
+      display: inline-block; margin-bottom: 5px;
+    }
+    .prog-badge.teal  { background: rgba(13,148,136,0.1); color: var(--accent); }
+    .prog-badge.blue  { background: rgba(37,99,235,0.1);  color: var(--blue); }
+    .prog-badge.green { background: rgba(5,150,105,0.1);  color: var(--green); }
+    .prog-flag {
+      font-size: 7.5pt; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; background: var(--accent);
+      color: #fff; padding: 3px 9px; border-radius: 2px;
+      display: inline-block; margin-left: 6px;
+    }
+    .prog-title { font-size: 12.5pt; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; letter-spacing: -0.01em; }
+    .prog-hl   { font-size: 10.5pt; font-style: italic; font-weight: 500; margin-bottom: 4px; }
+    .prog-desc { font-size: 10pt; color: var(--text-body); line-height: 1.5; }
+    .prog-cta  { font-size: 9.5pt; font-weight: 700; color: var(--accent); white-space: nowrap; padding-top: 5px; }
+    .prog-cta.blue  { color: var(--blue); }
+    .prog-cta.green { color: var(--green); }
+
+    /* ── Feature grid ── */
+    .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 22px 0; }
+    .feat-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px 22px; background: var(--bg-white);
+    }
+    .feat-num { font-size: 9pt; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 10px; }
+    .feat-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(13,148,136,0.08); border: 1px solid rgba(13,148,136,0.14);
+      margin-bottom: 10px;
+    }
+    .feat-card h3 { font-size: 13pt; margin-bottom: 6px; }
+    .feat-card p  { font-size: 10.5pt; line-height: 1.65; }
+
+    /* ── Responsible AI ── */
+    .rai-box {
+      padding: 18px 22px;
+      background: var(--accent-lt);
+      border: 1px solid rgba(13,148,136,0.2);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      margin: 18px 0 0;
+    }
+    .rai-box-lbl {
+      font-size: 8pt; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 9px;
+    }
+    .rai-box p { font-size: 10.5pt; color: var(--text-dark); line-height: 1.7; margin: 0; }
+
+    /* ── CTA band ── */
+    .cta-band {
+      background: var(--bg-dark); border-radius: 10px;
+      padding: 26px 30px; margin-top: 16px;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 20px; align-items: center;
+    }
+    .cta-band h3 { font-size: 17pt; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 7px; }
+    .cta-band p  { font-size: 11.5pt; color: rgba(255,255,255,0.55); margin: 0; }
+    .cta-btn {
+      background: var(--accent); color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11.5pt; font-weight: 700; letter-spacing: 0.02em;
+      padding: 14px 28px; border-radius: 6px;
+      white-space: nowrap; display: inline-block;
+    }
+
+    /* ── Contact ── */
+    .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .contact-card {
+      background: var(--bg-off-white); border: 1px solid var(--border);
+      border-radius: 8px; padding: 18px 22px;
+    }
+    .contact-lbl {
+      font-size: 8pt; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;
+    }
+    .contact-val { font-size: 12pt; font-weight: 600; color: var(--text-dark); }
+    .contact-val a { color: var(--accent); }
+
+    @media print {
+      body { width: 210mm; }
+      .cover, .page { min-height: 297mm; page-break-after: always; }
+      .page:last-child { page-break-after: avoid; }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE 1 — COVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="cover">
+
+  <div class="cover-nav">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="3"  r="2" fill="white"/>
+          <circle cx="3" cy="14" r="2" fill="white"/>
+          <circle cx="15" cy="14" r="2" fill="white"/>
+          <line x1="9" y1="5"  x2="3"  y2="12" stroke="white" stroke-width="1.2" stroke-opacity="0.6"/>
+          <line x1="9" y1="5"  x2="15" y2="12" stroke="white" stroke-width="1.2" stroke-opacity="0.6"/>
+          <line x1="3" y1="14" x2="15" y2="14" stroke="white" stroke-width="1.2" stroke-opacity="0.6"/>
+        </svg>
+      </div>
+      <span class="brand-name">PlexusAI</span>
+    </div>
+    <span class="cover-badge">Company Overview 2026</span>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">India's First Hospital-Embedded Clinical AI Validation Hub</div>
+
+    <h1>
+      We Test and<br/>
+      Validate AI<br/>
+      <em>in Hospitals.</em>
+    </h1>
+
+    <p class="cover-tagline">
+      Bring your AI. We embed it in live hospital workflows,
+      gather clinician-validated evidence, and certify it —
+      with patient safety at every step.
+    </p>
+
+    <div class="cover-trust">
+      <div class="cover-trust-item">
+        <div class="cover-trust-dot"></div>
+        <span class="cover-trust-txt">IEC-Approved Trials</span>
+      </div>
+      <div class="cover-trust-item">
+        <div class="cover-trust-dot"></div>
+        <span class="cover-trust-txt">DPDP Act 2023 Compliant</span>
+      </div>
+      <div class="cover-trust-item">
+        <div class="cover-trust-dot"></div>
+        <span class="cover-trust-txt">CDSCO Framework</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-left">
+      <strong>support@plexusai.in</strong> &nbsp;·&nbsp; Accepting partners for Q2 2026
+    </div>
+    <span class="cover-url">plexusai.in</span>
+  </div>
+
+</div>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE 2 — MISSION & VALIDATION JOURNEY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-brand">
+      <div class="page-brand-mark">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="3" r="2" fill="white"/>
+          <circle cx="3" cy="14" r="2" fill="white"/>
+          <circle cx="15" cy="14" r="2" fill="white"/>
+          <line x1="9" y1="5" x2="3"  y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="9" y1="5" x2="15" y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="3" y1="14" x2="15" y2="14" stroke="white" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <span class="page-brand-name">PlexusAI</span>
+    </div>
+    <span class="page-section-label">Our Mission</span>
+  </div>
+
+  <div class="section-lbl">Who We Are</div>
+  <h2>Accelerating <em>Safe Clinical AI</em><br/>From Idea to Responsible Impact</h2>
+  <p style="max-width:540px">
+    PlexusAI is India's first hospital-embedded clinical AI validation hub — built to bridge
+    the gap between promising AI tools and safe, proven clinical adoption. We partner with
+    hospitals, AI startups, pharma companies, and clinicians to rigorously validate, ethically
+    certify, and responsibly scale healthcare AI inside live workflows — with patient safety at every step.
+  </p>
+
+  <div class="callout">
+    "Most healthcare AI never reaches patients — not because the technology fails, but because it
+    is never rigorously tested in real clinical environments. We exist to change that, responsibly."
+  </div>
+
+  <hr/>
+
+  <div class="section-lbl">How It Works</div>
+  <h2 style="font-size:19pt; margin-bottom:14px">The Validation Journey</h2>
+  <p style="max-width:500px; margin-bottom:0">
+    From first conversation to a published, certified outcome — every project follows a structured,
+    ethics-governed four-stage process.
+  </p>
+
+  <div class="pipeline">
+    <div class="pipe-step active">
+      <div class="pipe-n">01</div>
+      <div class="pipe-label">Onboard</div>
+      <div class="pipe-desc">Intake, scope &amp; IEC-aligned partner alignment</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-n">02</div>
+      <div class="pipe-label">Deploy</div>
+      <div class="pipe-desc">Real OPD / IPD / ICU integration under oversight</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-n">03</div>
+      <div class="pipe-label">Validate</div>
+      <div class="pipe-desc">Clinician feedback &amp; peer-reviewed RWE capture</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-n">04</div>
+      <div class="pipe-label">Certify</div>
+      <div class="pipe-desc">CDSCO-ready regulatory dossier &amp; publication</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-footer-txt">PlexusAI — Company Brochure 2026</span>
+  </div>
+
+</div>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE 3 — CORE FOCUS AREAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-brand">
+      <div class="page-brand-mark">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="3" r="2" fill="white"/>
+          <circle cx="3" cy="14" r="2" fill="white"/>
+          <circle cx="15" cy="14" r="2" fill="white"/>
+          <line x1="9" y1="5" x2="3"  y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="9" y1="5" x2="15" y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="3" y1="14" x2="15" y2="14" stroke="white" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <span class="page-brand-name">PlexusAI</span>
+    </div>
+    <span class="page-section-label">Core Focus Areas</span>
+  </div>
+
+  <div class="section-lbl">What We Work On</div>
+  <h2>Three Pillars of<br/><em>Hospital AI</em></h2>
+  <p style="max-width:520px; margin-bottom:0">
+    We operate across three areas of hospital AI — from daily clinical workflows
+    to regulatory approval and published real-world evidence.
+  </p>
+
+  <div class="focus-grid">
+    <div class="focus-card">
+      <div class="focus-card-left teal">
+        <div class="focus-dec teal">01</div>
+        <span class="focus-tag teal">Clinical Intelligence</span>
+      </div>
+      <div class="focus-card-right">
+        <h3>AI Clinical Workflow</h3>
+        <p>We deploy AI to support discharge summaries, outpatient notes, ICU alerts, and clinical
+        decision-making — reducing cognitive load on clinicians and improving patient outcomes.
+        AI assists; clinicians decide.</p>
+      </div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-card-left blue">
+        <div class="focus-dec blue">02</div>
+        <span class="focus-tag blue">Research &amp; Trials</span>
+      </div>
+      <div class="focus-card-right">
+        <h3>Digital Health Trials</h3>
+        <p>We run ethics-approved, structured trials for wearables, AI diagnostics, and remote monitoring
+        — under Institutional Ethics Committee (IEC) oversight. You receive publishable,
+        peer-reviewable real-world evidence.</p>
+      </div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-card-left green">
+        <div class="focus-dec green">03</div>
+        <span class="focus-tag green">Regulatory Validation</span>
+      </div>
+      <div class="focus-card-right">
+        <h3>Evidence Generation (RWE)</h3>
+        <p>Auditable, peer-reviewable real-world evidence for CDSCO regulatory submissions,
+        investor due diligence, and multi-centre hospital adoption — fully compliant
+        with DPDP Act 2023.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-footer-txt">PlexusAI — Company Brochure 2026</span>
+  </div>
+
+</div>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE 4 — PROGRAMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-brand">
+      <div class="page-brand-mark">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="3" r="2" fill="white"/>
+          <circle cx="3" cy="14" r="2" fill="white"/>
+          <circle cx="15" cy="14" r="2" fill="white"/>
+          <line x1="9" y1="5" x2="3"  y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="9" y1="5" x2="15" y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="3" y1="14" x2="15" y2="14" stroke="white" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <span class="page-brand-name">PlexusAI</span>
+    </div>
+    <span class="page-section-label">Programs</span>
+  </div>
+
+  <div class="section-lbl">Programs Open for Application</div>
+  <h2>What Can You<br/><em>Apply For?</em></h2>
+
+  <div class="prog-list">
+
+    <div class="prog-row">
+      <div class="prog-num">01</div>
+      <div>
+        <span class="prog-badge teal">For Startups</span>
+        <div class="prog-title">Clinical Validation Access</div>
+        <div class="prog-hl" style="color:var(--accent)">Test your AI inside a real hospital — not a lab.</div>
+        <div class="prog-desc">Ethics-overseen access to live workflows, de-identified clinical data, and direct clinician feedback. Validated in months, not years.</div>
+      </div>
+      <div class="prog-cta">Apply for Access →</div>
+    </div>
+
+    <div class="prog-row">
+      <div class="prog-num highlight">02</div>
+      <div>
+        <span class="prog-badge teal">Flagship Program</span>
+        <span class="prog-flag">Most Impactful</span>
+        <div class="prog-title">PlexusAI Validation Certificate</div>
+        <div class="prog-hl" style="color:var(--accent)">The credential that opens regulated markets for your AI.</div>
+        <div class="prog-desc">India's first structured clinical AI validation certificate — trusted by investors, regulators, and hospitals to open regulated markets faster.</div>
+      </div>
+      <div class="prog-cta">Apply for Certification →</div>
+    </div>
+
+    <div class="prog-row">
+      <div class="prog-num">03</div>
+      <div>
+        <span class="prog-badge green">For Pharma &amp; MedTech</span>
+        <div class="prog-title">Sponsored Hospital Research</div>
+        <div class="prog-hl" style="color:var(--green)">Commission ethics-approved studies with measurable patient impact.</div>
+        <div class="prog-desc">IEC-approved, ICMR-guided clinical AI studies inside partner hospitals — producing publishable real-world evidence under full regulatory compliance.</div>
+      </div>
+      <div class="prog-cta green">Explore Research →</div>
+    </div>
+
+    <div class="prog-row">
+      <div class="prog-num">04</div>
+      <div>
+        <span class="prog-badge blue">High-Potential Startups</span>
+        <div class="prog-title">AI Accelerator Track</div>
+        <div class="prog-hl" style="color:var(--blue)">Skip the noise. Scale inside a hospital.</div>
+        <div class="prog-desc">Equity-based acceleration — co-building with clinicians and our expert advisory network to bring validated AI to scale responsibly.</div>
+      </div>
+      <div class="prog-cta blue">Apply to Accelerator →</div>
+    </div>
+
+    <div class="prog-row">
+      <div class="prog-num">05</div>
+      <div>
+        <span class="prog-badge teal">For Clinicians</span>
+        <div class="prog-title">AI Certification for Doctors</div>
+        <div class="prog-hl" style="color:var(--accent)">Become the AI-fluent clinician your hospital needs.</div>
+        <div class="prog-desc">AI certification designed by clinicians, for clinicians — to evaluate, implement, and champion AI tools with confidence and ethical clarity.</div>
+      </div>
+      <div class="prog-cta">Register →</div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span class="page-footer-txt">PlexusAI — Company Brochure 2026</span>
+  </div>
+
+</div>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE 5 — WHY PLEXUSAI + CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-brand">
+      <div class="page-brand-mark">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="3" r="2" fill="white"/>
+          <circle cx="3" cy="14" r="2" fill="white"/>
+          <circle cx="15" cy="14" r="2" fill="white"/>
+          <line x1="9" y1="5" x2="3"  y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="9" y1="5" x2="15" y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="3" y1="14" x2="15" y2="14" stroke="white" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <span class="page-brand-name">PlexusAI</span>
+    </div>
+    <span class="page-section-label">Why PlexusAI</span>
+  </div>
+
+  <div class="section-lbl">Why PlexusAI</div>
+  <h2>What You Get<br/><em>With PlexusAI</em></h2>
+  <p style="max-width:500px; margin-bottom:0">
+    We take your AI from concept to certified — inside real hospitals, with patient safety
+    and regulatory compliance built into every step.
+  </p>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-num">01</div>
+      <div class="feat-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3h6M9 3v6l-5 9a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-5-9V3"/>
+        </svg>
+      </div>
+      <h3>Validate in Real Hospitals</h3>
+      <p>We integrate your AI into live OPDs, IPDs, and ICUs — with real clinical data, under institutional ethics oversight. Validated in months, not years.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">02</div>
+      <div class="feat-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <h3>Clinical Certification</h3>
+      <p>The credential that opens regulated doors. Investors gain confidence. Regulators engage sooner. Hospitals adopt certified AI with institutional trust.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">03</div>
+      <div class="feat-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>
+        </svg>
+      </div>
+      <h3>Ethically Sourced Data</h3>
+      <p>Appropriately de-identified patient data, governed under DPDP Act 2023 and IEC approval, across live hospital workflows — enabling rigorous, compliant AI validation.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">04</div>
+      <div class="feat-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <h3>Fast-Track to Market</h3>
+      <p>Direct access to clinicians, hospital administrators, and our advisory network — compressing the path from validated AI to responsibly adopted AI.</p>
+    </div>
+  </div>
+
+  <div class="rai-box">
+    <div class="rai-box-lbl">Our Responsible AI Commitment</div>
+    <p>All AI tools validated through PlexusAI undergo Institutional Ethics Committee (IEC) review. Patient data is handled in compliance with India's Digital Personal Data Protection (DPDP) Act 2023. PlexusAI outputs are designed to <strong>assist — never replace</strong> — qualified healthcare professionals. All research is conducted under ICMR guidelines and applicable CDSCO regulatory frameworks.</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-footer-txt">PlexusAI — Company Brochure 2026</span>
+  </div>
+
+</div>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE 6 — GET STARTED & CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-brand">
+      <div class="page-brand-mark">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="3" r="2" fill="white"/>
+          <circle cx="3" cy="14" r="2" fill="white"/>
+          <circle cx="15" cy="14" r="2" fill="white"/>
+          <line x1="9" y1="5" x2="3"  y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="9" y1="5" x2="15" y2="12" stroke="white" stroke-width="1.4"/>
+          <line x1="3" y1="14" x2="15" y2="14" stroke="white" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <span class="page-brand-name">PlexusAI</span>
+    </div>
+    <span class="page-section-label">Get Started</span>
+  </div>
+
+  <div class="section-lbl">Ready to Begin?</div>
+  <h2>Apply to the<br/><em>Innovation Sandbox</em></h2>
+  <p style="max-width:500px; margin-bottom:0">
+    We are accepting partners committed to safe, evidence-based clinical AI for Q2 2026.
+    Every engagement is ethics-governed, clinician-led, and built for real-world impact.
+  </p>
+
+  <div class="cta-band">
+    <div>
+      <h3>Ready to Validate Your AI Responsibly?</h3>
+      <p>Apply to the Innovation Sandbox — accepting partners for Q2 2026.</p>
+    </div>
+    <span class="cta-btn">Apply Now →</span>
+  </div>
+
+  <hr style="margin: 28px 0"/>
+
+  <div class="section-lbl">Get In Touch</div>
+  <h2 style="font-size:16pt; margin-bottom:8px">Contact Us</h2>
+  <p style="margin-bottom:0">Reach out to learn how PlexusAI can accelerate your responsible clinical AI journey.</p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-lbl">Email</div>
+      <div class="contact-val"><a href="mailto:support@plexusai.in">support@plexusai.in</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-lbl">Website</div>
+      <div class="contact-val"><a href="https://plexusai.in" style="color:var(--accent)">plexusai.in</a></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-footer-txt">PlexusAI — Company Brochure 2026 &nbsp;·&nbsp; All rights reserved</span>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -38,7 +38,7 @@ const Footer = () => {
   return (
     <footer style={{ background: 'var(--bg-dark)', color: '#ffffff', borderTop: 'none' }}>
       <div className="container" style={{ padding: '72px 32px 40px' }}>
-        <div style={{
+        <div className="footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: '240px repeat(4, 1fr)',
           gap: '40px',

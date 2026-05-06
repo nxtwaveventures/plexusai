@@ -65,7 +65,7 @@ const Advisors = () => {
           </p>
         </div>
 
-        <div style={{
+        <div className="advisors-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
           gap: '20px',

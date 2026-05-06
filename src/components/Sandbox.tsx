@@ -140,7 +140,7 @@ const Sandbox = () => {
                         </button>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                      <div className="sandbox-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                         <input className="form-input" type="text" placeholder="Startup Name" required
                           value={formData.startupName} onChange={e => setFormData({ ...formData, startupName: e.target.value })} />
                         <input className="form-input" type="text" placeholder="Founder Name" required

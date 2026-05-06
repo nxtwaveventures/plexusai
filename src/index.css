@@ -266,15 +266,78 @@ hr.divider {
   transform: translateX(4px);
 }
 
+/* ── Nav helpers (desktop defaults) ─── */
+.nav-desktop  { display: flex; align-items: center; gap: 36px; }
+.nav-hamburger { display: none; background: none; border: none; color: var(--text-dark); padding: 4px; }
+
 /* ── Responsive ─────────────────────── */
 @media (max-width: 768px) {
   .container { padding: 0 var(--s2); }
-  .section { padding: var(--s6) 0; }
-  .section-header { margin-bottom: var(--s5); }
+  .section   { padding: var(--s5) 0; }
+  .section-header { margin-bottom: var(--s4); }
 
+  /* Navbar */
+  .site-nav   { padding: 0 20px !important; }
+  .nav-desktop  { display: none !important; }
+  .nav-hamburger { display: flex !important; align-items: center; }
+
+  /* Hero — stack columns */
+  .hero-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+
+  /* Features — 2 col */
+  .features-grid { grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+
+  /* Focus Areas — stack, remove sticky */
+  .focus-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .focus-sticky { position: static !important; }
+
+  /* How It Works — 2 col, hide line */
+  .hiw-steps     { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+  .hiw-connector { display: none !important; }
+  .hiw-cta       {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 24px !important;
+  }
+
+  /* Programs */
   .program-row {
     grid-template-columns: 1fr;
     gap: var(--s2);
     padding: var(--s3) var(--s2);
   }
+
+  /* Team — stack, centre photo */
+  .team-card {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    max-width: 100% !important;
+  }
+
+  /* Advisors — 2 col */
+  .advisors-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* FAQ — stack, remove sticky */
+  .faq-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .faq-sticky { position: static !important; }
+
+  /* Footer — 2 col */
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px 32px !important; }
+}
+
+@media (max-width: 480px) {
+  /* Features — single column on small phones */
+  .features-grid { grid-template-columns: 1fr !important; }
+
+  /* How It Works — single column */
+  .hiw-steps { grid-template-columns: 1fr !important; gap: 24px !important; }
+
+  /* Advisors — 2 col (keep readable) */
+  .advisors-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Footer — single column */
+  .footer-grid { grid-template-columns: 1fr !important; }
+
+  /* Sandbox name row */
+  .sandbox-name-row { grid-template-columns: 1fr !important; }
 }

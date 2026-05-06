@@ -45,7 +45,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav style={{
+      <nav className="site-nav" style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -75,7 +75,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop nav */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
+        <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
           {navItems.map(item => (
             <div
               key={item.label}
@@ -161,9 +161,9 @@ const Navbar = () => {
             Apply Now
           </a>
           <button
+            className="nav-hamburger"
             onClick={() => setMobileOpen(v => !v)}
             style={{
-              display: 'none',
               background: 'none',
               border: 'none',
               cursor: 'pointer',

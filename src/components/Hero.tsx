@@ -121,7 +121,7 @@ const Hero = () => {
         className="container"
         style={{ position: 'relative', zIndex: 1, y: contentY, opacity: contentOpacity }}
       >
-        <div style={{
+        <div className="hero-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: '80px',

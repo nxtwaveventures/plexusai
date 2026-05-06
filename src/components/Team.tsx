@@ -42,6 +42,7 @@ const Team = () => {
           </p>
         </div>
 
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
         {team.map((member, i) => (
           <motion.div
             key={i}
@@ -49,6 +50,7 @@ const Team = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5 }}
+            className="team-card"
             style={{
               display: 'grid',
               gridTemplateColumns: '260px 1fr',
@@ -141,6 +143,7 @@ const Team = () => {
             </div>
           </motion.div>
         ))}
+        </div>
       </div>
     </section>
   );

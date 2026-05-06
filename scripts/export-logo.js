@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT = path.join(__dirname, '../logo-exports');
+const OUT = path.join(__dirname, '../public/brand');
 mkdirSync(OUT, { recursive: true });
 
 const ACCENT = '#0D9488';

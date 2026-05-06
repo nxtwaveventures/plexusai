@@ -35,14 +35,14 @@ const FocusAreas = () => {
   return (
     <section className="section section-subtle" id="focus-areas">
       <div className="container">
-        <div style={{
+        <div className="focus-layout" style={{
           display: 'grid',
           gridTemplateColumns: '320px 1fr',
           gap: '80px',
           alignItems: 'start',
         }}>
           {/* Left: sticky header */}
-          <div style={{ position: 'sticky', top: '96px' }}>
+          <div className="focus-sticky" style={{ position: 'sticky', top: '96px' }}>
             <span className="eyebrow">What We Work On</span>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '20px', marginTop: '12px' }}>
               Core Focus Areas

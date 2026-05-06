@@ -35,14 +35,14 @@ const FAQ = () => {
   return (
     <section id="faq" className="section section-light">
       <div className="container">
-        <div style={{
+        <div className="faq-layout" style={{
           display: 'grid',
           gridTemplateColumns: '300px 1fr',
           gap: '80px',
           alignItems: 'start',
         }}>
           {/* Left */}
-          <div style={{ position: 'sticky', top: '96px' }}>
+          <div className="faq-sticky" style={{ position: 'sticky', top: '96px' }}>
             <span className="eyebrow">FAQ</span>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '16px', marginTop: '12px' }}>
               Frequently asked questions
